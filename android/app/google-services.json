@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "710307148068",
+    "firebase_url": "https://friendly-chat-last.firebaseio.com",
+    "project_id": "friendly-chat-last",
+    "storage_bucket": "friendly-chat-last.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:710307148068:android:ba7527eb393c4d83b943b1",
+        "android_client_info": {
+          "package_name": "com.example.shelf"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "710307148068-8fqvkojpcf4abe19nnjj3tbdcdlhj6k3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4cnpLLSdCb_e53JfFKwjBC_YYVrtVI9o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "710307148068-8fqvkojpcf4abe19nnjj3tbdcdlhj6k3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
