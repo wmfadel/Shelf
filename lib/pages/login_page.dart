@@ -1,11 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:shelf/providers/auth_provider.dart';
+import 'package:shelf/services/auth_service.dart';
 
 class LoginPage extends StatelessWidget {
-  static final String routeName = '/';
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  final GoogleSignIn _googleSignIn = GoogleSignIn();
+  static final String routeName = '/login';
+  final AuthProvider provider = AuthProvider();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,29 +14,11 @@ class LoginPage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           ElevatedButton(
-            onPressed: signInWithGoogle,
+            onPressed: provider.loginWithGoogle,
             child: Text('Signin with Google'),
           )
         ],
       ),
     );
-  }
-
-  signInWithGoogle() async {
-    GoogleSignInAccount googleSignInAccount = await _googleSignIn.signIn();
-    GoogleSignInAuthentication googleSignInAuthentication =
-        await googleSignInAccount.authentication;
-    AuthCredential credential = GoogleAuthProvider.credential(
-      accessToken: googleSignInAuthentication.accessToken,
-      idToken: googleSignInAuthentication.idToken,
-    );
-    await _auth.signInWithCredential(credential);
-
-    User currentUser = _auth.currentUser;
-
-    print("User Name: ${currentUser.displayName}");
-    print("User Email ${currentUser.email}");
-    print("User UID ${currentUser.uid}");
-    print("User Photo ${currentUser.photoURL}");
   }
 }
