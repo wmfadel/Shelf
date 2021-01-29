@@ -1,4 +1,4 @@
-# shelf
+# Shelf
 
 A new Flutter project.
 
