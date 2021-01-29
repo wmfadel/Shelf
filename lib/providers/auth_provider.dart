@@ -9,6 +9,7 @@ class AuthProvider with ChangeNotifier {
   loginWithGoogle() async {
     User user = await _authService.signInWithGoogle();
     uid = user.uid;
+    return uid == null ? false : true;
   }
 
   Future<bool> autoLogin() async {
