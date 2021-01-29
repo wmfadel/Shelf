@@ -52,4 +52,25 @@ class AuthService {
     print('id from prefs: $id');
     return id;
   }
+
+  Future<String> loadUserNameFromCach() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String name = prefs.getString('name');
+    print('name from prefs: $name');
+    return name;
+  }
+
+  Future<String> loadUserEmailFromCach() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String email = prefs.getString('email');
+    print('email from prefs: $email');
+    return email;
+  }
+
+  Future<String> loadUserPhotoFromCach() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String photo = prefs.getString('photo');
+    print('photo from prefs: $photo');
+    return photo;
+  }
 }

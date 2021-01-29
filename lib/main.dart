@@ -26,6 +26,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
         ),
         initialRoute: Wrapper.routeName,
+        debugShowCheckedModeBanner: false,
         routes: {
           Wrapper.routeName: (BuildContext context) => Wrapper(),
           LoginPage.routeName: (BuildContext context) => LoginPage(),

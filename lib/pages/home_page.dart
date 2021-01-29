@@ -2,7 +2,8 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:shelf/widgets/drawer_button.dart';
+import 'package:shelf/widgets/custom_avatar.dart';
+import 'package:shelf/widgets/custom_button.dart';
 
 class HomePage extends StatelessWidget {
   static final String routeName = '/home';
@@ -32,8 +33,24 @@ class HomePage extends StatelessWidget {
             Positioned(
               top: 45,
               left: 20,
-              child: DrawerButton(scaffoldContext: context),
-            )
+              child: CustomButton(
+                iconData: Icons.menu,
+                onPressed: () => Scaffold.of(context).openDrawer(),
+              ),
+            ),
+            Positioned(
+              top: 45,
+              right: 20,
+              child: CustomAvatar(),
+            ),
+            Positioned(
+              top: 45,
+              right: 80,
+              child: CustomButton(
+                iconData: Icons.library_books,
+                onPressed: () {},
+              ),
+            ),
           ],
         ));
   }
