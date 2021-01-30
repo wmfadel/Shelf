@@ -40,16 +40,6 @@ class AuthService {
     prefs.setString('uid', id);
   }
 
-  cachUser(User user) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    print('started storing user data in prefs');
-    prefs.setString('uid', user.uid);
-    prefs.setString('email', user.email);
-    prefs.setString('name', user.displayName);
-    prefs.setString('photo', user.photoURL);
-    print('done storing user data in prefs');
-  }
-
   Future<String> checkLoggedUser() async {
     if (await _googleSignIn.isSignedIn()) {
       print('user is signed');
@@ -63,26 +53,5 @@ class AuthService {
     String id = prefs.getString('uid');
     print('id from prefs: $id');
     return id;
-  }
-
-  Future<String> loadUserNameFromCach() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String name = prefs.getString('name');
-    print('name from prefs: $name');
-    return name;
-  }
-
-  Future<String> loadUserEmailFromCach() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String email = prefs.getString('email');
-    print('email from prefs: $email');
-    return email;
-  }
-
-  Future<String> loadUserPhotoFromCach() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String photo = prefs.getString('photo');
-    print('photo from prefs: $photo');
-    return photo;
   }
 }

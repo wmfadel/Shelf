@@ -5,10 +5,11 @@ import 'package:shelf/widgets/custom_button.dart';
 
 class HomePage extends StatelessWidget {
   static final String routeName = '/home';
-
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        key: scaffoldKey,
         drawer: Drawer(),
         body: Stack(
           children: [
@@ -33,7 +34,7 @@ class HomePage extends StatelessWidget {
               left: 20,
               child: CustomButton(
                 iconData: Icons.menu,
-                onPressed: () => Scaffold.of(context).openDrawer(),
+                onPressed: () => scaffoldKey.currentState.openDrawer(),
               ),
             ),
             Positioned(

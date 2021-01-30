@@ -31,10 +31,4 @@ class AuthProvider with ChangeNotifier {
     photo = value.get('photo');
     print('got data from firestore\nname:$name\temail:$email\nphoto:$photo');
   }
-
-  _loadUser() async {
-    email = await _authService.loadUserEmailFromCach();
-    name = await _authService.loadUserNameFromCach();
-    photo = await _authService.loadUserPhotoFromCach();
-  }
 }
