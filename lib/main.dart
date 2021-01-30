@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shelf/pages/add_book_page.dart';
 import 'package:shelf/pages/home_page.dart';
 import 'package:shelf/pages/login_page.dart';
 import 'package:shelf/pages/wrapper.dart';
@@ -25,12 +26,13 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        initialRoute: Wrapper.routeName,
         debugShowCheckedModeBanner: false,
+        initialRoute: AddBookPage.routeName,
         routes: {
           Wrapper.routeName: (BuildContext context) => Wrapper(),
           LoginPage.routeName: (BuildContext context) => LoginPage(),
           HomePage.routeName: (BuildContext context) => HomePage(),
+          AddBookPage.routeName: (BuildContext context) => AddBookPage(),
         },
       ),
     );
