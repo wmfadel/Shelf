@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:shelf/widgets/custom_avatar.dart';
@@ -48,6 +46,14 @@ class HomePage extends StatelessWidget {
               right: 80,
               child: CustomButton(
                 iconData: Icons.library_books,
+                onPressed: () {},
+              ),
+            ),
+            Positioned(
+              top: 45,
+              right: 135,
+              child: CustomButton(
+                iconData: Icons.search,
                 onPressed: () {},
               ),
             ),
