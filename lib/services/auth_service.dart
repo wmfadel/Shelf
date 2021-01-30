@@ -22,13 +22,22 @@ class AuthService {
     print("User Email ${currentUser.email}");
     print("User UID ${currentUser.uid}");
     print("User Photo ${currentUser.photoURL}");
-    cachUser(currentUser);
-    FirebaseFirestore.instance.collection('users').doc(currentUser.uid).set({
-      'name': currentUser.displayName,
-      'photo': currentUser.photoURL,
-      'email': currentUser.email,
-    });
+    //cachUser(currentUser);
+    await cashUserID(currentUser.uid);
+    FirebaseFirestore.instance.collection('users').doc(currentUser.uid).set(
+      {
+        'name': currentUser.displayName,
+        'photo': currentUser.photoURL,
+        'email': currentUser.email,
+      },
+    );
     return currentUser;
+  }
+
+  cashUserID(String id) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    print('started storing user data in prefs');
+    prefs.setString('uid', id);
   }
 
   cachUser(User user) async {
@@ -42,9 +51,6 @@ class AuthService {
   }
 
   Future<String> checkLoggedUser() async {
-    /*SharedPreferences prefs = await SharedPreferences.getInstance();
-    if (prefs.containsKey('uid')) {}
-    return null;*/
     if (await _googleSignIn.isSignedIn()) {
       print('user is signed');
       return await loadUserIDFromCach();
