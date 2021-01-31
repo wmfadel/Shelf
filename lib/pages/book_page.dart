@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shelf/models/api_book.dart';
 import 'package:shelf/providers/api_search_provider.dart';
+import 'package:shelf/widgets/add_to_shelf_builder.dart';
 import 'package:shelf/widgets/info_chip.dart';
 import 'package:shelf/widgets/info_chip_text.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -13,6 +14,7 @@ class BookPage extends StatelessWidget {
   Widget build(BuildContext context) {
     APIBook book = Provider.of<APISearchPRovider>(context, listen: false)
         .getSelectedBook();
+
     return Scaffold(
       key: _scaffoldKey,
       backgroundColor: Colors.white,
@@ -23,12 +25,13 @@ class BookPage extends StatelessWidget {
             icon: Icon(Icons.note_add_rounded),
             onPressed: () {
               showModalBottomSheet(
-                context: context,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-                builder: (ctx) => Container(),
-              );
+                  context: context,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  builder: (ctx) {
+                    return AddToShelfBuilder(book);
+                  });
             },
           )
         ],

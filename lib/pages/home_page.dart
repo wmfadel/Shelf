@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:shelf/pages/add_book_page.dart';
+import 'package:shelf/pages/profile_page.dart';
 import 'package:shelf/widgets/custom_avatar.dart';
 import 'package:shelf/widgets/custom_button.dart';
 
@@ -41,7 +42,10 @@ class HomePage extends StatelessWidget {
             Positioned(
               top: 45,
               right: 20,
-              child: CustomAvatar(),
+              child: GestureDetector(
+                  onTap: () =>
+                      Navigator.of(context).pushNamed(ProfilePage.routeName),
+                  child: CustomAvatar()),
             ),
             Positioned(
               top: 45,

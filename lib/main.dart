@@ -5,6 +5,7 @@ import 'package:shelf/pages/add_book_page.dart';
 import 'package:shelf/pages/book_page.dart';
 import 'package:shelf/pages/home_page.dart';
 import 'package:shelf/pages/login_page.dart';
+import 'package:shelf/pages/profile_page.dart';
 import 'package:shelf/pages/wrapper.dart';
 import 'package:shelf/providers/api_search_provider.dart';
 import 'package:shelf/providers/auth_provider.dart';
@@ -38,6 +39,7 @@ class MyApp extends StatelessWidget {
           HomePage.routeName: (BuildContext context) => HomePage(),
           AddBookPage.routeName: (BuildContext context) => AddBookPage(),
           BookPage.routeName: (BuildContext context) => BookPage(),
+          ProfilePage.routeName: (BuildContext context) => ProfilePage(),
         },
       ),
     );
