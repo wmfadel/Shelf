@@ -3,17 +3,28 @@ import 'package:shelf/models/api_book.dart';
 import 'package:shelf/services/book_api_search_service.dart';
 
 class APISearchPRovider with ChangeNotifier {
-  bool isLoading = false;
-  List<APIBook> books = [];
+  bool _isLoading = false;
+  List<APIBook> _books = [];
   BooksAPISearchService _searchService = BooksAPISearchService();
+  String _selectedBookID;
+  List<APIBook> get books => _books;
+  bool get isLoading => _isLoading;
+  set selectedBookID(String id) {
+    _selectedBookID = id;
+  }
 
   Future<bool> searchForABook(String name) async {
-    isLoading = true;
+    _isLoading = true;
     notifyListeners();
-    books = await _searchService.searchAPIBook(name);
-    isLoading = false;
+    _books = await _searchService.searchAPIBook(name);
+    _isLoading = false;
     notifyListeners();
-    if (books == null || books.length == 0) return false;
+    if (_books == null || _books.length == 0) return false;
     return true;
+  }
+
+  APIBook getSelectedBook() {
+    return _books.firstWhere((APIBook b) => b.id == _selectedBookID,
+        orElse: () => null);
   }
 }

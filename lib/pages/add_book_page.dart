@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:shelf/models/api_book.dart';
 import 'package:provider/provider.dart';
 import 'package:shelf/providers/api_search_provider.dart';
-
-import 'package:shelf/services/book_api_search_service.dart';
 import 'package:shelf/widgets/api_book_list_item.dart';
 
 class AddBookPage extends StatelessWidget {
