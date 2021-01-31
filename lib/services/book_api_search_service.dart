@@ -4,10 +4,10 @@ import 'package:http/http.dart' as http;
 import 'package:shelf/models/api_book.dart';
 
 class BooksAPISearchService {
-  final String searchURL = 'https://www.googleapis.com/books/v1/volumes?q=';
+  final String _searchURL = 'https://www.googleapis.com/books/v1/volumes?q=';
 
   Future<List<APIBook>> searchAPIBook(String name) async {
-    String url = searchURL + name;
+    String url = _searchURL + name;
     print('searching for book on $url');
     http.Response response = await http.get(url);
     Map<String, dynamic> res = json.decode(response.body);

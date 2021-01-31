@@ -1,20 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:shelf/models/api_book.dart';
+import 'package:provider/provider.dart';
+import 'package:shelf/providers/api_search_provider.dart';
 
 import 'package:shelf/services/book_api_search_service.dart';
 import 'package:shelf/widgets/api_book_list_item.dart';
 
-class AddBookPage extends StatefulWidget {
+class AddBookPage extends StatelessWidget {
   static final String routeName = '/addBook';
-
-  @override
-  _AddBookPageState createState() => _AddBookPageState();
-}
-
-class _AddBookPageState extends State<AddBookPage> {
   final TextEditingController _textEditingController = TextEditingController();
-  List<APIBook> books = [];
-  bool isLoading = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,9 +32,10 @@ class _AddBookPageState extends State<AddBookPage> {
                 Flexible(
                   child: TextField(
                     controller: _textEditingController,
-                    maxLines: 2,
                     textInputAction: TextInputAction.search,
                     decoration: InputDecoration(
+                      contentPadding:
+                          EdgeInsets.symmetric(horizontal: 5, vertical: 4),
                       labelText: 'Search for books on your shelf',
                       hintText: 'Normal People ...',
                     ),
@@ -51,35 +46,45 @@ class _AddBookPageState extends State<AddBookPage> {
                     Icons.search,
                     color: Colors.blue,
                   ),
-                  onPressed: isLoading
+                  onPressed: context.watch<APISearchPRovider>().isLoading
                       ? null
                       : () async {
-                          setState(() {
-                            isLoading = true;
-                          });
                           print('text: ${_textEditingController.text}');
-                          books = await BooksAPISearchService().searchAPIBook(
-                              _textEditingController.text.replaceAll(' ', '+'));
-                          if (books != null && books.length > 0)
-                            setState(() {
-                              isLoading = false;
-                            });
+                          Provider.of<APISearchPRovider>(context, listen: false)
+                              .searchForABook(_textEditingController.text
+                                  .replaceAll(' ', '+'));
                         },
                 ),
               ],
             ),
           ),
-          if (books == null || books.length == 0) SizedBox(height: 100),
-          if (books == null || books.length == 0)
-            Image.asset('assets/pics/bibliophile.png'),
-          if (books.length > 0)
+          if (context.watch<APISearchPRovider>().books == null ||
+              context.watch<APISearchPRovider>().books.length == 0 ||
+              context.watch<APISearchPRovider>().isLoading)
+            SizedBox(height: 100),
+          if (context.watch<APISearchPRovider>().books == null ||
+              context.watch<APISearchPRovider>().books.length == 0 &&
+                  !context.watch<APISearchPRovider>().isLoading)
+            Image.asset(
+              'assets/pics/bibliophile.png',
+              width: MediaQuery.of(context).size.width * 0.7,
+            ),
+          if (context.watch<APISearchPRovider>().isLoading)
+            Center(child: CircularProgressIndicator()),
+          if (context.watch<APISearchPRovider>().books.length > 0 &&
+              !context.watch<APISearchPRovider>().isLoading)
             Expanded(
               child: ListView.builder(
-                itemCount: books.length,
+                itemCount:
+                    Provider.of<APISearchPRovider>(context, listen: false)
+                        .books
+                        .length,
                 primary: true,
                 physics: ClampingScrollPhysics(),
                 itemBuilder: (BuildContext context, int index) =>
-                    APIBookListItem(books[index]),
+                    APIBookListItem(
+                        Provider.of<APISearchPRovider>(context, listen: false)
+                            .books[index]),
               ),
             ),
         ],
