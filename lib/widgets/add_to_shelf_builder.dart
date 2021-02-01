@@ -11,9 +11,12 @@ class AddToShelfBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     AuthProvider authProvider =
         Provider.of<AuthProvider>(context, listen: false);
+
     return FutureBuilder<QuerySnapshot>(
         future: FirebaseFirestore.instance
-            .collection('users/${authProvider.uid}/shelfs')
+            .collection('users')
+            .doc(authProvider.uid)
+            .collection('shelfs')
             .get(),
         builder: (BuildContext context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting)
@@ -41,12 +44,18 @@ class AddToShelfBuilder extends StatelessWidget {
                         Icon(Icons.add_box_rounded, color: Colors.greenAccent),
                         Expanded(
                           child: TextField(
-                            onSubmitted: (value) {
+                            onSubmitted: (value) async {
+                              await FirebaseFirestore.instance
+                                  .collection('users')
+                                  .doc(authProvider.uid)
+                                  .collection('shelfs')
+                                  .doc(value.replaceAll(' ', '!@#').trim())
+                                  .set({'time': DateTime.now().toString()});
                               FirebaseFirestore.instance
                                   .collection('users')
                                   .doc(authProvider.uid)
                                   .collection('shelfs')
-                                  .doc(value)
+                                  .doc(value.replaceAll(' ', '!@#').trim())
                                   .collection('books')
                                   .doc(book.id)
                                   .set(book.toJson());
@@ -63,28 +72,29 @@ class AddToShelfBuilder extends StatelessWidget {
                     ),
                   ),
                   Divider(),
-                  if (snapshot.data.docs.length > 0)
-                    ListView.builder(
-                        shrinkWrap: true,
-                        physics: ClampingScrollPhysics(),
-                        itemCount: snapshot.data.docs.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return ListTile(
-                            onTap: () async {
-                              await FirebaseFirestore.instance
-                                  .collection(
-                                      'users/${authProvider.uid}/shelfs/${snapshot.data.docs[index].id}/books')
-                                  .doc(book.id)
-                                  .set(book.toJson());
-                              Navigator.of(context).pop();
-                            },
-                            leading: Icon(
-                              Icons.add_box_rounded,
-                              color: Colors.blue,
-                            ),
-                            title: Text(snapshot.data.docs[index].id),
-                          );
-                        }),
+                  ListView.builder(
+                      shrinkWrap: true,
+                      physics: ClampingScrollPhysics(),
+                      itemCount: snapshot.data.size,
+                      itemBuilder: (BuildContext context, int index) {
+                        return ListTile(
+                          onTap: () async {
+                            await FirebaseFirestore.instance
+                                .collection(
+                                    'users/${authProvider.uid}/shelfs/${snapshot.data.docs[index].id}/books')
+                                .doc(book.id)
+                                .set(book.toJson());
+                            Navigator.of(context).pop();
+                          },
+                          leading: Icon(
+                            Icons.add_box_rounded,
+                            color: Colors.blue,
+                          ),
+                          title: Text(snapshot.data.docs[index].id
+                              .replaceAll('!@#', ' ')),
+                        );
+                      }),
+                  Text('Total shelfs ${snapshot.data.size}'),
                 ],
               ),
             ),

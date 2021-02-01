@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shelf/models/api_book.dart';
@@ -14,7 +15,6 @@ class BookPage extends StatelessWidget {
   Widget build(BuildContext context) {
     APIBook book = Provider.of<APISearchPRovider>(context, listen: false)
         .getSelectedBook();
-
     return Scaffold(
       key: _scaffoldKey,
       backgroundColor: Colors.white,
