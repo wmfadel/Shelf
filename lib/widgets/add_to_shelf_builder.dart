@@ -52,20 +52,27 @@ class AddToShelfBuilder extends StatelessWidget {
                     ),
                   ),
                   Divider(),
-                  ListTile(
-                    onTap: () {
-                      FirebaseFirestore.instance
-                          .collection(
-                              'users/${authProvider.uid}/shelfs/${snapshot.data.docs.first.id}/books')
-                          .doc(book.id)
-                          .set(book.toJson());
-                    },
-                    leading: Icon(
-                      Icons.add_box_rounded,
-                      color: Colors.blue,
-                    ),
-                    title: Text(snapshot.data.docs.first.id),
-                  ),
+                  ListView.builder(
+                      shrinkWrap: true,
+                      physics: ClampingScrollPhysics(),
+                      itemCount: snapshot.data.docs.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return ListTile(
+                          onTap: () async {
+                            await FirebaseFirestore.instance
+                                .collection(
+                                    'users/${authProvider.uid}/shelfs/${snapshot.data.docs[index].id}/books')
+                                .doc(book.id)
+                                .set(book.toJson());
+                            Navigator.of(context).pop();
+                          },
+                          leading: Icon(
+                            Icons.add_box_rounded,
+                            color: Colors.blue,
+                          ),
+                          title: Text(snapshot.data.docs[index].id),
+                        );
+                      }),
                 ],
               ),
             ),

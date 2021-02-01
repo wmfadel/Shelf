@@ -39,20 +39,21 @@ class APIBook {
       this.webReaderLink});
 
   APIBook.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    etag = json['etag'];
-    title = json['volumeInfo']['title'];
-    subtitle = json['volumeInfo']['subtitle'];
+    id = json['id'] ?? '';
+    etag = json['etag'] ?? '';
+    title = json['volumeInfo']['title'] ?? 'No title available';
+    subtitle = json['volumeInfo']['subtitle'] ?? 'No Subtitle available';
     authors = (json['volumeInfo']['authors'] ?? <String>[]).cast<String>();
-    publishedDate = json['volumeInfo']['publishedDate'];
-    description = json['volumeInfo']['description'];
+    publishedDate = json['volumeInfo']['publishedDate'] ?? 'No Date Available';
+    description =
+        json['volumeInfo']['description'] ?? 'No Description Available';
     if (json['volumeInfo']['industryIdentifiers'] != null) {
       industryIdentifiers = [];
       json['volumeInfo']['industryIdentifiers'].forEach((v) {
         industryIdentifiers.add(new IndustryIdentifiers.fromJson(v));
       });
     }
-    pageCount = json['volumeInfo']['pageCount'];
+    pageCount = json['volumeInfo']['pageCount'] ?? 0;
     categories =
         (json['volumeInfo']['categories'] ?? <String>[]).cast<String>();
     maturityRating = json['volumeInfo']['maturityRating'];
@@ -62,11 +63,13 @@ class APIBook {
     thumbnail = json['volumeInfo']['imageLinks'] == null
         ? null
         : json['volumeInfo']['imageLinks']['thumbnail'];
-    language = json['volumeInfo']['language'];
-    previewLink = json['volumeInfo']['previewLink'];
-    infoLink = json['volumeInfo']['infoLink'];
-    canonicalVolumeLink = json['volumeInfo']['canonicalVolumeLink'];
-    webReaderLink = json['accessInfo']['webReaderLink'];
+    language = json['volumeInfo']['language'] ?? 'Unknown';
+    previewLink = json['volumeInfo']['previewLink'] ?? 'https:www.google.com';
+    infoLink = json['volumeInfo']['infoLink'] ?? 'https:www.google.com';
+    canonicalVolumeLink =
+        json['volumeInfo']['canonicalVolumeLink'] ?? 'https:www.google.com';
+    webReaderLink =
+        json['accessInfo']['webReaderLink'] ?? 'https:www.google.com';
   }
 
   Map<String, dynamic> toJson() {
