@@ -41,6 +41,17 @@ class AddToShelfBuilder extends StatelessWidget {
                         Icon(Icons.add_box_rounded, color: Colors.greenAccent),
                         Expanded(
                           child: TextField(
+                            onSubmitted: (value) {
+                              FirebaseFirestore.instance
+                                  .collection('users')
+                                  .doc(authProvider.uid)
+                                  .collection('shelfs')
+                                  .doc(value)
+                                  .collection('books')
+                                  .doc(book.id)
+                                  .set(book.toJson());
+                              Navigator.of(context).pop();
+                            },
                             decoration: InputDecoration(
                                 contentPadding:
                                     EdgeInsets.symmetric(horizontal: 20),
@@ -52,27 +63,28 @@ class AddToShelfBuilder extends StatelessWidget {
                     ),
                   ),
                   Divider(),
-                  ListView.builder(
-                      shrinkWrap: true,
-                      physics: ClampingScrollPhysics(),
-                      itemCount: snapshot.data.docs.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return ListTile(
-                          onTap: () async {
-                            await FirebaseFirestore.instance
-                                .collection(
-                                    'users/${authProvider.uid}/shelfs/${snapshot.data.docs[index].id}/books')
-                                .doc(book.id)
-                                .set(book.toJson());
-                            Navigator.of(context).pop();
-                          },
-                          leading: Icon(
-                            Icons.add_box_rounded,
-                            color: Colors.blue,
-                          ),
-                          title: Text(snapshot.data.docs[index].id),
-                        );
-                      }),
+                  if (snapshot.data.docs.length > 0)
+                    ListView.builder(
+                        shrinkWrap: true,
+                        physics: ClampingScrollPhysics(),
+                        itemCount: snapshot.data.docs.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return ListTile(
+                            onTap: () async {
+                              await FirebaseFirestore.instance
+                                  .collection(
+                                      'users/${authProvider.uid}/shelfs/${snapshot.data.docs[index].id}/books')
+                                  .doc(book.id)
+                                  .set(book.toJson());
+                              Navigator.of(context).pop();
+                            },
+                            leading: Icon(
+                              Icons.add_box_rounded,
+                              color: Colors.blue,
+                            ),
+                            title: Text(snapshot.data.docs[index].id),
+                          );
+                        }),
                 ],
               ),
             ),
