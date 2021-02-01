@@ -29,6 +29,7 @@ class AuthService {
         'name': currentUser.displayName,
         'photo': currentUser.photoURL,
         'email': currentUser.email,
+        'visibility': true,
       },
     );
     return currentUser;

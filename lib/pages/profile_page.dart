@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shelf/providers/auth_provider.dart';
+import 'package:shelf/widgets/visibility_switch.dart';
 
 class ProfilePage extends StatelessWidget {
   static final String routeName = '/profile';
@@ -30,7 +31,9 @@ class ProfilePage extends StatelessWidget {
       body: Padding(
         padding: EdgeInsets.all(10),
         child: ListView(
-          children: [],
+          children: [
+            VisibilitySwitch(),
+          ],
         ),
       ),
     );
