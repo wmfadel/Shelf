@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shelf/providers/auth_provider.dart';
+import 'package:shelf/services/location_service.dart';
 
 class VisibilitySwitch extends StatefulWidget {
   @override
@@ -10,9 +11,24 @@ class VisibilitySwitch extends StatefulWidget {
 
 class _VisibilitySwitchState extends State<VisibilitySwitch> {
   bool isSwitch = false;
-  bool dynamicSwitch;
+  bool dynamicSwitch = false;
 
-  handleSwitch(bool value) {
+  handleSwitch(bool value, String uid) async {
+    if (value) {
+      DocumentSnapshot userDoc =
+          await FirebaseFirestore.instance.collection('users').doc(uid).get();
+      if (userDoc.data()['location'] == null) {
+        String newLocation = await LocationService().getUserLocation();
+        if (newLocation == null) {
+          return;
+        } else {
+          FirebaseFirestore.instance
+              .collection('users')
+              .doc(uid)
+              .update({'location': newLocation});
+        }
+      }
+    }
     setState(() {
       isSwitch = value;
       dynamicSwitch = value;
@@ -34,7 +50,7 @@ class _VisibilitySwitchState extends State<VisibilitySwitch> {
           title: Text(isSwitch ? 'Visibile' : 'Invisible'),
           subtitle: Text('change (location\\shelfs) visibility'),
           onChanged: (val) {
-            handleSwitch(val);
+            handleSwitch(val, uid);
             FirebaseFirestore.instance
                 .collection('users')
                 .doc(uid)
