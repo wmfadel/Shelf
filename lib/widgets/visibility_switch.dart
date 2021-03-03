@@ -31,7 +31,7 @@ class _VisibilitySwitchState extends State<VisibilitySwitch> {
         dynamicSwitch = snapshot.data.data()['visibility'];
         return SwitchListTile(
           value: dynamicSwitch != true ? isSwitch : dynamicSwitch,
-          title: Text('Visibile'),
+          title: Text(isSwitch ? 'Visibile' : 'Invisible'),
           subtitle: Text('change (location\\shelfs) visibility'),
           onChanged: (val) {
             handleSwitch(val);
@@ -49,7 +49,7 @@ class _VisibilitySwitchState extends State<VisibilitySwitch> {
     return SwitchListTile(
       value: false,
       title: Text('Visibile'),
-      subtitle: Text('Checking your visibility'),
+      subtitle: Text('change (location\\shelfs) visibility'),
       onChanged: (val) {},
     );
   }
