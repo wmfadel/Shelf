@@ -29,6 +29,7 @@ class _LoginPageState extends State<LoginPage> {
                         await Provider.of<AuthProvider>(context, listen: false)
                             .loginWithGoogle();
                     if (logStatus) {
+                      //User is logged in navigate to home screen
                       Navigator.of(context)
                           .pushReplacementNamed(HomePage.routeName);
                     } else {

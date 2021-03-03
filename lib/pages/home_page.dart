@@ -20,6 +20,9 @@ class HomePage extends StatelessWidget {
                 target: LatLng(30.0494817, 31.236408),
                 zoom: 17,
               ),
+              padding: EdgeInsets.only(
+                top: MediaQuery.of(context).size.height - 150,
+              ),
               myLocationEnabled: true,
               indoorViewEnabled: true,
               buildingsEnabled: true,
