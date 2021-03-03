@@ -40,6 +40,7 @@ dependencies:
   cloud_firestore: ^0.16.0
   url_launcher: ^5.7.10
   location: ^3.2.4
+  google_fonts: ^1.1.2
 
 dev_dependencies:
   flutter_test:
@@ -64,6 +65,7 @@ flutter:
     - assets/pics/loading.png
     - assets/pics/location_search.png
     - assets/pics/no_data.png
+    - assets/pics/google_logo.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
