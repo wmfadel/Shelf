@@ -45,10 +45,13 @@ class _LoginPageState extends State<LoginPage> {
                     setState(() {
                       isLogging = true;
                     });
-                    bool logStatus =
+                    bool logStatus;
+
+                    logStatus =
                         await Provider.of<AuthProvider>(context, listen: false)
                             .loginWithGoogle();
-                    if (logStatus) {
+
+                    if (logStatus != null && logStatus) {
                       //User is logged in navigate to home screen
                       Navigator.of(context)
                           .pushReplacementNamed(HomePage.routeName);

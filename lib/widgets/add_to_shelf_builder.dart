@@ -2,11 +2,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shelf/models/api_book.dart';
+import 'package:shelf/pages/create_shelf_screen.dart';
 import 'package:shelf/providers/auth_provider.dart';
 
 class AddToShelfBuilder extends StatelessWidget {
   final APIBook book;
-  AddToShelfBuilder(this.book);
+  final BuildContext scaffoldCTX;
+  AddToShelfBuilder(this.book, this.scaffoldCTX);
   @override
   Widget build(BuildContext context) {
     AuthProvider authProvider =
@@ -14,9 +16,8 @@ class AddToShelfBuilder extends StatelessWidget {
 
     return FutureBuilder<QuerySnapshot>(
         future: FirebaseFirestore.instance
-            .collection('users')
-            .doc(authProvider.uid)
             .collection('shelfs')
+            .where('user', isEqualTo: authProvider.uid)
             .get(),
         builder: (BuildContext context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting)
@@ -27,49 +28,26 @@ class AddToShelfBuilder extends StatelessWidget {
               padding: const EdgeInsets.all(10),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(
-                    'My Shelfs',
-                    style: TextStyle(
-                      color: Colors.blue,
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Divider(),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15),
-                    child: Row(
-                      children: [
-                        Icon(Icons.add_box_rounded, color: Colors.greenAccent),
-                        Expanded(
-                          child: TextField(
-                            onSubmitted: (value) async {
-                              await FirebaseFirestore.instance
-                                  .collection('users')
-                                  .doc(authProvider.uid)
-                                  .collection('shelfs')
-                                  .doc(value.replaceAll(' ', '!@#').trim())
-                                  .set({'time': DateTime.now().toString()});
-                              FirebaseFirestore.instance
-                                  .collection('users')
-                                  .doc(authProvider.uid)
-                                  .collection('shelfs')
-                                  .doc(value.replaceAll(' ', '!@#').trim())
-                                  .collection('books')
-                                  .doc(book.id)
-                                  .set(book.toJson());
-                              Navigator.of(context).pop();
-                            },
-                            decoration: InputDecoration(
-                                contentPadding:
-                                    EdgeInsets.symmetric(horizontal: 20),
-                                labelText: 'Add New Shelf',
-                                hintText: 'My New great shelf ...'),
-                          ),
-                        )
-                      ],
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'My Shelfs',
+                        style: TextStyle(
+                          color: Colors.blue,
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      ElevatedButton.icon(
+                        onPressed: () => Navigator.of(context)
+                            .pushNamed(CreateShelfScreen.routeName),
+                        icon: Icon(Icons.add_box_rounded),
+                        label: Text('Create New Shelf'),
+                      ),
+                    ],
                   ),
                   Divider(),
                   ListView.builder(
@@ -80,17 +58,24 @@ class AddToShelfBuilder extends StatelessWidget {
                         return ListTile(
                           onTap: () async {
                             await FirebaseFirestore.instance
-                                .collection(
-                                    'users/${authProvider.uid}/shelfs/${snapshot.data.docs[index].id}/books')
+                                .collection('shelfs')
+                                .doc(snapshot.data.docs[index].id)
+                                .collection('books')
                                 .doc(book.id)
                                 .set(book.toJson());
+
+                            ScaffoldMessenger.of(scaffoldCTX).showSnackBar(
+                                SnackBar(
+                                    content: Text(
+                                        'Book Added to Shelf succesfully')));
                             Navigator.of(context).pop();
                           },
                           leading: Icon(
                             Icons.add_box_rounded,
                             color: Colors.blue,
                           ),
-                          title: Text(snapshot.data.docs[index].id
+                          title: Text(snapshot.data.docs[index]
+                              .data()['name']
                               .replaceAll('!@#', ' ')),
                         );
                       }),

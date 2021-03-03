@@ -29,8 +29,9 @@ class BookPage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                   builder: (ctx) {
-                    return AddToShelfBuilder(book);
+                    return AddToShelfBuilder(book, context);
                   });
+              //Dialogs().showAddShelfDialog(context, book);
             },
           )
         ],
@@ -50,11 +51,14 @@ class BookPage extends StatelessWidget {
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(10),
-                  child: Image.network(
-                    book.thumbnail,
-                    width: 140,
-                    height: 200,
-                    fit: BoxFit.cover,
+                  child: Hero(
+                    tag: book.id,
+                    child: Image.network(
+                      book.thumbnail,
+                      width: 140,
+                      height: 200,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
                 SizedBox(width: 10),

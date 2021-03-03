@@ -50,6 +50,7 @@ class AddBookPage extends StatelessWidget {
                           Provider.of<APISearchPRovider>(context, listen: false)
                               .searchForABook(_textEditingController.text
                                   .replaceAll(' ', '+'));
+                          FocusScope.of(context).unfocus();
                         },
                 ),
               ],

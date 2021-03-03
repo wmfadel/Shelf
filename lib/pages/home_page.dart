@@ -21,7 +21,7 @@ class HomePage extends StatelessWidget {
                 zoom: 17,
               ),
               padding: EdgeInsets.only(
-                top: MediaQuery.of(context).size.height - 150,
+                top: (MediaQuery.of(context).size.height - 160),
               ),
               myLocationEnabled: true,
               indoorViewEnabled: true,

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shelf/pages/add_book_page.dart';
 import 'package:shelf/pages/book_page.dart';
+import 'package:shelf/pages/create_shelf_screen.dart';
 import 'package:shelf/pages/home_page.dart';
 import 'package:shelf/pages/login_page.dart';
 import 'package:shelf/pages/profile_page.dart';
@@ -43,6 +44,8 @@ class MyApp extends StatelessWidget {
           AddBookPage.routeName: (BuildContext context) => AddBookPage(),
           BookPage.routeName: (BuildContext context) => BookPage(),
           ProfilePage.routeName: (BuildContext context) => ProfilePage(),
+          CreateShelfScreen.routeName: (BuildContext context) =>
+              CreateShelfScreen(),
         },
       ),
     );

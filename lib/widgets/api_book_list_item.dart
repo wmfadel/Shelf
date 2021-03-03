@@ -86,11 +86,14 @@ class APIBookListItem extends StatelessWidget {
               Positioned(
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8),
-                  child: Image.network(
-                    book.thumbnail,
-                    width: 100,
-                    height: 150,
-                    fit: BoxFit.cover,
+                  child: Hero(
+                    tag: book.id,
+                    child: Image.network(
+                      book.thumbnail,
+                      width: 100,
+                      height: 150,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               ),
