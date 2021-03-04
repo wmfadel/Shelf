@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:shelf/pages/add_book_page.dart';
 import 'package:shelf/pages/profile_page.dart';
+import 'package:shelf/providers/auth_provider.dart';
 import 'package:shelf/widgets/custom_avatar.dart';
 import 'package:shelf/widgets/custom_button.dart';
+import 'package:shelf/widgets/drawer_list.dart';
 
 class HomePage extends StatefulWidget {
   static final String routeName = '/home';
@@ -19,7 +22,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         key: scaffoldKey,
-        drawer: Drawer(),
+        drawer: DrawerList(),
         body: Stack(
           children: [
             GoogleMap(
@@ -57,8 +60,11 @@ class _HomePageState extends State<HomePage> {
               top: 45,
               right: 20,
               child: GestureDetector(
-                  onTap: () =>
-                      Navigator.of(context).pushNamed(ProfilePage.routeName),
+                  onTap: () => Navigator.of(context).pushNamed(
+                      ProfilePage.routeName,
+                      arguments:
+                          Provider.of<AuthProvider>(context, listen: false)
+                              .uid),
                   child: CustomAvatar()),
             ),
             Positioned(
