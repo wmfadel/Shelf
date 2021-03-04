@@ -5,9 +5,16 @@ import 'package:shelf/pages/profile_page.dart';
 import 'package:shelf/widgets/custom_avatar.dart';
 import 'package:shelf/widgets/custom_button.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   static final String routeName = '/home';
+
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,6 +27,10 @@ class HomePage extends StatelessWidget {
                 target: LatLng(30.0494817, 31.236408),
                 zoom: 17,
               ),
+              onMapCreated: (_) {
+                // setting state to allow map to apply padding correctly
+                setState(() {});
+              },
               padding: EdgeInsets.only(
                 top: (MediaQuery.of(context).size.height - 160),
               ),
