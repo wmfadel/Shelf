@@ -13,7 +13,7 @@ class BookPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     APIBook book = Provider.of<APISearchPRovider>(context, listen: false)
-        .getSelectedBook();
+        .getSelectedBook()!;
     return Scaffold(
       key: _scaffoldKey,
       backgroundColor: Colors.white,
@@ -36,7 +36,7 @@ class BookPage extends StatelessWidget {
           )
         ],
         title: Text(
-          book.title,
+          book.title!,
           style: TextStyle(color: Colors.blue),
         ),
         backgroundColor: Colors.white70,
@@ -52,9 +52,9 @@ class BookPage extends StatelessWidget {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: Hero(
-                    tag: book.id,
+                    tag: book.id!,
                     child: Image.network(
-                      book.thumbnail,
+                      book.thumbnail!,
                       width: 140,
                       height: 200,
                       fit: BoxFit.cover,
@@ -69,7 +69,7 @@ class BookPage extends StatelessWidget {
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Text(
-                        book.title,
+                        book.title!,
                         style: TextStyle(
                           color: Colors.black,
                           fontSize: 24,
@@ -77,7 +77,7 @@ class BookPage extends StatelessWidget {
                         ),
                       ),
                       SizedBox(height: 10),
-                      ...book.authors.map((e) => Text(
+                      ...book.authors!.map((e) => Text(
                             e,
                             style: TextStyle(
                               color: Colors.black87,
@@ -85,7 +85,7 @@ class BookPage extends StatelessWidget {
                             ),
                           )),
                       SizedBox(height: 15),
-                      Text(book.subtitle),
+                      Text(book.subtitle!),
                     ],
                   ),
                 )
@@ -109,7 +109,7 @@ class BookPage extends StatelessWidget {
                 InfoChip(Icons.pages_outlined, book.pageCount.toString()),
                 InfoChip(Icons.language_outlined, book.language),
                 InfoChip(Icons.rate_review,
-                    book.maturityRating.replaceAll('_', ' ')),
+                    book.maturityRating!.replaceAll('_', ' ')),
               ],
             ),
             Padding(
@@ -126,7 +126,7 @@ class BookPage extends StatelessWidget {
             ),
             Wrap(
               children: [
-                ...book.categories.map(
+                ...book.categories!.map(
                   (c) => InfoChip(Icons.category_outlined, c),
                 )
               ],
@@ -147,25 +147,25 @@ class BookPage extends StatelessWidget {
               children: [
                 GestureDetector(
                   onTap: () async {
-                    await launch(book.infoLink);
+                    await launch(book.infoLink!);
                   },
                   child: InfoChip(Icons.info_outline, 'Information'),
                 ),
                 GestureDetector(
                   onTap: () async {
-                    await launch(book.canonicalVolumeLink);
+                    await launch(book.canonicalVolumeLink!);
                   },
                   child: InfoChip(Icons.bookmark_border_rounded, 'Volume'),
                 ),
                 GestureDetector(
                   onTap: () async {
-                    await launch(book.previewLink);
+                    await launch(book.previewLink!);
                   },
                   child: InfoChip(Icons.preview_outlined, 'Preview'),
                 ),
                 GestureDetector(
                   onTap: () async {
-                    await launch(book.webReaderLink);
+                    await launch(book.webReaderLink!);
                   },
                   child: InfoChip(Icons.read_more, 'Reader'),
                 ),
@@ -185,7 +185,7 @@ class BookPage extends StatelessWidget {
             ),
             SizedBox(height: 15),
             Text(
-              book.description,
+              book.description!,
               style: TextStyle(fontSize: 16),
             ),
             Padding(
@@ -202,9 +202,9 @@ class BookPage extends StatelessWidget {
             ),
             Wrap(
               children: [
-                ...book.industryIdentifiers.map(
+                ...book.industryIdentifiers!.map(
                   (i) =>
-                      InfoChipText(i.type.replaceAll('_', ' '), i.identifier),
+                      InfoChipText(i.type!.replaceAll('_', ' '), i.identifier),
                 )
               ],
             ),

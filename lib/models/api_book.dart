@@ -1,22 +1,22 @@
 class APIBook {
-  String id;
-  String etag;
-  String title;
-  String subtitle;
-  List<String> authors;
-  String publishedDate;
-  String description;
-  List<IndustryIdentifiers> industryIdentifiers;
-  int pageCount;
-  List<String> categories;
-  String maturityRating;
-  String smallThumbnail;
-  String thumbnail;
-  String language;
-  String previewLink;
-  String infoLink;
-  String canonicalVolumeLink;
-  String webReaderLink;
+  String? id;
+  String? etag;
+  String? title;
+  String? subtitle;
+  List<String>? authors;
+  String? publishedDate;
+  String? description;
+  List<IndustryIdentifiers>? industryIdentifiers;
+  int? pageCount;
+  List<String>? categories;
+  String? maturityRating;
+  String? smallThumbnail;
+  String? thumbnail;
+  String? language;
+  String? previewLink;
+  String? infoLink;
+  String? canonicalVolumeLink;
+  String? webReaderLink;
 
   APIBook(
       {this.id,
@@ -50,7 +50,7 @@ class APIBook {
     if (json['volumeInfo']['industryIdentifiers'] != null) {
       industryIdentifiers = [];
       json['volumeInfo']['industryIdentifiers'].forEach((v) {
-        industryIdentifiers.add(new IndustryIdentifiers.fromJson(v));
+        industryIdentifiers!.add(new IndustryIdentifiers.fromJson(v));
       });
     }
     pageCount = json['volumeInfo']['pageCount'] ?? 0;
@@ -83,7 +83,7 @@ class APIBook {
     data['description'] = this.description;
     if (this.industryIdentifiers != null) {
       data['industryIdentifiers'] =
-          this.industryIdentifiers.map((v) => v.toJson()).toList();
+          this.industryIdentifiers!.map((v) => v.toJson()).toList();
     }
     data['pageCount'] = this.pageCount;
     data['categories'] = this.categories;
@@ -100,8 +100,8 @@ class APIBook {
 }
 
 class IndustryIdentifiers {
-  String type;
-  String identifier;
+  String? type;
+  String? identifier;
 
   IndustryIdentifiers({this.type, this.identifier});
 

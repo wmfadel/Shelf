@@ -5,7 +5,7 @@ import 'package:shelf/services/auth_service.dart';
 
 class AuthProvider with ChangeNotifier {
   AuthService _authService = AuthService();
-  String uid, name, photo, email;
+  String? uid, name, photo, email;
 
   loginWithGoogle() async {
     User user = await _authService.signInWithGoogle();
@@ -23,7 +23,7 @@ class AuthProvider with ChangeNotifier {
     return false;
   }
 
-  _getUserData(String uid) async {
+  _getUserData(String? uid) async {
     DocumentSnapshot value =
         await FirebaseFirestore.instance.collection('users').doc(uid).get();
     name = value.get('name');

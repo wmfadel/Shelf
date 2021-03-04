@@ -7,7 +7,7 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String uid = ModalRoute.of(context).settings.arguments as String;
+    final String? uid = ModalRoute.of(context)!.settings.arguments as String?;
 
     return Scaffold(
       backgroundColor: Colors.white,

@@ -56,13 +56,11 @@ class AddBookPage extends StatelessWidget {
               ],
             ),
           ),
-          if (context.watch<APISearchPRovider>().books == null ||
-              context.watch<APISearchPRovider>().books.length == 0 ||
+          if (context.watch<APISearchPRovider>().books.length == 0 ||
               context.watch<APISearchPRovider>().isLoading)
             SizedBox(height: 100),
-          if (context.watch<APISearchPRovider>().books == null ||
-              context.watch<APISearchPRovider>().books.length == 0 &&
-                  !context.watch<APISearchPRovider>().isLoading)
+          if (context.watch<APISearchPRovider>().books.length == 0 &&
+              !context.watch<APISearchPRovider>().isLoading)
             Image.asset(
               'assets/pics/bibliophile.png',
               width: MediaQuery.of(context).size.width * 0.7,
@@ -81,7 +79,8 @@ class AddBookPage extends StatelessWidget {
                 physics: ClampingScrollPhysics(),
                 itemBuilder: (BuildContext context, int index) =>
                     APIBookListItem(
-                        Provider.of<APISearchPRovider>(context, listen: false)
+                        book: Provider.of<APISearchPRovider>(context,
+                                listen: false)
                             .books[index]),
               ),
             ),

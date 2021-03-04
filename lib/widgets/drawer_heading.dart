@@ -11,12 +11,12 @@ class DrawerHeading extends StatelessWidget {
         CircleAvatar(
           radius: 45,
           backgroundImage: NetworkImage(
-            Provider.of<AuthProvider>(context, listen: false).photo,
+            Provider.of<AuthProvider>(context, listen: false).photo!,
           ),
         ),
         SizedBox(height: 5),
         Text(
-          Provider.of<AuthProvider>(context, listen: false).name,
+          Provider.of<AuthProvider>(context, listen: false).name!,
           style: TextStyle(
             fontSize: 20,
             color: Colors.black,
@@ -24,7 +24,7 @@ class DrawerHeading extends StatelessWidget {
           ),
         ),
         Text(
-          Provider.of<AuthProvider>(context, listen: false).email,
+          Provider.of<AuthProvider>(context, listen: false).email!,
         ),
         SizedBox(height: 10),
         Divider(

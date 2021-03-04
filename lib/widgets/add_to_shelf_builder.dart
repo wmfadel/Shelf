@@ -53,13 +53,13 @@ class AddToShelfBuilder extends StatelessWidget {
                   ListView.builder(
                       shrinkWrap: true,
                       physics: ClampingScrollPhysics(),
-                      itemCount: snapshot.data.size,
+                      itemCount: snapshot.data!.size,
                       itemBuilder: (BuildContext context, int index) {
                         return ListTile(
                           onTap: () async {
                             await FirebaseFirestore.instance
                                 .collection('shelfs')
-                                .doc(snapshot.data.docs[index].id)
+                                .doc(snapshot.data!.docs[index].id)
                                 .collection('books')
                                 .doc(book.id)
                                 .set(book.toJson());
@@ -74,12 +74,12 @@ class AddToShelfBuilder extends StatelessWidget {
                             Icons.add_box_rounded,
                             color: Colors.blue,
                           ),
-                          title: Text(snapshot.data.docs[index]
-                              .data()['name']
+                          title: Text(snapshot.data!.docs[index]
+                              .data()!['name']
                               .replaceAll('!@#', ' ')),
                         );
                       }),
-                  Text('Total shelfs ${snapshot.data.size}'),
+                  Text('Total shelfs ${snapshot.data!.size}'),
                 ],
               ),
             ),

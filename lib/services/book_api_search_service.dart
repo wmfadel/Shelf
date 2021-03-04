@@ -9,7 +9,7 @@ class BooksAPISearchService {
   Future<List<APIBook>> searchAPIBook(String name) async {
     String url = _searchURL + name;
     print('searching for book on $url');
-    http.Response response = await http.get(url);
+    http.Response response = await http.get(Uri.tryParse(url)!);
     Map<String, dynamic> res = json.decode(response.body);
     List<APIBook> books = [];
     for (var item in res['items']) {

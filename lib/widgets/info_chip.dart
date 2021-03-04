@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class InfoChip extends StatelessWidget {
   final IconData icon;
-  final String value;
+  final String? value;
   final Color color;
 
   InfoChip(this.icon, this.value, {this.color = Colors.blue});

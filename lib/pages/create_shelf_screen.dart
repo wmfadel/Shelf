@@ -40,7 +40,7 @@ class CreateShelfScreen extends StatelessWidget {
           SizedBox(height: 40),
           ElevatedButton(
             onPressed: () async {
-              String userID =
+              String? userID =
                   Provider.of<AuthProvider>(context, listen: false).uid;
               await FirebaseFirestore.instance.collection('shelfs').doc().set({
                 'name': nameController.value.text,

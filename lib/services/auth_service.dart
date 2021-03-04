@@ -9,7 +9,8 @@ class AuthService {
   final GoogleSignIn _googleSignIn = GoogleSignIn();
 
   Future<User> signInWithGoogle() async {
-    GoogleSignInAccount googleSignInAccount = await _googleSignIn.signIn();
+    GoogleSignInAccount googleSignInAccount =
+        await (_googleSignIn.signIn() as Future<GoogleSignInAccount>);
     GoogleSignInAuthentication googleSignInAuthentication =
         await googleSignInAccount.authentication;
     AuthCredential credential = GoogleAuthProvider.credential(
@@ -17,7 +18,7 @@ class AuthService {
       idToken: googleSignInAuthentication.idToken,
     );
     await _auth.signInWithCredential(credential);
-    User currentUser = _auth.currentUser;
+    User currentUser = _auth.currentUser!;
 
     print("User Name: ${currentUser.displayName}");
     print("User Email ${currentUser.email}");
@@ -25,7 +26,7 @@ class AuthService {
     print("User Photo ${currentUser.photoURL}");
     //cachUser(currentUser);
     await cashUserID(currentUser.uid);
-    String location = await LocationService().getUserLocation();
+    String? location = await LocationService().getUserLocation();
     FirebaseFirestore.instance.collection('users').doc(currentUser.uid).set(
       {
         'name': currentUser.displayName,
@@ -44,7 +45,7 @@ class AuthService {
     prefs.setString('uid', id);
   }
 
-  Future<String> checkLoggedUser() async {
+  Future<String?> checkLoggedUser() async {
     if (await _googleSignIn.isSignedIn()) {
       print('user is signed');
       return await loadUserIDFromCach();
@@ -52,9 +53,9 @@ class AuthService {
     return null;
   }
 
-  Future<String> loadUserIDFromCach() async {
+  Future<String?> loadUserIDFromCach() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String id = prefs.getString('uid');
+    String? id = prefs.getString('uid');
     print('id from prefs: $id');
     return id;
   }

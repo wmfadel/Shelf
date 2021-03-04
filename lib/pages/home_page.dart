@@ -53,7 +53,7 @@ class _HomePageState extends State<HomePage> {
               left: 20,
               child: CustomButton(
                 iconData: Icons.menu,
-                onPressed: () => scaffoldKey.currentState.openDrawer(),
+                onPressed: () => scaffoldKey.currentState!.openDrawer(),
               ),
             ),
             Positioned(

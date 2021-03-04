@@ -11,14 +11,14 @@ class VisibilitySwitch extends StatefulWidget {
 
 class _VisibilitySwitchState extends State<VisibilitySwitch> {
   bool isSwitch = false;
-  bool dynamicSwitch = false;
+  bool? dynamicSwitch = false;
 
-  handleSwitch(bool value, String uid) async {
+  handleSwitch(bool value, String? uid) async {
     if (value) {
       DocumentSnapshot userDoc =
           await FirebaseFirestore.instance.collection('users').doc(uid).get();
-      if (userDoc.data()['location'] == null) {
-        String newLocation = await LocationService().getUserLocation();
+      if (userDoc.data()!['location'] == null) {
+        String? newLocation = await LocationService().getUserLocation();
         if (newLocation == null) {
           return;
         } else {
@@ -37,16 +37,16 @@ class _VisibilitySwitchState extends State<VisibilitySwitch> {
 
   @override
   Widget build(BuildContext context) {
-    String uid = Provider.of<AuthProvider>(context, listen: false).uid;
+    String? uid = Provider.of<AuthProvider>(context, listen: false).uid;
 
     return StreamBuilder(
       stream: FirebaseFirestore.instance.doc('users/$uid').snapshots(),
       builder: (ctx, AsyncSnapshot<DocumentSnapshot> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting)
           return dummyPlaceHolder();
-        dynamicSwitch = snapshot.data.data()['visibility'];
+        dynamicSwitch = snapshot.data!.data()!['visibility'];
         return SwitchListTile(
-          value: dynamicSwitch != true ? isSwitch : dynamicSwitch,
+          value: dynamicSwitch != true ? isSwitch : dynamicSwitch!,
           title: Text(dynamicSwitch != true
               ? isSwitch
                   ? 'Visibile'

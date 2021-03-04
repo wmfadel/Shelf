@@ -23,7 +23,7 @@ class _WrapperState extends State<Wrapper> {
     bool isLogged =
         await Provider.of<AuthProvider>(context, listen: false).autoLogin();
     print('wrapper log state $isLogged');
-    if (isLogged != null && isLogged) {
+    if (isLogged) {
       Navigator.of(context).pushReplacementNamed(HomePage.routeName);
     } else {
       Navigator.of(context).pushReplacementNamed(LoginPage.routeName);

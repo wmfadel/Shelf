@@ -5,8 +5,8 @@ import 'package:shelf/pages/book_page.dart';
 import 'package:shelf/providers/api_search_provider.dart';
 
 class APIBookListItem extends StatelessWidget {
-  final APIBook book;
-  APIBookListItem(this.book);
+  final APIBook? book;
+  APIBookListItem({@required this.book});
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -14,7 +14,7 @@ class APIBookListItem extends StatelessWidget {
       child: GestureDetector(
         onTap: () {
           Provider.of<APISearchPRovider>(context, listen: false)
-              .selectedBookID = book.id;
+              .selectedBookID = book!.id;
           Navigator.of(context).pushNamed(BookPage.routeName);
         },
         child: Stack(
@@ -38,7 +38,7 @@ class APIBookListItem extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        book.title,
+                        book!.title!,
                         maxLines: 2,
                         overflow: TextOverflow.fade,
                         style: TextStyle(
@@ -48,7 +48,7 @@ class APIBookListItem extends StatelessWidget {
                       ),
                       SizedBox(height: 10),
                       Text(
-                        book.subtitle ?? 'No subtitle available.',
+                        book!.subtitle ?? 'No subtitle available.',
                         maxLines: 3,
                         overflow: TextOverflow.fade,
                         style: TextStyle(
@@ -61,10 +61,10 @@ class APIBookListItem extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Icon(Icons.pages_rounded, color: Colors.blue),
-                          Text('${book.pageCount ?? 'unknown'}'),
+                          Text('${book!.pageCount ?? 'unknown'}'),
                           SizedBox(width: 10),
                           Icon(Icons.language_outlined, color: Colors.blue),
-                          Text(book.language),
+                          Text(book!.language!),
                           IconButton(
                               icon: Icon(
                                 Icons.info_outline,
@@ -82,14 +82,14 @@ class APIBookListItem extends StatelessWidget {
                 ),
               ),
             ),
-            if (book.thumbnail != null)
+            if (book!.thumbnail != null)
               Positioned(
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8),
                   child: Hero(
-                    tag: book.id,
+                    tag: book!.id!,
                     child: Image.network(
-                      book.thumbnail,
+                      book!.thumbnail!,
                       width: 100,
                       height: 150,
                       fit: BoxFit.cover,

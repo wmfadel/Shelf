@@ -15,7 +15,7 @@ class CustomAvatar extends StatelessWidget {
         height: 45,
         child: Center(
             child: CircleAvatar(
-          backgroundImage: NetworkImage(_authProvider.photo),
+          backgroundImage: NetworkImage(_authProvider.photo!),
         )),
       ),
     );

@@ -4,8 +4,8 @@ class CustomButton extends StatelessWidget {
   final IconData iconData;
   final Function onPressed;
   CustomButton({
-    @required this.iconData,
-    @required this.onPressed,
+    required this.iconData,
+    required this.onPressed,
   });
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class CustomButton extends StatelessWidget {
         child: Center(
           child: IconButton(
             icon: Icon(iconData, color: Colors.blue),
-            onPressed: onPressed,
+            onPressed: onPressed as void Function()?,
           ),
         ),
       ),
