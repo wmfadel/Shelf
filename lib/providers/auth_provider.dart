@@ -5,7 +5,7 @@ import 'package:shelf/services/auth_service.dart';
 
 class AuthProvider with ChangeNotifier {
   AuthService _authService = AuthService();
-  String? uid, name, photo, email;
+  String? uid, name, photo, email, location;
 
   loginWithGoogle() async {
     User user = await _authService.signInWithGoogle();
@@ -29,6 +29,8 @@ class AuthProvider with ChangeNotifier {
     name = value.get('name');
     email = value.get('email');
     photo = value.get('photo');
-    print('got data from firestore\nname:$name\temail:$email\nphoto:$photo');
+    location = value.get('location');
+    print(
+        'got data from firestore\nname:$name\temail:$email\tlocation:$location\nphoto:$photo');
   }
 }

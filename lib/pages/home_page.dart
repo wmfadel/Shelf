@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:shelf/pages/add_book_page.dart';
 import 'package:shelf/pages/profile_page.dart';
@@ -7,15 +6,11 @@ import 'package:shelf/providers/auth_provider.dart';
 import 'package:shelf/widgets/custom_avatar.dart';
 import 'package:shelf/widgets/custom_button.dart';
 import 'package:shelf/widgets/drawer_list.dart';
+import 'package:shelf/widgets/home_map.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget {
   static final String routeName = '/home';
 
-  @override
-  _HomePageState createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
 
   @override
@@ -25,29 +20,7 @@ class _HomePageState extends State<HomePage> {
         drawer: DrawerList(),
         body: Stack(
           children: [
-            GoogleMap(
-              initialCameraPosition: CameraPosition(
-                target: LatLng(30.0494817, 31.236408),
-                zoom: 17,
-              ),
-              onMapCreated: (_) {
-                // setting state to allow map to apply padding correctly
-                setState(() {});
-              },
-              padding: EdgeInsets.only(
-                top: (MediaQuery.of(context).size.height - 160),
-              ),
-              myLocationEnabled: true,
-              indoorViewEnabled: true,
-              buildingsEnabled: true,
-              compassEnabled: true,
-              mapToolbarEnabled: true,
-              myLocationButtonEnabled: true,
-              rotateGesturesEnabled: true,
-              scrollGesturesEnabled: true,
-              zoomControlsEnabled: true,
-              zoomGesturesEnabled: true,
-            ),
+            HomeMap(),
             Positioned(
               top: 45,
               left: 20,
