@@ -1,3 +1,5 @@
+
+
 class APIBook {
   String? id;
   String? etag;
@@ -70,6 +72,32 @@ class APIBook {
         json['volumeInfo']['canonicalVolumeLink'] ?? 'https:www.google.com';
     webReaderLink =
         json['accessInfo']['webReaderLink'] ?? 'https:www.google.com';
+  }
+
+  APIBook.fromFire(Map<String, dynamic> json) {
+    id = json['id'] ?? '';
+    etag = json['etag'] ?? '';
+    title = json['title'] ?? 'No title available';
+    subtitle = json['subtitle'] ?? 'No Subtitle available';
+    authors = (json['authors'] ?? <String>[]).cast<String>();
+    publishedDate = json['publishedDate'] ?? 'No Date Available';
+    description = json['description'] ?? 'No Description Available';
+    if (json['industryIdentifiers'] != null) {
+      industryIdentifiers = [];
+      json['industryIdentifiers'].forEach((v) {
+        industryIdentifiers!.add(new IndustryIdentifiers.fromJson(v));
+      });
+    }
+    pageCount = json['pageCount'] ?? 0;
+    categories = (json['categories'] ?? <String>[]).cast<String>();
+    maturityRating = json['maturityRating'];
+    smallThumbnail = json['smallThumbnail'];
+    thumbnail = json['thumbnail'];
+    language = json['language'] ?? 'Unknown';
+    previewLink = json['previewLink'] ?? 'https:www.google.com';
+    infoLink = json['infoLink'] ?? 'https:www.google.com';
+    canonicalVolumeLink = json['canonicalVolumeLink'] ?? 'https:www.google.com';
+    webReaderLink = json['webReaderLink'] ?? 'https:www.google.com';
   }
 
   Map<String, dynamic> toJson() {

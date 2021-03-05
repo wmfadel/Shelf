@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:shelf/models/shelf.dart';
 import 'package:shelf/widgets/shelf_grid/shelf_grid_item.dart';
+import 'package:shelf/widgets/shimmer_items/shmr_shelf_overview.dart';
 
 class ProfileShelfGridBuilder extends StatelessWidget {
   const ProfileShelfGridBuilder({
@@ -20,7 +21,16 @@ class ProfileShelfGridBuilder extends StatelessWidget {
           .get(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting ||
-            snapshot.data!.size < 1) return Container();
+            snapshot.data!.size < 1)
+          return GridView.count(
+              shrinkWrap: true,
+              physics: ClampingScrollPhysics(),
+              crossAxisCount: 2,
+              childAspectRatio: 1 / 1.2,
+              children: List.generate(
+                4,
+                (_) => ShmrShelfOverview(),
+              ));
 
         List<QueryDocumentSnapshot> documents = snapshot.data!.docs;
         List<Shelf> shelfs = [];
