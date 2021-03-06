@@ -68,11 +68,6 @@ class ShmrShelfOverview extends StatelessWidget {
               ],
             ),
           ),
-          Positioned(
-            bottom: 15,
-            left: 10,
-            child: ShmrShelfItemUser(),
-          ),
         ],
       ),
     );
