@@ -49,7 +49,7 @@ class APIBookListItem extends StatelessWidget {
                       SizedBox(height: 10),
                       Text(
                         book!.subtitle ?? 'No subtitle available.',
-                        maxLines: 3,
+                        maxLines: 2,
                         overflow: TextOverflow.fade,
                         style: TextStyle(
                           color: Colors.black87,

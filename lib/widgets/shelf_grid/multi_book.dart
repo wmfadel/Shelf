@@ -16,6 +16,7 @@ class MultiBook extends StatelessWidget {
         child: Stack(
           children: [
             ...books
+                .take(4)
                 .map(
                   (e) => Positioned(
                     left: (pos += 35),

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:shelf/pages/profile_page.dart';
 import 'package:shelf/providers/auth_provider.dart';
 
 class HomeMap extends StatefulWidget {
@@ -13,19 +14,6 @@ class _HomeMapState extends State<HomeMap> {
   GoogleMapController? _controller;
   late AuthProvider authProvider;
   Set<Marker> markers = {};
-/*
-snapshot.data?.docs.forEach((QueryDocumentSnapshot doc) {
-              if (doc.id != authProvider.uid)
-                markers.add(
-                  Marker(
-                    markerId: MarkerId(doc.id),
-                    position: parseLatLang(doc.get('location')),
-                  ),
-                );
-            });
-          }
-          print('doc count ${snapshot.data?.docs.length}');
-          print('markers length ${markers.length}');*/
 
   @override
   void didChangeDependencies() {
@@ -39,15 +27,20 @@ snapshot.data?.docs.forEach((QueryDocumentSnapshot doc) {
         .collection('users')
         .where('visibility', isEqualTo: true)
         .get();
-    future.docs.forEach((element) {
-      if (element.id != authProvider.uid)
+    future.docs.forEach((userDoc) async {
+      if (userDoc.id != authProvider.uid) {
         markers.add(
           Marker(
-            markerId: MarkerId(element.id),
-            position: parseLatLang(element.get('location')),
-            infoWindow: InfoWindow(title: element.get('name')),
+            markerId: MarkerId(userDoc.id),
+            position: parseLatLang(userDoc.get('location')),
+            infoWindow: InfoWindow(
+              title: userDoc.get('name'),
+              onTap: () => Navigator.of(context)
+                  .pushNamed(ProfilePage.routeName, arguments: userDoc.id),
+            ),
           ),
         );
+      }
     });
 
     print('doc count ${future.docs.length}');
@@ -79,9 +72,7 @@ snapshot.data?.docs.forEach((QueryDocumentSnapshot doc) {
         // setting state to allow map to apply padding correctly
         setState(() {});
       },
-      padding: EdgeInsets.only(
-        top: (MediaQuery.of(context).size.height - 160),
-      ),
+      padding: EdgeInsets.only(top: 100, right: 10),
       myLocationEnabled: true,
       indoorViewEnabled: true,
       buildingsEnabled: true,

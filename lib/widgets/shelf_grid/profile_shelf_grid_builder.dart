@@ -26,7 +26,9 @@ class ProfileShelfGridBuilder extends StatelessWidget {
               shrinkWrap: true,
               physics: ClampingScrollPhysics(),
               crossAxisCount: 2,
-              childAspectRatio: 1 / 1.2,
+              childAspectRatio: 1 / 1.1,
+              mainAxisSpacing: 5,
+              crossAxisSpacing: 5,
               children: List.generate(
                 4,
                 (_) => ShmrShelfOverview(),

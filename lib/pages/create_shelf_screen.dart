@@ -3,10 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shelf/providers/auth_provider.dart';
 
-class CreateShelfScreen extends StatelessWidget {
+class CreateShelfScreen extends StatefulWidget {
   static final String routeName = '/createShelf';
+
+  @override
+  _CreateShelfScreenState createState() => _CreateShelfScreenState();
+}
+
+class _CreateShelfScreenState extends State<CreateShelfScreen> {
   final TextEditingController nameController = TextEditingController();
+
   final TextEditingController descriptionController = TextEditingController();
+
+  bool isPublic = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,6 +47,15 @@ class CreateShelfScreen extends StatelessWidget {
               labelText: 'New shelf descrption',
             ),
           ),
+          SizedBox(height: 10),
+          SwitchListTile(
+              value: isPublic,
+              title: Text(isPublic ? 'Public' : 'Private'),
+              onChanged: (newValue) {
+                setState(() {
+                  isPublic = newValue;
+                });
+              }),
           SizedBox(height: 40),
           ElevatedButton(
             onPressed: () async {
@@ -47,6 +66,7 @@ class CreateShelfScreen extends StatelessWidget {
                 'user': userID,
                 'time': DateTime.now().toString(),
                 'description': descriptionController.text.trim(),
+                'isPublic': isPublic,
               });
               FocusScope.of(context).unfocus();
               ScaffoldMessenger.of(context).showSnackBar(

@@ -200,14 +200,15 @@ class BookPage extends StatelessWidget {
                 fontSize: 18,
               ),
             ),
-            Wrap(
-              children: [
-                ...book.industryIdentifiers!.map(
-                  (i) =>
-                      InfoChipText(i.type!.replaceAll('_', ' '), i.identifier),
-                )
-              ],
-            ),
+            if (book.industryIdentifiers != null)
+              Wrap(
+                children: [
+                  ...book.industryIdentifiers!.map(
+                    (i) => InfoChipText(
+                        i.type!.replaceAll('_', ' '), i.identifier),
+                  )
+                ],
+              ),
           ],
         ),
       ),
