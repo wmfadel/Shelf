@@ -6,6 +6,7 @@ class Shelf {
   String description;
   String user;
   String time;
+  bool isPublic;
   List<APIBook>? books;
 
   Shelf({
@@ -14,6 +15,7 @@ class Shelf {
     required this.description,
     required this.user,
     required this.time,
+    this.isPublic = true,
     this.books,
   });
 }

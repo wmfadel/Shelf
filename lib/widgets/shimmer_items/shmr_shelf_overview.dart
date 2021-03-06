@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:shelf/widgets/shimmer_items/shmr_shelf_item_user.dart';
 import 'package:shimmer/shimmer.dart';
 
 class ShmrShelfOverview extends StatelessWidget {

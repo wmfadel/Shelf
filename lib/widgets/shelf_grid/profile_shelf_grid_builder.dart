@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shelf/models/shelf.dart';
+import 'package:shelf/providers/auth_provider.dart';
 import 'package:shelf/widgets/shelf_grid/shelf_grid_item.dart';
 import 'package:shelf/widgets/shimmer_items/shmr_shelf_overview.dart';
 
@@ -42,6 +44,7 @@ class ProfileShelfGridBuilder extends StatelessWidget {
               name: e.get('name'),
               description: e.get('description'),
               user: e.get('user'),
+              isPublic: e.get('isPublic') ?? true,
               time: e.get('time')));
         });
         print(shelfs.length.toString());
@@ -53,7 +56,16 @@ class ProfileShelfGridBuilder extends StatelessWidget {
             childAspectRatio: 1 / 1.2,
           ),
           children: [
-            ...shelfs.map((Shelf shelf) => ShelfGridItem(shelf: shelf)).toList()
+            ...shelfs
+                .where((Shelf element) {
+                  String? uid =
+                      Provider.of<AuthProvider>(context, listen: false).uid;
+                  if (element.user == uid) return true;
+                  if (element.isPublic) return true;
+                  return false;
+                })
+                .map((Shelf shelf) => ShelfGridItem(shelf: shelf))
+                .toList()
           ],
         );
       },
