@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:shelf/models/api_book.dart';
-import 'package:shelf/widgets/books_grid_item.dart';
+import 'package:shelf/widgets/shelf_page/books_grid_item.dart';
 
 class BooksGrid extends StatelessWidget {
   final String shelfID;

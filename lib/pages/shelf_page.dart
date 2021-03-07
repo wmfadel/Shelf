@@ -2,8 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shelf/providers/auth_provider.dart';
-import 'package:shelf/widgets/Shelf_page_switch.dart';
-import 'package:shelf/widgets/books_grid.dart';
+import 'package:shelf/widgets/shelf_page/Shelf_page_switch.dart';
+import 'package:shelf/widgets/shelf_page/books_grid.dart';
+import 'package:shelf/widgets/shelf_page/shelf_page_user.dart';
 
 class ShelfPage extends StatelessWidget {
   static final String routeName = '/shelf-page';
@@ -57,6 +58,8 @@ class ShelfPage extends StatelessWidget {
                     snapshot.data?.get('description'),
                     style: TextStyle(color: Colors.black, fontSize: 16),
                   ),
+                  SizedBox(height: 4),
+                  ShelfPageUser(snapshot.data?.get('user')),
                   Padding(
                     padding: EdgeInsets.symmetric(
                       horizontal: 30,
