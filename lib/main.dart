@@ -35,8 +35,8 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
+            primarySwatch: Colors.blue,
+            iconTheme: IconThemeData(color: Colors.blue)),
         debugShowCheckedModeBanner: false,
         initialRoute: Wrapper.routeName,
         routes: {

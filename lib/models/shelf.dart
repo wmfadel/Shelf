@@ -1,5 +1,3 @@
-import 'package:shelf/models/api_book.dart';
-
 class Shelf {
   String id;
   String name;
