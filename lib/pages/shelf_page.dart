@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shelf/providers/auth_provider.dart';
 import 'package:shelf/widgets/Shelf_page_switch.dart';
+import 'package:shelf/widgets/books_grid.dart';
 
 class ShelfPage extends StatelessWidget {
   static final String routeName = '/shelf-page';
@@ -23,7 +24,6 @@ class ShelfPage extends StatelessWidget {
               (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting)
               return Center(child: CircularProgressIndicator());
-            bool? containsBooks = snapshot.data?.data()?.containsKey('books');
             return SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -64,7 +64,7 @@ class ShelfPage extends StatelessWidget {
                     ),
                     child: Divider(),
                   ),
-                  if (containsBooks != null && containsBooks) Container(),
+                  BooksGrid(shelfID!),
                 ],
               ),
             );
