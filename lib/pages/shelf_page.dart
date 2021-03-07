@@ -36,7 +36,7 @@ class ShelfPage extends StatelessWidget {
                         IconButton(
                             icon: Icon(Icons.arrow_back,
                                 color: Theme.of(context).iconTheme.color),
-                            onPressed: () => Navigator.of(context).pop),
+                            onPressed: () => Navigator.of(context).pop()),
                         // allow changing shelf visibility if creted by current user
                         if (currentUserID == snapshot.data?.get('user'))
                           ShelfPageSwitch(
