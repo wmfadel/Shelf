@@ -15,6 +15,7 @@ class BooksGridItem extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: Material(
         clipBehavior: Clip.hardEdge,
+        shadowColor: Theme.of(context).accentColor,
         elevation: 4,
         borderRadius: BorderRadius.circular(12),
         child: Container(
