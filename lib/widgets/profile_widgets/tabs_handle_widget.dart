@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shelf/widgets/profile_widgets/people_handle.dart';
 import 'package:shelf/widgets/shelf_grid/profile_shelf_grid_builder.dart';
 
 class TabsHandleWidget extends StatelessWidget {
@@ -10,7 +11,7 @@ class TabsHandleWidget extends StatelessWidget {
 
     return Container(
       width: size.width,
-      height: size.height - 270,
+      height: size.height - 250,
       child: DefaultTabController(
         length: 4,
         child: Column(
@@ -32,15 +33,8 @@ class TabsHandleWidget extends StatelessWidget {
             Expanded(
               child: Container(
                 child: TabBarView(children: [
-                  Padding(
-                    padding: const EdgeInsets.only(top: 8),
-                    child: ProfileShelfGridBuilder(uid: uid),
-                  ),
-                  Container(
-                    width: double.infinity,
-                    height: double.infinity,
-                    color: Colors.red,
-                  ),
+                  ProfileShelfGridBuilder(uid: uid),
+                  PeopleHandle(uid: uid),
                   Container(
                     width: double.infinity,
                     height: double.infinity,
