@@ -1,5 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shelf/providers/auth_provider.dart';
+import 'package:shelf/widgets/follow_button.dart';
 import 'package:shelf/widgets/shimmer_items/shmr_profile_personal_info.dart';
 
 class ProfilePersonalInfo extends StatelessWidget {
@@ -12,31 +15,41 @@ class ProfilePersonalInfo extends StatelessWidget {
         builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting)
             return ShmrProfilePersonalInfo();
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
+          return Stack(
             children: [
-              SizedBox(
-                height: 10,
-                width: MediaQuery.of(context).size.width,
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    height: 10,
+                    width: MediaQuery.of(context).size.width,
+                  ),
+                  CircleAvatar(
+                    radius: 60,
+                    backgroundImage: NetworkImage(
+                      snapshot.data?.get('photo'),
+                    ),
+                  ),
+                  SizedBox(height: 5),
+                  Text(
+                    snapshot.data?.get('name'),
+                    style: TextStyle(
+                      fontSize: 25,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    snapshot.data?.get('email'),
+                  ),
+                ],
               ),
-              CircleAvatar(
-                radius: 60,
-                backgroundImage: NetworkImage(
-                  snapshot.data?.get('photo'),
-                ),
-              ),
-              SizedBox(height: 5),
-              Text(
-                snapshot.data?.get('name'),
-                style: TextStyle(
-                  fontSize: 25,
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Text(
-                snapshot.data?.get('email'),
-              ),
+              if (uid != Provider.of<AuthProvider>(context, listen: false).uid)
+                Positioned(
+                  top: 75,
+                  right: MediaQuery.of(context).size.width * 0.25,
+                  child: FollowButton(uid),
+                )
             ],
           );
         });
