@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:shelf/widgets/profile_personal_info.dart';
-import 'package:shelf/widgets/shelf_grid/profile_shelf_grid_builder.dart';
+import 'package:shelf/widgets/profile_widgets/profile_personal_info.dart';
+import 'package:shelf/widgets/profile_widgets/tabs_handle_widget.dart';
 
 class ProfilePage extends StatelessWidget {
   static final String routeName = '/profile';
@@ -22,11 +22,7 @@ class ProfilePage extends StatelessWidget {
             ),
           ),
           ProfilePersonalInfo(uid: uid),
-          Padding(
-            padding: const EdgeInsets.all(10),
-            child: Divider(),
-          ),
-          ProfileShelfGridBuilder(uid: uid),
+          TabsHandleWidget(uid),
         ],
       ),
     );
