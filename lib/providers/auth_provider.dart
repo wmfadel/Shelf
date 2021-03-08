@@ -14,6 +14,10 @@ class AuthProvider with ChangeNotifier {
     return uid == null ? false : true;
   }
 
+  logout() {
+    _authService.logout();
+  }
+
   Future<bool> autoLogin() async {
     uid = await _authService.checkLoggedUser();
     if (uid != null) {

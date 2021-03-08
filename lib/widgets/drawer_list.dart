@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shelf/pages/login_page.dart';
 import 'package:shelf/pages/settings_page.dart';
+import 'package:shelf/providers/auth_provider.dart';
 import 'package:shelf/widgets/drawer_heading.dart';
 
 class DrawerList extends StatelessWidget {
@@ -20,6 +23,17 @@ class DrawerList extends StatelessWidget {
                 onTap: () {
                   Navigator.of(context).pop();
                   Navigator.of(context).pushNamed(SettingsPage.routeName);
+                }),
+            ListTile(
+                title: Text('Logout'),
+                leading: Icon(
+                  Icons.settings,
+                  color: Colors.red,
+                ),
+                onTap: () {
+                  Provider.of<AuthProvider>(context, listen: false).logout();
+                  Navigator.of(context).pushNamedAndRemoveUntil(
+                      LoginPage.routeName, (r) => false);
                 }),
           ],
         ),
