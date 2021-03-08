@@ -42,9 +42,6 @@ class _HomeMapState extends State<HomeMap> {
         );
       }
     });
-
-    print('doc count ${future.docs.length}');
-    print('markers length ${markers.length}');
     if (markers.length > 0) setState(() {});
   }
 

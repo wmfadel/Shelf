@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shelf/widgets/change_location.dart';
 import 'package:shelf/widgets/visibility_switch.dart';
 
 class SettingsPage extends StatelessWidget {
@@ -14,6 +15,7 @@ class SettingsPage extends StatelessWidget {
           style: TextStyle(color: Theme.of(context).primaryColor),
         ),
         backgroundColor: Colors.white70,
+        iconTheme: IconThemeData(color: Theme.of(context).iconTheme.color),
         centerTitle: true,
       ),
       body: Padding(
@@ -21,6 +23,7 @@ class SettingsPage extends StatelessWidget {
         child: ListView(
           children: [
             VisibilitySwitch(),
+            ChangeLocation(),
           ],
         ),
       ),

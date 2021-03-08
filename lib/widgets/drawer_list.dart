@@ -27,7 +27,7 @@ class DrawerList extends StatelessWidget {
             ListTile(
                 title: Text('Logout'),
                 leading: Icon(
-                  Icons.settings,
+                  Icons.exit_to_app,
                   color: Colors.red,
                 ),
                 onTap: () {

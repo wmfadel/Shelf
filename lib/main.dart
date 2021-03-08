@@ -12,7 +12,6 @@ import 'package:shelf/pages/shelf_page.dart';
 import 'package:shelf/pages/wrapper.dart';
 import 'package:shelf/providers/api_search_provider.dart';
 import 'package:shelf/providers/auth_provider.dart';
-import 'package:shelf/providers/user_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,14 +22,12 @@ void main() async {
 class MyApp extends StatelessWidget {
   final AuthProvider _authProvider = AuthProvider();
   final APISearchPRovider _apiSearchPRovider = APISearchPRovider();
-  final UserProvider _userProvider = UserProvider();
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => _authProvider),
         ChangeNotifierProvider(create: (_) => _apiSearchPRovider),
-        ChangeNotifierProvider(create: (_) => _userProvider),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
