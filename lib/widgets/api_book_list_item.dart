@@ -23,7 +23,7 @@ class APIBookListItem extends StatelessWidget {
               padding: const EdgeInsets.all(20),
               child: Material(
                 elevation: 10,
-                shadowColor: Colors.blueAccent,
+                shadowColor: Theme.of(context).accentColor,
                 borderRadius: BorderRadius.circular(10),
                 child: Container(
                   width: MediaQuery.of(context).size.width,
@@ -60,15 +60,17 @@ class APIBookListItem extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Icon(Icons.pages_rounded, color: Colors.blue),
+                          Icon(Icons.pages_rounded,
+                              color: Theme.of(context).iconTheme.color),
                           Text('${book!.pageCount ?? 'unknown'}'),
                           SizedBox(width: 10),
-                          Icon(Icons.language_outlined, color: Colors.blue),
+                          Icon(Icons.language_outlined,
+                              color: Theme.of(context).iconTheme.color),
                           Text(book!.language!),
                           IconButton(
                               icon: Icon(
                                 Icons.info_outline,
-                                color: Colors.blue,
+                                color: Theme.of(context).iconTheme.color,
                               ),
                               onPressed: () {})
                         ],

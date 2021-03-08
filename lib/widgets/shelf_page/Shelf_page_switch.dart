@@ -21,13 +21,17 @@ class _ShelfPageSwitchState extends State<ShelfPageSwitch> {
       padding: EdgeInsets.only(left: 8),
       decoration: BoxDecoration(
           border: Border.all(
-              color: widget.isPublic ? Colors.blue : Colors.red, width: 2),
+              color:
+                  widget.isPublic ? Theme.of(context).primaryColor : Colors.red,
+              width: 2),
           borderRadius: BorderRadius.circular(25)),
       child: Row(
         children: [
           Icon(
             widget.isPublic ? Icons.lock_open_outlined : Icons.lock_outlined,
-            color: widget.isPublic ? Colors.blue : Colors.red,
+            color: widget.isPublic
+                ? Theme.of(context).iconTheme.color
+                : Colors.red,
           ),
           Switch(
               value: widget.isPublic,

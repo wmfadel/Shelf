@@ -36,7 +36,7 @@ class AddToShelfBuilder extends StatelessWidget {
                       Text(
                         'My Shelfs',
                         style: TextStyle(
-                          color: Colors.blue,
+                          color: Theme.of(context).primaryColor,
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
                         ),
@@ -72,7 +72,7 @@ class AddToShelfBuilder extends StatelessWidget {
                           },
                           leading: Icon(
                             Icons.add_box_rounded,
-                            color: Colors.blue,
+                            color: Theme.of(context).iconTheme.color,
                           ),
                           title: Text(snapshot.data!.docs[index]
                               .data()!['name']

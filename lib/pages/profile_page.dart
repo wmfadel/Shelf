@@ -16,7 +16,8 @@ class ProfilePage extends StatelessWidget {
           Container(
             alignment: Alignment.centerLeft,
             child: IconButton(
-              icon: Icon(Icons.arrow_back, color: Colors.blue),
+              icon: Icon(Icons.arrow_back,
+                  color: Theme.of(context).iconTheme.color),
               onPressed: () => Navigator.of(context).pop(),
             ),
           ),

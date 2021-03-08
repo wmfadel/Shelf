@@ -48,15 +48,20 @@ class ShelfPage extends StatelessWidget {
                   ),
                   Text(
                     snapshot.data?.get('name'),
+                    textAlign: TextAlign.center,
                     style: TextStyle(
                         color: Colors.black,
                         fontSize: 30,
                         fontWeight: FontWeight.bold),
                   ),
                   SizedBox(height: 4),
-                  Text(
-                    snapshot.data?.get('description'),
-                    style: TextStyle(color: Colors.black, fontSize: 16),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      snapshot.data?.get('description'),
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: Colors.black, fontSize: 16),
+                    ),
                   ),
                   SizedBox(height: 4),
                   ShelfPageUser(snapshot.data?.get('user')),
@@ -67,7 +72,10 @@ class ShelfPage extends StatelessWidget {
                     ),
                     child: Divider(),
                   ),
-                  BooksGrid(shelfID!),
+                  BooksGrid(
+                    shelfID!,
+                    isEdible: snapshot.data?.get('user') == currentUserID,
+                  ),
                 ],
               ),
             );

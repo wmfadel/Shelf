@@ -26,7 +26,7 @@ class _LoginPageState extends State<LoginPage> {
             'Shelf.',
             style: GoogleFonts.pacifico(
               fontSize: 64,
-              color: Colors.blue,
+              color: Theme.of(context).primaryColor,
               fontStyle: FontStyle.italic,
             ),
           ),
@@ -34,7 +34,7 @@ class _LoginPageState extends State<LoginPage> {
             'everything there is to do with books',
             style: GoogleFonts.pacifico(
               fontSize: 16,
-              color: Colors.blue,
+              color: Theme.of(context).primaryColor,
             ),
           ),
           SizedBox(height: 20),

@@ -11,12 +11,12 @@ class AddBookPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        iconTheme: IconThemeData(color: Colors.blue),
         title: Text(
           'Add Books on your Shelf',
-          style: TextStyle(color: Colors.blue),
+          style: TextStyle(color: Theme.of(context).primaryColor),
         ),
         backgroundColor: Colors.white70,
+        iconTheme: IconThemeData(color: Theme.of(context).iconTheme.color),
         centerTitle: true,
       ),
       body: Column(
@@ -41,7 +41,7 @@ class AddBookPage extends StatelessWidget {
                 IconButton(
                   icon: Icon(
                     Icons.search,
-                    color: Colors.blue,
+                    color: Theme.of(context).iconTheme.color,
                   ),
                   onPressed: context.watch<APISearchPRovider>().isLoading
                       ? null

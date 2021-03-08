@@ -1,12 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:shelf/models/api_book.dart';
+import 'package:shelf/pages/add_book_page.dart';
 import 'package:shelf/widgets/shelf_page/books_grid_item.dart';
+import 'package:shelf/widgets/shelf_page/grid_adder.dart';
 
 class BooksGrid extends StatelessWidget {
   final String shelfID;
+  final bool isEdible;
 
-  BooksGrid(this.shelfID);
+  BooksGrid(
+    this.shelfID, {
+    this.isEdible = true,
+  });
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<QuerySnapshot>(
@@ -26,10 +32,11 @@ class BooksGrid extends StatelessWidget {
         snapshot.data?.docs.forEach((QueryDocumentSnapshot fireBook) {
           books.add(APIBook.fromFire(fireBook.data()!));
         });
+
         return Padding(
           padding: const EdgeInsets.only(bottom: 25),
           child: GridView.builder(
-            itemCount: books.length,
+            itemCount: (books.length + 1),
             shrinkWrap: true,
             physics: ClampingScrollPhysics(),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -37,7 +44,11 @@ class BooksGrid extends StatelessWidget {
               childAspectRatio: 1 / 1.7,
             ),
             itemBuilder: (BuildContext context, int index) {
-              return BooksGridItem(book: books[index]);
+              return (index == books.length)
+                  ? isEdible
+                      ? GridAdder()
+                      : Container()
+                  : BooksGridItem(book: books[index]);
             },
           ),
         );

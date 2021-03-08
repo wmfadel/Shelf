@@ -9,7 +9,7 @@ class CustomAvatar extends StatelessWidget {
     return Material(
       elevation: 10,
       borderRadius: BorderRadius.circular(50),
-      color: Colors.blue,
+      color: Theme.of(context).primaryColor,
       child: Container(
         width: 45,
         height: 45,

@@ -21,10 +21,9 @@ class _CreateShelfScreenState extends State<CreateShelfScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        iconTheme: IconThemeData(color: Colors.blue),
         title: Text(
           'Create new shelf',
-          style: TextStyle(color: Colors.blue),
+          style: TextStyle(color: Theme.of(context).primaryColor),
         ),
         backgroundColor: Colors.white70,
         centerTitle: true,
@@ -72,7 +71,7 @@ class _CreateShelfScreenState extends State<CreateShelfScreen> {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                     content: Text('New shelf created'),
-                    backgroundColor: Colors.blue),
+                    backgroundColor: Theme.of(context).primaryColor),
               );
               nameController.clear();
               descriptionController.clear();

@@ -18,7 +18,7 @@ class CustomButton extends StatelessWidget {
         height: 45,
         child: Center(
           child: IconButton(
-            icon: Icon(iconData, color: Colors.blue),
+            icon: Icon(iconData, color: Theme.of(context).iconTheme.color),
             onPressed: onPressed as void Function()?,
           ),
         ),

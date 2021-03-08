@@ -15,7 +15,7 @@ class DrawerList extends StatelessWidget {
                 title: Text('Settings'),
                 leading: Icon(
                   Icons.settings,
-                  color: Colors.blue,
+                  color: Theme.of(context).iconTheme.color,
                 ),
                 onTap: () {
                   Navigator.of(context).pop();

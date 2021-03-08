@@ -18,7 +18,6 @@ class BookPage extends StatelessWidget {
       key: _scaffoldKey,
       backgroundColor: Colors.white,
       appBar: AppBar(
-        iconTheme: IconThemeData(color: Colors.blue),
         actions: [
           IconButton(
             icon: Icon(Icons.note_add_rounded),
@@ -37,7 +36,7 @@ class BookPage extends StatelessWidget {
         ],
         title: Text(
           book.title!,
-          style: TextStyle(color: Colors.blue),
+          style: TextStyle(color: Theme.of(context).primaryColor),
         ),
         backgroundColor: Colors.white70,
         centerTitle: true,
