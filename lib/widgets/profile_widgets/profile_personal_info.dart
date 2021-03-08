@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shelf/providers/auth_provider.dart';
-import 'package:shelf/widgets/follow_button.dart';
+import 'package:shelf/widgets/profile_widgets/follow_button.dart';
 import 'package:shelf/widgets/shimmer_items/shmr_profile_personal_info.dart';
 
 class ProfilePersonalInfo extends StatelessWidget {
