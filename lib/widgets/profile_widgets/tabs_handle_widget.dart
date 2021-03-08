@@ -33,7 +33,10 @@ class TabsHandleWidget extends StatelessWidget {
             Expanded(
               child: Container(
                 child: TabBarView(children: [
-                  ProfileShelfGridBuilder(uid: uid),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8.0),
+                    child: ProfileShelfGridBuilder(uid: uid),
+                  ),
                   PeopleHandle(uid: uid),
                   Container(
                     width: double.infinity,
