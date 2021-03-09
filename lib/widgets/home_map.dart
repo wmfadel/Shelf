@@ -4,6 +4,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:shelf/pages/profile_page.dart';
 import 'package:shelf/providers/auth_provider.dart';
+import 'package:shelf/services/location_service.dart';
 
 class HomeMap extends StatefulWidget {
   @override
@@ -22,13 +23,33 @@ class _HomeMapState extends State<HomeMap> {
     fetchMarkers();
   }
 
+  Future<BitmapDescriptor?> getCustomMarker() async {
+    return await BitmapDescriptor.fromAssetImage(
+        ImageConfiguration(
+          size: Size(5, 5),
+        ),
+        'assets/pics/marker.png');
+  }
+
   fetchMarkers() async {
     QuerySnapshot future = await FirebaseFirestore.instance
         .collection('users')
         .where('visibility', isEqualTo: true)
         .get();
     future.docs.forEach((userDoc) async {
-      if (userDoc.id != authProvider.uid) {
+      if (userDoc.id == authProvider.uid) {
+        var icon = await getCustomMarker();
+        markers.add(Marker(
+          markerId: MarkerId(userDoc.id),
+          position: parseLatLang(userDoc.get('location')),
+          icon: icon!,
+          infoWindow: InfoWindow(
+            title: 'Me',
+            onTap: () => Navigator.of(context)
+                .pushNamed(ProfilePage.routeName, arguments: userDoc.id),
+          ),
+        ));
+      } else {
         markers.add(
           Marker(
             markerId: MarkerId(userDoc.id),
@@ -64,9 +85,9 @@ class _HomeMapState extends State<HomeMap> {
         zoom: 19,
       ),
       markers: markers,
-      onMapCreated: (GoogleMapController controller) {
+      onMapCreated: (GoogleMapController controller) async {
         _controller = controller;
-        String? location = authProvider.location;
+        String? location = await LocationService().getUserLocation();
         if (location != null) {
           _controller?.animateCamera(
             CameraUpdate.newLatLng(parseLatLang(location)),

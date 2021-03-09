@@ -71,6 +71,7 @@ flutter:
     - assets/pics/location_search.png
     - assets/pics/no_data.png
     - assets/pics/google_logo.png
+    - assets/pics/marker.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

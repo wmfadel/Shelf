@@ -25,6 +25,20 @@ class DrawerList extends StatelessWidget {
                   Navigator.of(context).pushNamed(SettingsPage.routeName);
                 }),
             ListTile(
+                title: Text('Help'),
+                leading: Icon(
+                  Icons.help_center,
+                  color: Theme.of(context).iconTheme.color,
+                ),
+                onTap: () {}),
+            ListTile(
+                title: Text('About'),
+                leading: Icon(
+                  Icons.info,
+                  color: Theme.of(context).iconTheme.color,
+                ),
+                onTap: () {}),
+            ListTile(
                 title: Text('Logout'),
                 leading: Icon(
                   Icons.exit_to_app,
