@@ -18,6 +18,13 @@ class _CreateShelfScreenState extends State<CreateShelfScreen> {
   bool isPublic = true;
 
   @override
+  void dispose() {
+    nameController.dispose();
+    descriptionController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(

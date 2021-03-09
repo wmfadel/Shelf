@@ -51,6 +51,12 @@ class _HomeMapState extends State<HomeMap> {
   }
 
   @override
+  void dispose() {
+    _controller?.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return GoogleMap(
       initialCameraPosition: CameraPosition(
