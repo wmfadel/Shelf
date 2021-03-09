@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:shelf/widgets/change_location.dart';
-import 'package:shelf/widgets/visibility_switch.dart';
+import 'package:shelf/widgets/settings/change_location.dart';
+import 'package:shelf/widgets/settings/visibility_switch.dart';
 
 class SettingsPage extends StatelessWidget {
   static final String routeName = '/settings';

@@ -23,7 +23,7 @@ class TabsHandleWidget extends StatelessWidget {
                   Tab(text: "Shelfs"),
                   Tab(text: "People"),
                   Tab(text: "Activity"),
-                  Tab(text: "Qoutes"),
+                  Tab(text: "Trade"),
                 ],
                 indicatorColor: Theme.of(context).accentColor,
                 labelColor: Theme.of(context).primaryColor,
