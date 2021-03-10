@@ -16,48 +16,48 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        key: scaffoldKey,
-        drawer: DrawerList(),
-        body: Stack(
-          children: [
-            HomeMap(),
-            Positioned(
-              top: 45,
-              left: 20,
-              child: CustomButton(
-                iconData: Icons.menu,
-                onPressed: () => scaffoldKey.currentState!.openDrawer(),
-              ),
+      key: scaffoldKey,
+      drawer: DrawerList(),
+      body: Stack(
+        children: [
+          HomeMap(),
+          Positioned(
+            top: 45,
+            left: 20,
+            child: CustomButton(
+              iconData: Icons.menu,
+              onPressed: () => scaffoldKey.currentState!.openDrawer(),
             ),
-            Positioned(
-              top: 45,
-              right: 20,
-              child: GestureDetector(
-                  onTap: () => Navigator.of(context).pushNamed(
-                      ProfilePage.routeName,
-                      arguments:
-                          Provider.of<AuthProvider>(context, listen: false)
-                              .uid),
-                  child: CustomAvatar()),
+          ),
+          Positioned(
+            top: 45,
+            right: 20,
+            child: GestureDetector(
+                onTap: () => Navigator.of(context).pushNamed(
+                    ProfilePage.routeName,
+                    arguments:
+                        Provider.of<AuthProvider>(context, listen: false).uid),
+                child: CustomAvatar()),
+          ),
+          Positioned(
+            top: 45,
+            right: 80,
+            child: CustomButton(
+              iconData: Icons.library_books,
+              onPressed: () =>
+                  Navigator.of(context).pushNamed(AddBookPage.routeName),
             ),
-            Positioned(
-              top: 45,
-              right: 80,
-              child: CustomButton(
-                iconData: Icons.library_books,
-                onPressed: () =>
-                    Navigator.of(context).pushNamed(AddBookPage.routeName),
-              ),
+          ),
+          Positioned(
+            top: 45,
+            right: 135,
+            child: CustomButton(
+              iconData: Icons.search,
+              onPressed: () {},
             ),
-            Positioned(
-              top: 45,
-              right: 135,
-              child: CustomButton(
-                iconData: Icons.search,
-                onPressed: () {},
-              ),
-            ),
-          ],
-        ));
+          ),
+        ],
+      ),
+    );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shelf/pages/login_page.dart';
+import 'package:shelf/pages/online_content_page.dart';
 import 'package:shelf/pages/settings_page.dart';
 import 'package:shelf/providers/auth_provider.dart';
 import 'package:shelf/widgets/drawer_heading.dart';
@@ -24,6 +25,15 @@ class DrawerList extends StatelessWidget {
                   Navigator.of(context).pop();
                   Navigator.of(context).pushNamed(SettingsPage.routeName);
                 }),
+            ListTile(
+              title: Text('Online Content'),
+              leading: Icon(
+                Icons.local_fire_department_sharp,
+                color: Theme.of(context).iconTheme.color,
+              ),
+              onTap: () =>
+                  Navigator.of(context).pushNamed(OnlineContentPage.routeName),
+            ),
             ListTile(
                 title: Text('Help'),
                 leading: Icon(

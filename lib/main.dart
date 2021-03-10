@@ -6,6 +6,7 @@ import 'package:shelf/pages/book_page.dart';
 import 'package:shelf/pages/create_shelf_screen.dart';
 import 'package:shelf/pages/home_page.dart';
 import 'package:shelf/pages/login_page.dart';
+import 'package:shelf/pages/online_content_page.dart';
 import 'package:shelf/pages/profile_page.dart';
 import 'package:shelf/pages/settings_page.dart';
 import 'package:shelf/pages/shelf_page.dart';
@@ -47,6 +48,8 @@ class MyApp extends StatelessWidget {
           ProfilePage.routeName: (BuildContext context) => ProfilePage(),
           ShelfPage.routeName: (BuildContext context) => ShelfPage(),
           SettingsPage.routeName: (BuildContext context) => SettingsPage(),
+          OnlineContentPage.routeName: (BuildContext context) =>
+              OnlineContentPage(),
           CreateShelfScreen.routeName: (BuildContext context) =>
               CreateShelfScreen(),
         },
