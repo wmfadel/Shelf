@@ -8,6 +8,7 @@ import 'package:shelf/pages/home_page.dart';
 import 'package:shelf/pages/login_page.dart';
 import 'package:shelf/pages/online_content_page.dart';
 import 'package:shelf/pages/profile_page.dart';
+import 'package:shelf/pages/rating_page.dart';
 import 'package:shelf/pages/settings_page.dart';
 import 'package:shelf/pages/shelf_page.dart';
 import 'package:shelf/pages/wrapper.dart';
@@ -48,6 +49,7 @@ class MyApp extends StatelessWidget {
           ProfilePage.routeName: (BuildContext context) => ProfilePage(),
           ShelfPage.routeName: (BuildContext context) => ShelfPage(),
           SettingsPage.routeName: (BuildContext context) => SettingsPage(),
+          RatingPage.routeName: (BuildContext context) => RatingPage(),
           OnlineContentPage.routeName: (BuildContext context) =>
               OnlineContentPage(),
           CreateShelfScreen.routeName: (BuildContext context) =>
