@@ -37,6 +37,8 @@ class AuthService {
         'email': currentUser.email,
         'location': location,
         'visibility': location == null ? false : true,
+        'upVote': 0,
+        'downVote': 0,
       },
     );
     return currentUser;
