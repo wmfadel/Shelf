@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shelf/providers/auth_provider.dart';
@@ -36,45 +35,17 @@ class _RatingPageState extends State<RatingPage> {
             ),
           ),
           SizedBox(height: 50),
-          RateWidget(userID: userID, field: 'upVote'),
-          SizedBox(height: 15),
-          FloatingActionButton(
-            heroTag: 'up',
-            onPressed: () {
-              vote('upVote');
-            },
-            backgroundColor: Colors.blueAccent,
-            child: Icon(Icons.thumb_up),
-          ),
-          SizedBox(height: 30),
-          FloatingActionButton(
-            heroTag: 'down',
-            onPressed: () {
-              vote('downVote');
-            },
-            backgroundColor: Colors.redAccent,
-            child: Icon(Icons.thumb_down),
-          ),
-          SizedBox(height: 15),
           RateWidget(
             userID: userID,
-            field: 'downVote',
-            color: Colors.redAccent,
+            isUp: true,
           ),
-          SizedBox(height: 50),
+          SizedBox(height: 30),
+          RateWidget(
+            userID: userID,
+            isUp: false,
+          ),
         ],
       ),
     );
-  }
-
-  vote(String field) async {
-    DocumentSnapshot doc =
-        await FirebaseFirestore.instance.collection('users').doc(userID).get();
-    FirebaseFirestore.instance
-        .collection('users')
-        .doc(userID)
-        .update({field: (doc.get(field) + 1)}).then((_) {
-      setState(() {});
-    });
   }
 }
