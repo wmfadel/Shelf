@@ -45,11 +45,11 @@ class _RateBuildState extends State<RateBuild> {
         widget.rate.toString(),
         style: TextStyle(
             color: widget.isUp ? Colors.blueAccent : Colors.redAccent,
-            fontSize: 22),
+            fontSize: 25),
       ),
       SizedBox(height: 15),
       FloatingActionButton(
-        heroTag: 'up',
+        heroTag: widget.isUp ? 'up' : 'down',
         onPressed: () async {
           FirebaseFirestore.instance
               .collection('users')
