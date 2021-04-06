@@ -10,29 +10,46 @@ import 'package:url_launcher/url_launcher.dart';
 class BookPage extends StatelessWidget {
   static final String routeName = '/book';
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
+
+  APIBook? getBook() {
+    return null;
+  }
+
   @override
   Widget build(BuildContext context) {
-    APIBook book = Provider.of<APISearchPRovider>(context, listen: false)
-        .getSelectedBook()!;
+    APIBook book;
+    bool isView = false;
+    if (ModalRoute.of(context)?.settings.arguments != null) {
+      book = APIBook.fromFire(
+          ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>);
+      isView = true;
+    } else {
+      book = Provider.of<APISearchPRovider>(context, listen: false)
+          .getSelectedBook()!;
+    }
+
     return Scaffold(
       key: _scaffoldKey,
       backgroundColor: Colors.white,
       appBar: AppBar(
+        iconTheme: IconThemeData(color: Theme.of(context).primaryColor),
         actions: [
-          IconButton(
-            icon: Icon(Icons.note_add_rounded),
-            onPressed: () {
-              showModalBottomSheet(
-                  context: context,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  builder: (ctx) {
-                    return AddToShelfBuilder(book, context);
-                  });
-              //Dialogs().showAddShelfDialog(context, book);
-            },
-          )
+          if (isView)
+            if (!isView)
+              IconButton(
+                icon: Icon(Icons.note_add_rounded),
+                onPressed: () {
+                  showModalBottomSheet(
+                      context: context,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      builder: (ctx) {
+                        return AddToShelfBuilder(book, context);
+                      });
+                  //Dialogs().showAddShelfDialog(context, book);
+                },
+              )
         ],
         title: Text(
           book.title!,

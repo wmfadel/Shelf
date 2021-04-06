@@ -1,5 +1,3 @@
-
-
 class APIBook {
   String? id;
   String? etag;
