@@ -2,11 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shelf/models/shelf.dart';
+import 'package:shelf/pages/create_shelf_screen.dart';
 import 'package:shelf/providers/auth_provider.dart';
 import 'package:shelf/widgets/shelf_grid/shelf_grid_item.dart';
 import 'package:shelf/widgets/shimmer_items/shmr_shelf_overview.dart';
 
-class ProfileShelfGridBuilder extends StatelessWidget {
+class ProfileShelfGridBuilder extends StatefulWidget {
   const ProfileShelfGridBuilder({
     Key? key,
     required this.uid,
@@ -15,15 +16,20 @@ class ProfileShelfGridBuilder extends StatelessWidget {
   final String uid;
 
   @override
+  _ProfileShelfGridBuilderState createState() =>
+      _ProfileShelfGridBuilderState();
+}
+
+class _ProfileShelfGridBuilderState extends State<ProfileShelfGridBuilder> {
+  @override
   Widget build(BuildContext context) {
     return FutureBuilder<QuerySnapshot>(
       future: FirebaseFirestore.instance
           .collection('shelfs')
-          .where('user', isEqualTo: uid)
+          .where('user', isEqualTo: widget.uid)
           .get(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting ||
-            snapshot.data!.size < 1)
+        if (snapshot.connectionState == ConnectionState.waiting)
           return GridView.count(
               shrinkWrap: true,
               physics: ClampingScrollPhysics(),
@@ -35,7 +41,16 @@ class ProfileShelfGridBuilder extends StatelessWidget {
                 4,
                 (_) => ShmrShelfOverview(),
               ));
-
+        if (snapshot.data!.size < 1)
+          return TextButton(
+              onPressed: () {
+                Navigator.of(context)
+                    .pushNamed(CreateShelfScreen.routeName)
+                    .then((_) {
+                  setState(() {});
+                });
+              },
+              child: Text('Create your first shelf'));
         List<QueryDocumentSnapshot> documents = snapshot.data!.docs;
         List<Shelf> shelfs = [];
         documents.forEach((QueryDocumentSnapshot e) {
