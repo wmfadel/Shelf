@@ -34,22 +34,21 @@ class BookPage extends StatelessWidget {
       appBar: AppBar(
         iconTheme: IconThemeData(color: Theme.of(context).primaryColor),
         actions: [
-          if (isView)
-            if (!isView)
-              IconButton(
-                icon: Icon(Icons.note_add_rounded),
-                onPressed: () {
-                  showModalBottomSheet(
-                      context: context,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      builder: (ctx) {
-                        return AddToShelfBuilder(book, context);
-                      });
-                  //Dialogs().showAddShelfDialog(context, book);
-                },
-              )
+          if (!isView)
+            IconButton(
+              icon: Icon(Icons.note_add_rounded),
+              onPressed: () {
+                showModalBottomSheet(
+                    context: context,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    builder: (ctx) {
+                      return AddToShelfBuilder(book, context);
+                    });
+                //Dialogs().showAddShelfDialog(context, book);
+              },
+            )
         ],
         title: Text(
           book.title!,

@@ -1,10 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:shelf/models/api_book.dart';
+import 'package:shelf/pages/book_page.dart';
 import 'package:shelf/widgets/shelf_page/books_grid_item.dart';
 import 'package:shelf/widgets/shelf_page/grid_adder.dart';
 
-class BooksGrid extends StatelessWidget {
+class BooksGrid extends StatefulWidget {
   final String shelfID;
   final bool isEdible;
 
@@ -12,12 +13,18 @@ class BooksGrid extends StatelessWidget {
     this.shelfID, {
     this.isEdible = true,
   });
+
+  @override
+  _BooksGridState createState() => _BooksGridState();
+}
+
+class _BooksGridState extends State<BooksGrid> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<QuerySnapshot>(
       future: FirebaseFirestore.instance
           .collection('shelfs')
-          .doc(shelfID)
+          .doc(widget.shelfID)
           .collection('books')
           .get(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -43,11 +50,86 @@ class BooksGrid extends StatelessWidget {
               childAspectRatio: 1 / 1.7,
             ),
             itemBuilder: (BuildContext context, int index) {
+              late Dialog errorDialog;
+              if (books.length > 0 && index != books.length) {
+                errorDialog = Dialog(
+                  shape: RoundedRectangleBorder(
+                      borderRadius:
+                          BorderRadius.circular(12.0)), //this right here
+                  child: Container(
+                    height: 250,
+                    width: double.infinity,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          SizedBox(height: 10),
+                          Text(
+                            'Are you sure you want to remove \"${books[index].title}\" from this shelf',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(fontSize: 18),
+                            maxLines: 5,
+                          ),
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              TextButton(
+                                  onPressed: () => Navigator.of(context).pop(),
+                                  child: Text('Cancel')),
+                              ElevatedButton(
+                                onPressed: () {
+                                  FirebaseFirestore.instance
+                                      .collection('shelfs')
+                                      .doc(widget.shelfID)
+                                      .collection('books')
+                                      .doc(books[index].id)
+                                      .delete();
+                                  Navigator.of(context).pop(true);
+                                },
+                                child: Text('remove'),
+                                style: ButtonStyle(
+                                  backgroundColor:
+                                      MaterialStateProperty.resolveWith<Color>(
+                                    (Set<MaterialState> states) {
+                                      return Colors.red;
+                                    },
+                                  ),
+                                ),
+                              )
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                );
+              }
+
               return (index == books.length)
-                  ? isEdible
+                  ? widget.isEdible
                       ? GridAdder()
                       : Container()
-                  : BooksGridItem(book: books[index]);
+                  : GestureDetector(
+                      onLongPress: () {
+                        showDialog(
+                            context: context,
+                            barrierDismissible: true,
+                            builder: (BuildContext context) {
+                              return errorDialog;
+                            }).then((value) {
+                          if (value) setState(() {});
+                        });
+                      },
+                      onTap: () => Navigator.of(context).pushNamed(
+                          BookPage.routeName,
+                          arguments: books[index].toJson()),
+                      child: BooksGridItem(
+                        book: books[index],
+                        shelfID: widget.shelfID,
+                      ),
+                    );
             },
           ),
         );
