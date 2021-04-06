@@ -5,23 +5,22 @@ import 'package:shelf/providers/api_search_provider.dart';
 import 'package:shelf/widgets/add_to_shelf_builder.dart';
 import 'package:shelf/widgets/info_chip.dart';
 import 'package:shelf/widgets/info_chip_text.dart';
+import 'package:shelf/widgets/sell_button.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class BookPage extends StatelessWidget {
   static final String routeName = '/book';
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
 
-  APIBook? getBook() {
-    return null;
-  }
-
   @override
   Widget build(BuildContext context) {
     APIBook book;
+    String shelfID = '';
     bool isView = false;
     if (ModalRoute.of(context)?.settings.arguments != null) {
-      book = APIBook.fromFire(
-          ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>);
+      var args = ModalRoute.of(context)?.settings.arguments as List<dynamic>;
+      book = APIBook.fromFire(args[1]);
+      shelfID = args[0];
       isView = true;
     } else {
       book = Provider.of<APISearchPRovider>(context, listen: false)
@@ -34,6 +33,7 @@ class BookPage extends StatelessWidget {
       appBar: AppBar(
         iconTheme: IconThemeData(color: Theme.of(context).primaryColor),
         actions: [
+          if (isView) SellButton(bookID: book.id!, shelfID: shelfID),
           if (!isView)
             IconButton(
               icon: Icon(Icons.note_add_rounded),

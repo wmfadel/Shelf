@@ -6,11 +6,9 @@ class BooksGridItem extends StatelessWidget {
   const BooksGridItem({
     Key? key,
     required this.book,
-    this.shelfID,
   }) : super(key: key);
 
   final APIBook book;
-  final String? shelfID;
 
   @override
   Widget build(BuildContext context) {

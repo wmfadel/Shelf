@@ -124,11 +124,8 @@ class _BooksGridState extends State<BooksGrid> {
                       },
                       onTap: () => Navigator.of(context).pushNamed(
                           BookPage.routeName,
-                          arguments: books[index].toJson()),
-                      child: BooksGridItem(
-                        book: books[index],
-                        shelfID: widget.shelfID,
-                      ),
+                          arguments: [widget.shelfID, books[index].toJson()]),
+                      child: BooksGridItem(book: books[index]),
                     );
             },
           ),

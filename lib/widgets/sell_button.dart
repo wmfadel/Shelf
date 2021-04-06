@@ -46,7 +46,18 @@ class _SellButtonState extends State<SellButton> {
           onPressed: () async {
             if (onSale) {
               // TODO remove from market
-
+              QuerySnapshot snap = await FirebaseFirestore.instance
+                  .collection('market')
+                  .where('id', isEqualTo: widget.bookID)
+                  .where('user-id', isEqualTo: authProvider.uid)
+                  .get();
+              FirebaseFirestore.instance
+                  .collection('market')
+                  .doc(snap.docs.first.id)
+                  .delete();
+              setState(() {
+                onSale = false;
+              });
             } else {
               showDialog(
                   context: context,
