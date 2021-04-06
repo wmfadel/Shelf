@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shelf/pages/login_page.dart';
+import 'package:shelf/pages/market_page.dart';
 import 'package:shelf/pages/online_content_page.dart';
 import 'package:shelf/pages/rating_page.dart';
 import 'package:shelf/pages/settings_page.dart';
@@ -17,6 +18,40 @@ class DrawerList extends StatelessWidget {
           children: [
             DrawerHeading(),
             ListTile(
+                title: Text('Market'),
+                leading: Icon(
+                  Icons.store_mall_directory,
+                  color: Colors.green,
+                ),
+                onTap: () {
+                  Navigator.of(context).pop();
+                  Navigator.of(context).pushNamed(MarketPage.routeName);
+                }),
+            ListTile(
+              title: Text('Online Content'),
+              leading: Icon(
+                Icons.local_fire_department_sharp,
+                color: Colors.redAccent,
+              ),
+              onTap: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).pushNamed(OnlineContentPage.routeName);
+              },
+            ),
+            ListTile(
+              title: Text('Rating'),
+              leading: Icon(
+                Icons.star_rate_rounded,
+                color: Colors.orange,
+              ),
+              onTap: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).pushNamed(
+                  RatingPage.routeName,
+                );
+              },
+            ),
+            ListTile(
                 title: Text('Settings'),
                 leading: Icon(
                   Icons.settings,
@@ -26,25 +61,6 @@ class DrawerList extends StatelessWidget {
                   Navigator.of(context).pop();
                   Navigator.of(context).pushNamed(SettingsPage.routeName);
                 }),
-            ListTile(
-              title: Text('Online Content'),
-              leading: Icon(
-                Icons.local_fire_department_sharp,
-                color: Colors.redAccent,
-              ),
-              onTap: () =>
-                  Navigator.of(context).pushNamed(OnlineContentPage.routeName),
-            ),
-            ListTile(
-              title: Text('Rating'),
-              leading: Icon(
-                Icons.star_rate_rounded,
-                color: Colors.orange,
-              ),
-              onTap: () => Navigator.of(context).pushNamed(
-                RatingPage.routeName,
-              ),
-            ),
             ListTile(
                 title: Text('Help'),
                 leading: Icon(

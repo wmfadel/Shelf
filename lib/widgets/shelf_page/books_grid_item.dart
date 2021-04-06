@@ -1,8 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shelf/models/api_book.dart';
-import 'package:shelf/pages/book_page.dart';
 
 class BooksGridItem extends StatelessWidget {
   const BooksGridItem({
