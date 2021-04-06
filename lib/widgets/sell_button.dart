@@ -45,18 +45,47 @@ class _SellButtonState extends State<SellButton> {
           color: onSale ? Colors.redAccent : Colors.green,
           onPressed: () async {
             if (onSale) {
-              // TODO remove from market
-              QuerySnapshot snap = await FirebaseFirestore.instance
-                  .collection('market')
-                  .where('id', isEqualTo: widget.bookID)
-                  .where('user-id', isEqualTo: authProvider.uid)
-                  .get();
-              FirebaseFirestore.instance
-                  .collection('market')
-                  .doc(snap.docs.first.id)
-                  .delete();
-              setState(() {
-                onSale = false;
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: Text(
+                          'Are yoou sure you want to remove this book from market'),
+                      actions: [
+                        TextButton(
+                            onPressed: () => Navigator.of(context).pop(),
+                            child: Text('Cancel')),
+                        ElevatedButton(
+                          style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStateProperty.resolveWith<Color>(
+                              (Set<MaterialState> states) {
+                                return Colors.red;
+                              },
+                            ),
+                          ),
+                          onPressed: () async {
+                            QuerySnapshot snap = await FirebaseFirestore
+                                .instance
+                                .collection('market')
+                                .where('id', isEqualTo: widget.bookID)
+                                .where('user-id', isEqualTo: authProvider.uid)
+                                .get();
+                            FirebaseFirestore.instance
+                                .collection('market')
+                                .doc(snap.docs.first.id)
+                                .delete();
+                            Navigator.of(context).pop(true);
+                          },
+                          child: Text('Remove'),
+                        ),
+                      ],
+                    );
+                  }).then((value) {
+                if (value)
+                  setState(() {
+                    onSale = false;
+                  });
               });
             } else {
               showDialog(
