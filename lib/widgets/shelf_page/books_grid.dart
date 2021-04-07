@@ -113,6 +113,7 @@ class _BooksGridState extends State<BooksGrid> {
                       : Container()
                   : GestureDetector(
                       onLongPress: () {
+                        if (!widget.isEdible) return;
                         showDialog(
                             context: context,
                             barrierDismissible: true,
@@ -122,9 +123,12 @@ class _BooksGridState extends State<BooksGrid> {
                           if (value) setState(() {});
                         });
                       },
-                      onTap: () => Navigator.of(context).pushNamed(
-                          BookPage.routeName,
-                          arguments: [widget.shelfID, books[index].toJson()]),
+                      onTap: () => Navigator.of(context)
+                          .pushNamed(BookPage.routeName, arguments: [
+                        widget.shelfID,
+                        books[index].toJson(),
+                        widget.isEdible
+                      ]),
                       child: BooksGridItem(book: books[index]),
                     );
             },

@@ -16,11 +16,14 @@ class BookPage extends StatelessWidget {
   Widget build(BuildContext context) {
     APIBook book;
     String shelfID = '';
+    bool isEdible = true;
     bool isView = false;
     if (ModalRoute.of(context)?.settings.arguments != null) {
       var args = ModalRoute.of(context)?.settings.arguments as List<dynamic>;
       book = APIBook.fromFire(args[1]);
       shelfID = args[0];
+      // if its owned by user from parent profile
+      isEdible = args[2];
       isView = true;
     } else {
       book = Provider.of<APISearchPRovider>(context, listen: false)
@@ -33,7 +36,8 @@ class BookPage extends StatelessWidget {
       appBar: AppBar(
         iconTheme: IconThemeData(color: Theme.of(context).primaryColor),
         actions: [
-          if (isView) SellButton(bookID: book.id!, shelfID: shelfID),
+          if (isView && isEdible)
+            SellButton(bookID: book.id!, shelfID: shelfID),
           if (!isView)
             IconButton(
               icon: Icon(Icons.note_add_rounded),
