@@ -36,7 +36,8 @@ class _SellButtonState extends State<SellButton> {
 
         if (!snapshot.hasError || (snapshot.data?.docs.length ?? 0) > 0) {
           snapshot.data?.docs.forEach((QueryDocumentSnapshot item) {
-            if (item.get('id') == widget.bookID) {
+            if (item.get('id') == widget.bookID &&
+                item.get('user-id') == authProvider.uid) {
               onSale = true;
             }
           });
