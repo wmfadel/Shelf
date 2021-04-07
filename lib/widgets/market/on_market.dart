@@ -38,7 +38,7 @@ class OnMarket extends StatelessWidget {
                               'Are you sure you want to remove this book from market'),
                           actions: [
                             TextButton(
-                              onPressed: () => Navigator.of(context).pop(),
+                              onPressed: () => Navigator.of(context).pop(false),
                               child: Text('cancel'),
                             ),
                             ElevatedButton(

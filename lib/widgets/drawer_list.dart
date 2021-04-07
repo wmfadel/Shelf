@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shelf/pages/login_page.dart';
 import 'package:shelf/pages/market_page.dart';
+import 'package:shelf/pages/my_market_page.dart';
 import 'package:shelf/pages/online_content_page.dart';
 import 'package:shelf/pages/rating_page.dart';
 import 'package:shelf/pages/settings_page.dart';
@@ -26,6 +27,16 @@ class DrawerList extends StatelessWidget {
                 onTap: () {
                   Navigator.of(context).pop();
                   Navigator.of(context).pushNamed(MarketPage.routeName);
+                }),
+            ListTile(
+                title: Text('transactions'),
+                leading: Icon(
+                  Icons.call_to_action_rounded,
+                  color: Colors.deepPurple,
+                ),
+                onTap: () {
+                  Navigator.of(context).pop();
+                  Navigator.of(context).pushNamed(MyMarkeyPage.routeName);
                 }),
             ListTile(
               title: Text('Online Content'),
