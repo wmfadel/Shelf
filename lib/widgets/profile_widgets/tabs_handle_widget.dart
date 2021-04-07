@@ -44,7 +44,7 @@ class TabsHandleWidget extends StatelessWidget {
                     height: double.infinity,
                     color: Colors.green,
                   ),
-                  OnMarket(),
+                  OnMarket(userID: uid),
                 ]),
               ),
             )

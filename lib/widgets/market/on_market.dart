@@ -5,14 +5,15 @@ import 'package:shelf/providers/auth_provider.dart';
 import 'package:shelf/widgets/market/user_market_grid_item.dart';
 
 class OnMarket extends StatelessWidget {
+  final userID;
+
+  OnMarket({required this.userID});
   @override
   Widget build(BuildContext context) {
-    AuthProvider authProvider =
-        Provider.of<AuthProvider>(context, listen: false);
     return FutureBuilder<QuerySnapshot>(
       future: FirebaseFirestore.instance
           .collection('market')
-          .where('user-id', isEqualTo: authProvider.uid)
+          .where('user-id', isEqualTo: userID)
           .get(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting)
@@ -30,6 +31,9 @@ class OnMarket extends StatelessWidget {
               return Dismissible(
                 key: Key(itemID!),
                 confirmDismiss: (DismissDirection direction) async {
+                  if (userID !=
+                      Provider.of<AuthProvider>(context, listen: false).uid)
+                    return false;
                   bool confirm = await showDialog(
                       context: context,
                       builder: (BuildContext context) {
