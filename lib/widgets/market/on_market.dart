@@ -26,8 +26,50 @@ class OnMarket extends StatelessWidget {
             physics: ClampingScrollPhysics(),
             itemCount: snapshot.data?.docs.length,
             itemBuilder: (BuildContext context, int index) {
-              return UserMarketGridItem(
-                  item: snapshot.data?.docs[index].data());
+              String? itemID = snapshot.data?.docs[index].id;
+              return Dismissible(
+                key: Key(itemID!),
+                confirmDismiss: (DismissDirection direction) async {
+                  bool confirm = await showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text(
+                              'Are you sure you want to remove this book from market'),
+                          actions: [
+                            TextButton(
+                              onPressed: () => Navigator.of(context).pop(),
+                              child: Text('cancel'),
+                            ),
+                            ElevatedButton(
+                              onPressed: () {
+                                FirebaseFirestore.instance
+                                    .collection('market')
+                                    .doc(snapshot.data?.docs[index].id)
+                                    .delete();
+                                Navigator.of(context).pop(true);
+                              },
+                              child: Text('Remove'),
+                            ),
+                          ],
+                        );
+                      });
+                  return confirm;
+                },
+                background: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 25),
+                  color: Colors.red,
+                  alignment: Alignment.centerLeft,
+                  child: Icon(
+                    Icons.delete,
+                    color: Colors.white,
+                    size: 45,
+                  ),
+                ),
+                child: UserMarketGridItem(
+                  item: snapshot.data?.docs[index].data(),
+                ),
+              );
             });
       },
     );
