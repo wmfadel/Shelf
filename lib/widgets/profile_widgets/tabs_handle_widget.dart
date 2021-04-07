@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shelf/widgets/market/on_market.dart';
 import 'package:shelf/widgets/profile_widgets/people_handle.dart';
 import 'package:shelf/widgets/shelf_grid/profile_shelf_grid_builder.dart';
 
@@ -11,7 +12,7 @@ class TabsHandleWidget extends StatelessWidget {
 
     return Container(
       width: size.width,
-      height: size.height - 250,
+      height: size.height - 263,
       child: DefaultTabController(
         length: 4,
         child: Column(
@@ -23,7 +24,7 @@ class TabsHandleWidget extends StatelessWidget {
                   Tab(text: "Shelfs"),
                   Tab(text: "People"),
                   Tab(text: "Activity"),
-                  Tab(text: "Trade"),
+                  Tab(text: "Market"),
                 ],
                 indicatorColor: Theme.of(context).accentColor,
                 labelColor: Theme.of(context).primaryColor,
@@ -43,11 +44,7 @@ class TabsHandleWidget extends StatelessWidget {
                     height: double.infinity,
                     color: Colors.green,
                   ),
-                  Container(
-                    width: double.infinity,
-                    height: double.infinity,
-                    color: Colors.blue,
-                  ),
+                  OnMarket(),
                 ]),
               ),
             )

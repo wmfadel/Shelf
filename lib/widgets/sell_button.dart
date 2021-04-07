@@ -130,6 +130,7 @@ class _SellButtonState extends State<SellButton> {
                                   .collection('market')
                                   .add({
                                 'id': apiBook.id,
+                                'title': apiBook.title,
                                 'ISBN': apiBook.industryIdentifiers?.first
                                         .identifier ??
                                     'NOT-FOUND',
@@ -144,6 +145,8 @@ class _SellButtonState extends State<SellButton> {
                                 'email': authProvider.email,
                                 'location': authProvider.location,
                                 'photos': [],
+                                'sold': false,
+                                'buyer': '',
                               });
                               Navigator.of(context).pop(true);
                             },
