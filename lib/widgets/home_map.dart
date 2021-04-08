@@ -1,8 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:shelf/pages/profile_page.dart';
 import 'package:shelf/providers/auth_provider.dart';
 import 'package:shelf/providers/map_provider.dart';
 import 'package:shelf/services/location_service.dart';
@@ -24,6 +22,7 @@ class _HomeMapState extends State<HomeMap> {
     authProvider = Provider.of<AuthProvider>(context, listen: false);
     mapProvider = Provider.of<MapProvider>(context);
     mapProvider.fetchMarkers(context, authProvider.uid!);
+    // mapProvider.getMapMarket(authProvider.uid!);
     // fetchMarkers();
   }
 
@@ -70,10 +69,6 @@ class _HomeMapState extends State<HomeMap> {
     if (markers.length > 0) setState(() {});
   }
 */
-  LatLng parseLatLang(String coordenates) {
-    List<String> parts = coordenates.split(',');
-    return LatLng(double.parse(parts[0]), double.parse(parts[1]));
-  }
 
   @override
   void dispose() {
@@ -94,13 +89,13 @@ class _HomeMapState extends State<HomeMap> {
         String? location = await LocationService().getUserLocation();
         if (location != null) {
           _controller?.animateCamera(
-            CameraUpdate.newLatLng(parseLatLang(location)),
+            CameraUpdate.newLatLng(mapProvider.parseLatLang(location)),
           );
         }
         // setting state to allow map to apply padding correctly
         setState(() {});
       },
-      padding: EdgeInsets.only(top: 100, right: 10),
+      padding: EdgeInsets.only(top: 100, right: 10, bottom: 190),
       myLocationEnabled: true,
       indoorViewEnabled: true,
       buildingsEnabled: true,

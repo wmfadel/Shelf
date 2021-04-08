@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:shelf/pages/add_book_page.dart';
 import 'package:shelf/pages/profile_page.dart';
 import 'package:shelf/providers/auth_provider.dart';
+import 'package:shelf/providers/market_provider.dart';
 import 'package:shelf/widgets/custom_avatar.dart';
 import 'package:shelf/widgets/custom_button.dart';
 import 'package:shelf/widgets/drawer_list.dart';
@@ -56,7 +57,39 @@ class HomePage extends StatelessWidget {
               onPressed: () {},
             ),
           ),
+          Positioned(bottom: 5, child: MapMarket(context))
         ],
+      ),
+    );
+  }
+}
+
+class MapMarket extends StatelessWidget {
+  late final MarketProvider marketProvider;
+  MapMarket(BuildContext context) {
+    marketProvider = Provider.of<MarketProvider>(context);
+    marketProvider
+        .getMapMarket(Provider.of<AuthProvider>(context, listen: false).uid!);
+  }
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 200,
+      width: MediaQuery.of(context).size.width,
+      child: ListView.builder(
+        itemCount: marketProvider.marketBooks.length,
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (BuildContext context, int index) {
+          return Container(
+            width: 250,
+            height: 100,
+            color: Colors.red,
+            margin: EdgeInsets.all(10),
+            child: Center(
+              child: Text(marketProvider.marketBooks[index].title!),
+            ),
+          );
+        },
       ),
     );
   }

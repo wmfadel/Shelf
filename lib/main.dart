@@ -17,6 +17,7 @@ import 'package:shelf/pages/wrapper.dart';
 import 'package:shelf/providers/api_search_provider.dart';
 import 'package:shelf/providers/auth_provider.dart';
 import 'package:shelf/providers/map_provider.dart';
+import 'package:shelf/providers/market_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget {
   final AuthProvider _authProvider = AuthProvider();
   final APISearchPRovider _apiSearchPRovider = APISearchPRovider();
   final MapProvider _mapProvider = MapProvider();
+  final MarketProvider _marketProvider = MarketProvider();
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -35,6 +37,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => _authProvider),
         ChangeNotifierProvider(create: (_) => _apiSearchPRovider),
         ChangeNotifierProvider(create: (_) => _mapProvider),
+        ChangeNotifierProvider(create: (_) => _marketProvider),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
