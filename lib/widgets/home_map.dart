@@ -4,6 +4,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:shelf/pages/profile_page.dart';
 import 'package:shelf/providers/auth_provider.dart';
+import 'package:shelf/providers/map_provider.dart';
 import 'package:shelf/services/location_service.dart';
 
 class HomeMap extends StatefulWidget {
@@ -14,23 +15,26 @@ class HomeMap extends StatefulWidget {
 class _HomeMapState extends State<HomeMap> {
   GoogleMapController? _controller;
   late AuthProvider authProvider;
-  Set<Marker> markers = {};
+  late MapProvider mapProvider;
+  //Set<Marker> markers = {};
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     authProvider = Provider.of<AuthProvider>(context, listen: false);
-    fetchMarkers();
+    mapProvider = Provider.of<MapProvider>(context);
+    mapProvider.fetchMarkers(context, authProvider.uid!);
+    // fetchMarkers();
   }
 
-  Future<BitmapDescriptor?> getCustomMarker() async {
+  /* Future<BitmapDescriptor?> getCustomMarker() async {
     return await BitmapDescriptor.fromAssetImage(
         ImageConfiguration(
           size: Size(5, 5),
         ),
         'assets/pics/marker.png');
-  }
-
+  }*/
+/*
   fetchMarkers() async {
     QuerySnapshot future = await FirebaseFirestore.instance
         .collection('users')
@@ -65,7 +69,7 @@ class _HomeMapState extends State<HomeMap> {
     });
     if (markers.length > 0) setState(() {});
   }
-
+*/
   LatLng parseLatLang(String coordenates) {
     List<String> parts = coordenates.split(',');
     return LatLng(double.parse(parts[0]), double.parse(parts[1]));
@@ -84,7 +88,7 @@ class _HomeMapState extends State<HomeMap> {
         target: LatLng(30.0494817, 31.236408),
         zoom: 19,
       ),
-      markers: markers,
+      markers: mapProvider.markers,
       onMapCreated: (GoogleMapController controller) async {
         _controller = controller;
         String? location = await LocationService().getUserLocation();
