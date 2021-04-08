@@ -72,6 +72,8 @@ class OnMarket extends StatelessWidget {
                 ),
                 child: UserMarketGridItem(
                   item: snapshot.data?.docs[index].data(),
+                  isOwner: userID ==
+                      Provider.of<AuthProvider>(context, listen: false).uid,
                 ),
               );
             });
