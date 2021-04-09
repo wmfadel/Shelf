@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shelf/models/market_book.dart';
 import 'package:shelf/providers/auth_provider.dart';
 import 'package:shelf/widgets/market/user_market_grid_item.dart';
 
@@ -22,6 +23,11 @@ class OnMarket extends StatelessWidget {
         if (snapshot.hasError || (snapshot.data?.docs.length ?? 0) < 1) {
           return Center(child: Text('You have no Books on the Market'));
         }
+
+        List<MarketBook> books = [];
+        snapshot.data?.docs.forEach((QueryDocumentSnapshot book) {
+          books.add(MarketBook.fromJson(book.data()!));
+        });
         return ListView.builder(
             shrinkWrap: true,
             physics: ClampingScrollPhysics(),
@@ -71,7 +77,7 @@ class OnMarket extends StatelessWidget {
                   ),
                 ),
                 child: UserMarketGridItem(
-                  item: snapshot.data?.docs[index].data(),
+                  marketBook: books[index],
                   isOwner: userID ==
                       Provider.of<AuthProvider>(context, listen: false).uid,
                 ),

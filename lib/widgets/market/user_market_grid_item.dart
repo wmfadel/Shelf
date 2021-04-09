@@ -1,13 +1,14 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:shelf/models/market_book.dart';
 import 'package:shelf/widgets/market/buyer_info.dart';
 
 class UserMarketGridItem extends StatelessWidget {
-  final Map<String, dynamic>? item;
+  final MarketBook marketBook;
   final bool isOwner;
 
-  UserMarketGridItem({required this.item, required this.isOwner});
+  UserMarketGridItem({required this.marketBook, required this.isOwner});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -30,7 +31,7 @@ class UserMarketGridItem extends StatelessWidget {
                           width: double.infinity,
                           child: Center(
                             child: Text(
-                              item?['sold'] ? 'Sold' : 'In Market',
+                              marketBook.sold! ? 'Sold' : 'In Market',
                               style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
@@ -38,7 +39,7 @@ class UserMarketGridItem extends StatelessWidget {
                             ),
                           ),
                           decoration: BoxDecoration(
-                              color: item?['sold']
+                              color: marketBook.sold!
                                   ? Colors.redAccent
                                   : Colors.blue,
                               borderRadius: BorderRadius.only(
@@ -48,13 +49,13 @@ class UserMarketGridItem extends StatelessWidget {
                         ),
                         SizedBox(height: 10),
                         Image.network(
-                          item?['thumbnail'],
+                          marketBook.thumbnail!,
                           height: 200,
                           fit: BoxFit.fitHeight,
                         ),
                         SizedBox(height: 10),
                         Text(
-                          item?['title'],
+                          marketBook.title!,
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 20,
@@ -62,8 +63,8 @@ class UserMarketGridItem extends StatelessWidget {
                           ),
                         ),
                         SizedBox(height: 8),
-                        Text('${item?['publish-date'] ?? ''}'),
-                        ...(item?['authors'] as List<dynamic>)
+                        Text('${marketBook.publishDate!}'),
+                        ...(marketBook.authors as List<dynamic>)
                             .map((s) => Text(
                                   s,
                                   style: TextStyle(fontSize: 18),
@@ -72,9 +73,9 @@ class UserMarketGridItem extends StatelessWidget {
                         SizedBox(height: 4),
                         Divider(),
                         SizedBox(height: 20),
-                        Text('Price: ${item?['price']} EGP'),
+                        Text('Price: ${marketBook.price!} EGP'),
                         SizedBox(height: 4),
-                        if (item?['sold'])
+                        if (marketBook.sold!)
                           Text(
                             'Sold To',
                             style: TextStyle(
@@ -83,9 +84,9 @@ class UserMarketGridItem extends StatelessWidget {
                               fontSize: 16,
                             ),
                           ),
-                        if (item?['sold'])
+                        if (marketBook.sold!)
                           BuyerInfo(
-                            buyerID: item?['buyer'],
+                            buyerID: marketBook.buyer!,
                           ),
                         SizedBox(height: 15),
                         Padding(
@@ -119,7 +120,7 @@ class UserMarketGridItem extends StatelessWidget {
               child: Row(
                 children: [
                   Image.network(
-                    item?['thumbnail'],
+                    marketBook.thumbnail!,
                     height: 200,
                     fit: BoxFit.fitHeight,
                   ),
@@ -130,7 +131,7 @@ class UserMarketGridItem extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Text(
-                          item?['title'],
+                          marketBook.title!,
                           maxLines: 2,
                           textAlign: TextAlign.center,
                           style: TextStyle(
@@ -139,7 +140,7 @@ class UserMarketGridItem extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        ...(item?['authors'] as List<dynamic>)
+                        ...(marketBook.authors as List<dynamic>)
                             .map(
                               (author) => Text(
                                 author,
@@ -151,7 +152,7 @@ class UserMarketGridItem extends StatelessWidget {
                               ),
                             )
                             .toList(),
-                        Text('Price: ${item?['price']} EGP'),
+                        Text('Price: ${marketBook.price!} EGP'),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -160,7 +161,7 @@ class UserMarketGridItem extends StatelessWidget {
                               width: 85,
                               padding: EdgeInsets.all(5),
                               decoration: BoxDecoration(
-                                color: item?['sold']
+                                color: marketBook.sold!
                                     ? Colors.redAccent
                                     : Colors.blueAccent,
                                 borderRadius: BorderRadius.only(
@@ -170,11 +171,11 @@ class UserMarketGridItem extends StatelessWidget {
                               ),
                               child: Center(
                                   child: Text(
-                                item?['sold'] ? 'Sold' : 'In Market',
+                                marketBook.sold! ? 'Sold' : 'In Market',
                                 style: TextStyle(color: Colors.white),
                               )),
                             ),
-                            if (!isOwner && !item?['sold'])
+                            if (!isOwner && !marketBook.sold!)
                               Padding(
                                 padding:
                                     const EdgeInsets.only(right: 10, bottom: 5),

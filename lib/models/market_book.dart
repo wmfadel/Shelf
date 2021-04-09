@@ -5,6 +5,7 @@ class MarketBook {
   String? userId;
   String? title;
   List<String>? photos;
+  String? publishDate;
   String? buyer;
   String? userName;
   String? userPhoto;
@@ -22,6 +23,7 @@ class MarketBook {
       this.userId,
       this.title,
       this.photos,
+      this.publishDate,
       this.buyer,
       this.userName,
       this.userPhoto,
@@ -39,6 +41,7 @@ class MarketBook {
     userId = json['user-id'];
     title = json['title'];
     photos = json['photos'].cast<String>();
+    publishDate = json['publish-date'] ?? '';
     buyer = json['buyer'];
     userName = json['user-name'];
     userPhoto = json['user-photo'];
@@ -58,6 +61,7 @@ class MarketBook {
     data['user-id'] = this.userId;
     data['title'] = this.title;
     data['photos'] = this.photos;
+    data['publish-date'] = this.publishDate;
     data['buyer'] = this.buyer;
     data['user-name'] = this.userName;
     data['user-photo'] = this.userPhoto;

@@ -132,7 +132,7 @@ class _SellButtonState extends State<SellButton> {
                                   .add({
                                 'id': apiBook.id,
                                 'title': apiBook.title,
-                                'publish-date': apiBook.publishedDate,
+                                'publish-date': apiBook.publishedDate ?? '',
                                 'ISBN': apiBook.industryIdentifiers?.first
                                         .identifier ??
                                     'NOT-FOUND',
