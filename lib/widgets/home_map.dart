@@ -95,7 +95,7 @@ class _HomeMapState extends State<HomeMap> {
         // setting state to allow map to apply padding correctly
         setState(() {});
       },
-      padding: EdgeInsets.only(top: 100, right: 10, bottom: 190),
+      padding: EdgeInsets.only(top: 100, right: 10, bottom: 200),
       myLocationEnabled: true,
       indoorViewEnabled: true,
       buildingsEnabled: true,

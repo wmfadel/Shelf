@@ -146,6 +146,7 @@ class _SellButtonState extends State<SellButton> {
                                 'user-id': authProvider.uid,
                                 'email': authProvider.email,
                                 'location': authProvider.location,
+                                'user-photo': authProvider.photo,
                                 'photos': [],
                                 'sold': false,
                                 'buyer': '',

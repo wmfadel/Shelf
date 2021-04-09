@@ -7,6 +7,7 @@ class MarketBook {
   List<String>? photos;
   String? buyer;
   String? userName;
+  String? userPhoto;
   String? iSBN;
   String? price;
   String? location;
@@ -23,6 +24,7 @@ class MarketBook {
       this.photos,
       this.buyer,
       this.userName,
+      this.userPhoto,
       this.iSBN,
       this.price,
       this.location,
@@ -39,6 +41,7 @@ class MarketBook {
     photos = json['photos'].cast<String>();
     buyer = json['buyer'];
     userName = json['user-name'];
+    userPhoto = json['user-photo'];
     iSBN = json['ISBN'];
     price = json['price'];
     location = json['location'];
@@ -57,6 +60,7 @@ class MarketBook {
     data['photos'] = this.photos;
     data['buyer'] = this.buyer;
     data['user-name'] = this.userName;
+    data['user-photo'] = this.userPhoto;
     data['ISBN'] = this.iSBN;
     data['price'] = this.price;
     data['location'] = this.location;
