@@ -9,8 +9,9 @@ class MapMarket extends StatelessWidget {
   late final MarketProvider marketProvider;
   MapMarket(BuildContext context) {
     marketProvider = Provider.of<MarketProvider>(context);
-    marketProvider
-        .getMapMarket(Provider.of<AuthProvider>(context, listen: false).uid!);
+    if (marketProvider.marketBooks.length < 1)
+      marketProvider
+          .getMapMarket(Provider.of<AuthProvider>(context, listen: false).uid!);
   }
   @override
   Widget build(BuildContext context) {

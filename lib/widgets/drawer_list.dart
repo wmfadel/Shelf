@@ -29,10 +29,10 @@ class DrawerList extends StatelessWidget {
                   Navigator.of(context).pushNamed(MarketPage.routeName);
                 }),
             ListTile(
-                title: Text('transactions'),
+                title: Text('My Market'),
                 leading: Icon(
-                  Icons.call_to_action_rounded,
-                  color: Colors.deepPurple,
+                  Icons.storefront,
+                  color: Colors.cyan,
                 ),
                 onTap: () {
                   Navigator.of(context).pop();
