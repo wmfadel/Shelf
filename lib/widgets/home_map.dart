@@ -11,7 +11,6 @@ class HomeMap extends StatefulWidget {
 }
 
 class _HomeMapState extends State<HomeMap> {
-  GoogleMapController? _controller;
   late AuthProvider authProvider;
   late MapProvider mapProvider;
   //Set<Marker> markers = {};
@@ -72,7 +71,7 @@ class _HomeMapState extends State<HomeMap> {
 
   @override
   void dispose() {
-    _controller?.dispose();
+    mapProvider.controller?.dispose();
     super.dispose();
   }
 
@@ -85,10 +84,10 @@ class _HomeMapState extends State<HomeMap> {
       ),
       markers: mapProvider.markers,
       onMapCreated: (GoogleMapController controller) async {
-        _controller = controller;
+        mapProvider.controller = controller;
         String? location = await LocationService().getUserLocation();
         if (location != null) {
-          _controller?.animateCamera(
+          mapProvider.controller?.animateCamera(
             CameraUpdate.newLatLng(mapProvider.parseLatLang(location)),
           );
         }

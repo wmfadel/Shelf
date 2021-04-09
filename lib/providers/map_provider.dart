@@ -6,6 +6,7 @@ import 'package:shelf/pages/profile_page.dart';
 
 class MapProvider with ChangeNotifier {
   Set<Marker> markers = {};
+  GoogleMapController? controller;
 
   Future<BitmapDescriptor?> getCustomMarker() async {
     return await BitmapDescriptor.fromAssetImage(
