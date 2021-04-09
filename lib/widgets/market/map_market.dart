@@ -44,31 +44,74 @@ class MapMarket extends StatelessWidget {
                         padding: const EdgeInsets.all(8.0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           mainAxisSize: MainAxisSize.max,
                           children: [
-                            Text(
-                              marketProvider.marketBooks[index].title!,
-                              maxLines: 2,
-                              overflow: TextOverflow.fade,
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                              ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Text(
+                                  marketProvider.marketBooks[index].title!,
+                                  maxLines: 2,
+                                  overflow: TextOverflow.fade,
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                SizedBox(height: 5),
+                                ...marketProvider.marketBooks[index].authors!
+                                    .take(2)
+                                    .map((String s) => Text('$s ')),
+                                SizedBox(height: 5),
+                                Text(
+                                  'Price: ${marketProvider.marketBooks[index].price} EGP',
+                                  style: TextStyle(fontSize: 16),
+                                ),
+                              ],
                             ),
-                            SizedBox(height: 5),
-                            ...marketProvider.marketBooks[index].authors!
-                                .map((String s) => Text('$s ')),
-                            SizedBox(height: 5),
-                            Text(
-                              'Price: ${marketProvider.marketBooks[index].price} EGP',
-                              style: TextStyle(fontSize: 16),
-                            ),
-                            /*  ListTile(
+                            /* ListTile(
                               leading: CircleAvatar(
-                                backgroundImage: NetworkImage(url),
+                                backgroundImage: NetworkImage(marketProvider
+                                    .marketBooks[index].userPhoto!),
                               ),
+                              title: Text(
+                                  marketProvider.marketBooks[index].userName!),
+                              subtitle: Text(
+                                  marketProvider.marketBooks[index].email!),
                             )*/
+                            Row(
+                              children: [
+                                CircleAvatar(
+                                  backgroundImage: NetworkImage(marketProvider
+                                      .marketBooks[index].userPhoto!),
+                                ),
+                                SizedBox(width: 4),
+                                Expanded(
+                                    child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      marketProvider
+                                          .marketBooks[index].userName!,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    Text(
+                                      marketProvider.marketBooks[index].email!,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(fontSize: 12),
+                                    ),
+                                  ],
+                                ))
+                              ],
+                            )
                           ],
                         ),
                       ),
