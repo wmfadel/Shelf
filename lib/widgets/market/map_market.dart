@@ -25,7 +25,7 @@ class MapMarket extends StatelessWidget {
             onTap: () {
               MapProvider mapProvider =
                   Provider.of<MapProvider>(context, listen: false);
-              mapProvider.controller?.moveCamera(CameraUpdate.newLatLng(
+              mapProvider.controller?.animateCamera(CameraUpdate.newLatLng(
                   mapProvider.parseLatLang(
                       marketProvider.marketBooks[index].location!)));
             },
