@@ -41,7 +41,10 @@ class _ProfileShelfGridBuilderState extends State<ProfileShelfGridBuilder> {
                 4,
                 (_) => ShmrShelfOverview(),
               ));
-        if (snapshot.data!.size < 1)
+
+        String currentUserID =
+            Provider.of<AuthProvider>(context, listen: false).uid!;
+        if (snapshot.data!.size < 1 && widget.uid == currentUserID)
           return TextButton(
               onPressed: () {
                 Navigator.of(context)
@@ -51,6 +54,11 @@ class _ProfileShelfGridBuilderState extends State<ProfileShelfGridBuilder> {
                 });
               },
               child: Text('Create your first shelf'));
+
+        if (snapshot.data!.size < 1 && widget.uid != currentUserID)
+          return Center(
+            child: Text('No Shelfs created by this user'),
+          );
         List<QueryDocumentSnapshot> documents = snapshot.data!.docs;
         List<Shelf> shelfs = [];
         documents.forEach((QueryDocumentSnapshot e) {
