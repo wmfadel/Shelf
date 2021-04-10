@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class MarketBook {
-  //String? date;
+  Timestamp? date;
   bool? sold;
   String? thumbnail;
   String? userId;
@@ -17,7 +19,7 @@ class MarketBook {
   List<String>? authors;
 
   MarketBook(
-      { //this.date,
+      {this.date,
       this.sold,
       this.thumbnail,
       this.userId,
@@ -35,7 +37,7 @@ class MarketBook {
       this.authors});
 
   MarketBook.fromJson(Map<String, dynamic> json) {
-    // date = json['date'];
+    date = json['date'];
     sold = json['sold'];
     thumbnail = json['thumbnail'];
     userId = json['user-id'];
@@ -55,7 +57,7 @@ class MarketBook {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    // data['date'] = this.date;
+    data['date'] = this.date;
     data['sold'] = this.sold;
     data['thumbnail'] = this.thumbnail;
     data['user-id'] = this.userId;

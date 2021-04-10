@@ -141,7 +141,7 @@ class _SellButtonState extends State<SellButton> {
                                 'price': priceController.value.text
                                     .trim()
                                     .toString(),
-                                'date': DateTime.now(),
+                                'date': Timestamp.now(),
                                 'user-name': authProvider.name,
                                 'user-id': authProvider.uid,
                                 'email': authProvider.email,

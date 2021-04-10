@@ -71,7 +71,7 @@ class _CreateShelfScreenState extends State<CreateShelfScreen> {
               await FirebaseFirestore.instance.collection('shelfs').doc().set({
                 'name': nameController.value.text,
                 'user': userID,
-                'time': DateTime.now().toString(),
+                'time': Timestamp.now(),
                 'description': descriptionController.text.trim(),
                 'isPublic': isPublic,
               });

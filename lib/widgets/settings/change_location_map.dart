@@ -31,7 +31,7 @@ class _ChangeLocationMapState extends State<ChangeLocationMap> {
     print('location ${future.get('location')}');
     markers.add(
       Marker(
-        markerId: MarkerId(DateTime.now().toString()),
+        markerId: MarkerId(Timestamp.now().toString()),
         position: parseLatLang(future.get('location')),
       ),
     );
@@ -87,7 +87,7 @@ class _ChangeLocationMapState extends State<ChangeLocationMap> {
                 markers.clear();
                 markers.add(
                   Marker(
-                    markerId: MarkerId(DateTime.now().toString()),
+                    markerId: MarkerId(Timestamp.now().toString()),
                     position: newLatLng,
                   ),
                 );

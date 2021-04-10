@@ -81,7 +81,7 @@ class _FollowButtonState extends State<FollowButton> {
         .collection('following')
         .doc(widget.profileID)
         .set({
-      'follow-date': DateTime.now(),
+      'follow-date': Timestamp.now(),
     });
     // add to profile user followers list
     FirebaseFirestore.instance
@@ -90,7 +90,7 @@ class _FollowButtonState extends State<FollowButton> {
         .collection('followers')
         .doc(currentUSerID)
         .set({
-      'follow-date': DateTime.now(),
+      'follow-date': Timestamp.now(),
     });
   }
 }

@@ -1,9 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class Shelf {
   String id;
   String name;
   String description;
   String user;
-  String time;
+  Timestamp time;
   bool isPublic;
 
   Shelf({
