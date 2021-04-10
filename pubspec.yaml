@@ -73,6 +73,13 @@ flutter:
     - assets/pics/no_data.png
     - assets/pics/google_logo.png
     - assets/pics/marker.png
+    - assets/pics/chat.png
+    - assets/pics/library.png
+    - assets/pics/map.png
+    - assets/pics/profile.png
+    - assets/pics/share.png
+    - assets/pics/shop.png
+    - assets/pics/social.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
