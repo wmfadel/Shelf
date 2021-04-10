@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shelf/models/market_book.dart';
+import 'package:shelf/pages/profile_page.dart';
 
 class MarketListItem extends StatelessWidget {
   final MarketBook book;
@@ -121,41 +122,46 @@ class MarketListItem extends StatelessWidget {
                   padding: EdgeInsets.all(8),
                   child: Divider(),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 8, right: 8, bottom: 10),
-                  child: Row(
-                    children: [
-                      CircleAvatar(
-                        backgroundImage: NetworkImage(book.userPhoto!),
-                        radius: 25,
-                      ),
-                      SizedBox(width: 4),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              book.userName!,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            Text(
-                              book.email!,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(fontSize: 14),
-                            ),
-                          ],
+                GestureDetector(
+                  onTap: () => Navigator.of(context)
+                      .pushNamed(ProfilePage.routeName, arguments: book.userId),
+                  child: Padding(
+                    padding:
+                        const EdgeInsets.only(left: 8, right: 8, bottom: 10),
+                    child: Row(
+                      children: [
+                        CircleAvatar(
+                          backgroundImage: NetworkImage(book.userPhoto!),
+                          radius: 25,
                         ),
-                      ),
-                      ElevatedButton(
-                        onPressed: () {},
-                        child: Text('Buy'),
-                      )
-                    ],
+                        SizedBox(width: 4),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                book.userName!,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              Text(
+                                book.email!,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(fontSize: 14),
+                              ),
+                            ],
+                          ),
+                        ),
+                        ElevatedButton(
+                          onPressed: () {},
+                          child: Text('Buy'),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ],
