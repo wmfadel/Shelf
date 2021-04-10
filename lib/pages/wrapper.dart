@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shelf/pages/home_page.dart';
@@ -33,7 +32,6 @@ class _WrapperState extends State<Wrapper> {
 
   @override
   Widget build(BuildContext context) {
-    print(Timestamp.now());
     return Scaffold(
       body: Center(
         child: CircularProgressIndicator(),

@@ -10,6 +10,7 @@ class AuthService {
 
   logout() {
     _auth.signOut();
+    clearCash();
   }
 
   Future<User> signInWithGoogle() async {
@@ -63,5 +64,10 @@ class AuthService {
     String? id = prefs.getString('uid');
     print('id from prefs: $id');
     return id;
+  }
+
+  clearCash()async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.clear();
   }
 }
