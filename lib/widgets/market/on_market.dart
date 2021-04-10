@@ -34,54 +34,63 @@ class OnMarket extends StatelessWidget {
             itemCount: snapshot.data?.docs.length,
             itemBuilder: (BuildContext context, int index) {
               String? itemID = snapshot.data?.docs[index].id;
-              return Dismissible(
-                key: Key(itemID!),
-                confirmDismiss: (DismissDirection direction) async {
-                  if (userID !=
-                      Provider.of<AuthProvider>(context, listen: false).uid)
-                    return false;
-                  bool confirm = await showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return AlertDialog(
-                          title: Text(
-                              'Are you sure you want to remove this book from market'),
-                          actions: [
-                            TextButton(
-                              onPressed: () => Navigator.of(context).pop(false),
-                              child: Text('cancel'),
-                            ),
-                            ElevatedButton(
-                              onPressed: () {
-                                FirebaseFirestore.instance
-                                    .collection('market')
-                                    .doc(snapshot.data?.docs[index].id)
-                                    .delete();
-                                Navigator.of(context).pop(true);
-                              },
-                              child: Text('Remove'),
-                            ),
-                          ],
-                        );
-                      });
-                  return confirm;
-                },
-                background: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 25),
-                  color: Colors.red,
-                  alignment: Alignment.centerLeft,
-                  child: Icon(
-                    Icons.delete,
-                    color: Colors.white,
-                    size: 45,
-                  ),
-                ),
-                child: UserMarketGridItem(
-                  marketBook: books[index],
-                  isOwner: userID ==
-                      Provider.of<AuthProvider>(context, listen: false).uid,
-                ),
-              );
+              return userID ==
+                      Provider.of<AuthProvider>(context, listen: false).uid
+                  ? Dismissible(
+                      key: Key(itemID!),
+                      confirmDismiss: (DismissDirection direction) async {
+                        if (userID !=
+                            Provider.of<AuthProvider>(context, listen: false)
+                                .uid) return false;
+                        bool confirm = await showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                title: Text(
+                                    'Are you sure you want to remove this book from market'),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () =>
+                                        Navigator.of(context).pop(false),
+                                    child: Text('cancel'),
+                                  ),
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      FirebaseFirestore.instance
+                                          .collection('market')
+                                          .doc(snapshot.data?.docs[index].id)
+                                          .delete();
+                                      Navigator.of(context).pop(true);
+                                    },
+                                    child: Text('Remove'),
+                                  ),
+                                ],
+                              );
+                            });
+                        return confirm;
+                      },
+                      background: Container(
+                        padding: EdgeInsets.symmetric(horizontal: 25),
+                        color: Colors.red,
+                        alignment: Alignment.centerLeft,
+                        child: Icon(
+                          Icons.delete,
+                          color: Colors.white,
+                          size: 45,
+                        ),
+                      ),
+                      child: UserMarketGridItem(
+                        marketBook: books[index],
+                        isOwner: userID ==
+                            Provider.of<AuthProvider>(context, listen: false)
+                                .uid,
+                      ),
+                    )
+                  : UserMarketGridItem(
+                      marketBook: books[index],
+                      isOwner: userID ==
+                          Provider.of<AuthProvider>(context, listen: false).uid,
+                    );
             });
       },
     );
