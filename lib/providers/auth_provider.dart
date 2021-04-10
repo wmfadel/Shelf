@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shelf/services/auth_service.dart';
 
 class AuthProvider with ChangeNotifier {
@@ -36,5 +37,16 @@ class AuthProvider with ChangeNotifier {
     location = value.get('location');
     print(
         'got data from firestore\nname:$name\temail:$email\tlocation:$location\nphoto:$photo');
+  }
+
+  Future<bool> checkOnborading() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    if (prefs.containsKey('board')) return true;
+    return false;
+  }
+
+  completedOnBoarding() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool('board', true);
   }
 }

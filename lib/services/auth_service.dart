@@ -66,8 +66,8 @@ class AuthService {
     return id;
   }
 
-  clearCash()async{
+  clearCash() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.clear();
+    prefs.remove('uid');
   }
 }

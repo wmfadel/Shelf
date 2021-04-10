@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shelf/pages/home_page.dart';
 import 'package:shelf/pages/login_page.dart';
+import 'package:shelf/pages/on_boarding.dart';
 import 'package:shelf/providers/auth_provider.dart';
 
 class Wrapper extends StatefulWidget {
@@ -26,7 +27,19 @@ class _WrapperState extends State<Wrapper> {
     if (isLogged) {
       Navigator.of(context).pushReplacementNamed(HomePage.routeName);
     } else {
-      Navigator.of(context).pushReplacementNamed(LoginPage.routeName);
+      // check for onboarding page
+      bool onBoarding = await Provider.of<AuthProvider>(context, listen: false)
+          .checkOnborading();
+
+      if (onBoarding) {
+        // if true means its already Shown
+        Navigator.of(context).pushReplacementNamed(LoginPage.routeName);
+      } else {
+        // else not shown must be displayed
+        // in there fter finishing navigate to home page
+        // and mark it as shown for the future
+        Navigator.of(context).pushReplacementNamed(OnBoardingPage.routeName);
+      }
     }
   }
 
