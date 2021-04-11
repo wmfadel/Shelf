@@ -31,17 +31,26 @@ class AuthService {
     //cachUser(currentUser);
     await cashUserID(currentUser.uid);
     String? location = await LocationService().getUserLocation();
-    FirebaseFirestore.instance.collection('users').doc(currentUser.uid).set(
-      {
-        'name': currentUser.displayName,
-        'photo': currentUser.photoURL,
-        'email': currentUser.email,
-        'location': location,
-        'visibility': location == null ? false : true,
-        'upVote': 0,
-        'downVote': 0,
-      },
-    );
+    // check for user existance
+    DocumentSnapshot user = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(currentUser.uid)
+        .get();
+
+    if (!user.exists) {
+      FirebaseFirestore.instance.collection('users').doc(currentUser.uid).set(
+        {
+          'name': currentUser.displayName,
+          'photo': currentUser.photoURL,
+          'email': currentUser.email,
+          'location': location,
+          'visibility': location == null ? false : true,
+          'upVote': 0,
+          'downVote': 0,
+        },
+      );
+    }
+
     return currentUser;
   }
 
