@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shelf/pages/add_book_page.dart';
 import 'package:shelf/pages/book_page.dart';
+import 'package:shelf/pages/chat_page.dart';
 import 'package:shelf/pages/create_shelf_screen.dart';
 import 'package:shelf/pages/home_page.dart';
 import 'package:shelf/pages/login_page.dart';
@@ -62,6 +63,7 @@ class MyApp extends StatelessWidget {
           RatingPage.routeName: (BuildContext context) => RatingPage(),
           MarketPage.routeName: (BuildContext context) => MarketPage(),
           MyMarkeyPage.routeName: (BuildContext context) => MyMarkeyPage(),
+          ChatPage.routeName: (BuildContext context) => ChatPage(),
           OnlineContentPage.routeName: (BuildContext context) =>
               OnlineContentPage(),
           CreateShelfScreen.routeName: (BuildContext context) =>

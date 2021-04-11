@@ -41,6 +41,8 @@ dependencies:
   shimmer: ^2.0.0-nullsafety.0
   collection: ^1.15.0-nullsafety.4
   introduction_screen: ^2.1.0
+  #url_preview_card:
+  #  git: https://github.com/wmfadel/url_preview_card.git
 
 dev_dependencies:
   flutter_test:

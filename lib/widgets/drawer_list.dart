@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shelf/pages/chat_page.dart';
 import 'package:shelf/pages/login_page.dart';
 import 'package:shelf/pages/market_page.dart';
 import 'package:shelf/pages/my_market_page.dart';
@@ -7,6 +8,7 @@ import 'package:shelf/pages/online_content_page.dart';
 import 'package:shelf/pages/rating_page.dart';
 import 'package:shelf/pages/settings_page.dart';
 import 'package:shelf/providers/auth_provider.dart';
+import 'package:shelf/providers/map_provider.dart';
 import 'package:shelf/widgets/drawer_heading.dart';
 
 class DrawerList extends StatelessWidget {
@@ -37,6 +39,16 @@ class DrawerList extends StatelessWidget {
                 onTap: () {
                   Navigator.of(context).pop();
                   Navigator.of(context).pushNamed(MyMarkeyPage.routeName);
+                }),
+            ListTile(
+                title: Text('Chat'),
+                leading: Icon(
+                  Icons.chat_rounded,
+                  color: Colors.deepOrange,
+                ),
+                onTap: () {
+                  Navigator.of(context).pop();
+                  Navigator.of(context).pushNamed(ChatPage.routeName);
                 }),
             ListTile(
               title: Text('Online Content'),
@@ -93,6 +105,9 @@ class DrawerList extends StatelessWidget {
                   color: Colors.red,
                 ),
                 onTap: () {
+                  Provider.of<MapProvider>(context, listen: false)
+                      .controller!
+                      .dispose();
                   Provider.of<AuthProvider>(context, listen: false).logout();
                   Navigator.of(context).pushNamedAndRemoveUntil(
                       LoginPage.routeName, (r) => false);

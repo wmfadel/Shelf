@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 // preparations For adding online content page
@@ -18,7 +17,7 @@ class OnlineContentPage extends StatelessWidget {
         backgroundColor: Colors.white70,
         centerTitle: true,
       ),
-      body: FutureBuilder<DocumentSnapshot>(
+      /* body: FutureBuilder<DocumentSnapshot>(
           future: FirebaseFirestore.instance
               .collection('content')
               .doc('urls')
@@ -26,9 +25,18 @@ class OnlineContentPage extends StatelessWidget {
           builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting)
               return Center(child: CircularProgressIndicator());
-            List<String> urls = snapshot.data?.get('youtube') as List<String>;
-            return Text(urls.length.toString());
-          }),
+            List<dynamic> urls = snapshot.data?.get('youtube') as List<dynamic>;
+            return UrlPreviewCard(
+              url: urls[0].toString(),
+              titleStyle: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
+              ),
+              descriptionStyle: TextStyle(color: Colors.white),
+              siteNameStyle: TextStyle(color: Colors.white),
+            );
+          }),*/
     );
   }
 }
