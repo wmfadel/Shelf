@@ -59,7 +59,7 @@ class HomePage extends StatelessWidget {
             ),
           ),
           Positioned(bottom: 1, child: MapMarket(context)),
-          Positioned(bottom: 220, child: BookOverview()),
+          Positioned(bottom: 205, child: BookOverview()),
         ],
       ),
     );

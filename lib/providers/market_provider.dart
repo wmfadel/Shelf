@@ -20,7 +20,7 @@ class MarketProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  setActiveBook(MarketBook marketBook) {
+  setActiveBook(MarketBook? marketBook) {
     _activeBook = marketBook;
     notifyListeners();
   }
