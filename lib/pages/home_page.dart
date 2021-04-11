@@ -7,6 +7,7 @@ import 'package:shelf/widgets/custom_avatar.dart';
 import 'package:shelf/widgets/custom_button.dart';
 import 'package:shelf/widgets/drawer_list.dart';
 import 'package:shelf/widgets/home_map.dart';
+import 'package:shelf/widgets/market/book_overiew.dart';
 import 'package:shelf/widgets/market/map_market.dart';
 
 class HomePage extends StatelessWidget {
@@ -57,7 +58,8 @@ class HomePage extends StatelessWidget {
               onPressed: () {},
             ),
           ),
-          Positioned(bottom: 1, child: MapMarket(context))
+          Positioned(bottom: 1, child: MapMarket(context)),
+          Positioned(bottom: 220, child: BookOverview()),
         ],
       ),
     );

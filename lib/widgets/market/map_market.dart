@@ -26,6 +26,7 @@ class MapMarket extends StatelessWidget {
             onTap: () {
               MapProvider mapProvider =
                   Provider.of<MapProvider>(context, listen: false);
+              marketProvider.setActiveBook(marketProvider.marketBooks[index]);
               mapProvider.controller?.animateCamera(CameraUpdate.newLatLng(
                   mapProvider.parseLatLang(
                       marketProvider.marketBooks[index].location!)));
@@ -83,16 +84,6 @@ class MapMarket extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                              /* ListTile(
-                                leading: CircleAvatar(
-                                  backgroundImage: NetworkImage(marketProvider
-                                      .marketBooks[index].userPhoto!),
-                                ),
-                                title: Text(
-                                    marketProvider.marketBooks[index].userName!),
-                                subtitle: Text(
-                                    marketProvider.marketBooks[index].email!),
-                              )*/
                               Row(
                                 children: [
                                   CircleAvatar(

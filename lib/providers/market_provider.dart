@@ -4,6 +4,7 @@ import 'package:shelf/models/market_book.dart';
 
 class MarketProvider with ChangeNotifier {
   List<MarketBook> marketBooks = [];
+  MarketBook? _activeBook;
 
   getMapMarket(String currentUserID) async {
     QuerySnapshot snapshot = await FirebaseFirestore.instance
@@ -17,5 +18,14 @@ class MarketProvider with ChangeNotifier {
       marketBooks.add(MarketBook.fromJson(book.data()!));
     });
     notifyListeners();
+  }
+
+  setActiveBook(MarketBook marketBook) {
+    _activeBook = marketBook;
+    notifyListeners();
+  }
+
+  MarketBook? getActiveBook() {
+    return _activeBook;
   }
 }
