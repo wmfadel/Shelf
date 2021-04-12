@@ -21,6 +21,7 @@ import 'package:shelf/providers/api_search_provider.dart';
 import 'package:shelf/providers/auth_provider.dart';
 import 'package:shelf/providers/map_provider.dart';
 import 'package:shelf/providers/market_provider.dart';
+import 'package:shelf/providers/uploader_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
   final APISearchPRovider _apiSearchPRovider = APISearchPRovider();
   final MapProvider _mapProvider = MapProvider();
   final MarketProvider _marketProvider = MarketProvider();
+  final UploaderProvider _uploaderProvider = UploaderProvider();
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([
@@ -46,6 +48,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => _apiSearchPRovider),
         ChangeNotifierProvider(create: (_) => _mapProvider),
         ChangeNotifierProvider(create: (_) => _marketProvider),
+        ChangeNotifierProvider(create: (_) => _uploaderProvider),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',

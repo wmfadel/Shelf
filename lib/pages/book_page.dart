@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shelf/models/api_book.dart';
 import 'package:shelf/providers/api_search_provider.dart';
+import 'package:shelf/widgets/add_photo_view.dart';
 import 'package:shelf/widgets/add_to_shelf_builder.dart';
 import 'package:shelf/widgets/info_chip.dart';
 import 'package:shelf/widgets/info_chip_text.dart';
@@ -37,7 +38,20 @@ class BookPage extends StatelessWidget {
         iconTheme: IconThemeData(color: Theme.of(context).primaryColor),
         actions: [
           if (isView && isEdible)
-            SellButton(bookID: book.id!, shelfID: shelfID),
+            ...[
+              SellButton(bookID: book.id!, shelfID: shelfID),
+              PopupMenuButton(
+                icon: Icon(Icons.camera_alt_sharp),
+                itemBuilder: (BuildContext context) {
+                  return [
+                    PopupMenuItem(
+                      child: AddPhotoView(bookID: book.id!),
+                      value: 1,
+                    ),
+                  ];
+                },
+              ),
+            ].toList(),
           if (!isView)
             IconButton(
               icon: Icon(Icons.note_add_rounded),
