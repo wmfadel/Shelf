@@ -7,6 +7,7 @@ import 'package:shelf/pages/book_page.dart';
 import 'package:shelf/pages/chat_page.dart';
 import 'package:shelf/pages/create_shelf_screen.dart';
 import 'package:shelf/pages/home_page.dart';
+import 'package:shelf/pages/image_uploader_page.dart';
 import 'package:shelf/pages/login_page.dart';
 import 'package:shelf/pages/market_page.dart';
 import 'package:shelf/pages/my_market_page.dart';
@@ -73,6 +74,8 @@ class MyApp extends StatelessWidget {
           MarketPage.routeName: (BuildContext context) => MarketPage(),
           MyMarkeyPage.routeName: (BuildContext context) => MyMarkeyPage(),
           ChatPage.routeName: (BuildContext context) => ChatPage(),
+          ImageUploaderPage.routeName: (BuildContext context) =>
+              ImageUploaderPage(),
           OnlineContentPage.routeName: (BuildContext context) =>
               OnlineContentPage(),
           CreateShelfScreen.routeName: (BuildContext context) =>

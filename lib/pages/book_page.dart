@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shelf/models/api_book.dart';
+import 'package:shelf/pages/image_uploader_page.dart';
 import 'package:shelf/providers/api_search_provider.dart';
-import 'package:shelf/widgets/add_photo_view.dart';
 import 'package:shelf/widgets/add_to_shelf_builder.dart';
 import 'package:shelf/widgets/info_chip.dart';
 import 'package:shelf/widgets/info_chip_text.dart';
@@ -40,7 +40,13 @@ class BookPage extends StatelessWidget {
           if (isView && isEdible)
             ...[
               SellButton(bookID: book.id!, shelfID: shelfID),
-              PopupMenuButton(
+              IconButton(
+                onPressed: () => Navigator.of(context).pushNamed(
+                    ImageUploaderPage.routeName,
+                    arguments: book.id!),
+                icon: Icon(Icons.image),
+              )
+              /*PopupMenuButton(
                 icon: Icon(Icons.camera_alt_sharp),
                 itemBuilder: (BuildContext context) {
                   return [
@@ -50,7 +56,7 @@ class BookPage extends StatelessWidget {
                     ),
                   ];
                 },
-              ),
+              ),*/
             ].toList(),
           if (!isView)
             IconButton(
