@@ -45,7 +45,7 @@ class HomePage extends StatelessWidget {
             top: 45,
             right: 80,
             child: CustomButton(
-              iconData: Icons.library_books,
+              iconData: Icons.add,
               onPressed: () =>
                   Navigator.of(context).pushNamed(AddBookPage.routeName),
             ),

@@ -6,7 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:image_picker/image_picker.dart';
 
 class UploaderProvider with ChangeNotifier {
-  List<UploadTask?> uploadTasks = [];
+  List<UploadTask> uploadTasks = [];
   List<File> _imageFiles = [];
 
   List<File> get imageFiles => [..._imageFiles];
@@ -18,10 +18,10 @@ class UploaderProvider with ChangeNotifier {
 
   Future<String> frankUploadFile(String _image) async {
     Reference storageReference =
-        FirebaseStorage.instance.ref().child('posts/$_image');
+        FirebaseStorage.instance.ref().child('photos/${DateTime.now()}');
     UploadTask uploadTask = storageReference.putFile(File(_image));
+    uploadTasks.add(uploadTask);
     await uploadTask.whenComplete(() {});
-
     String url = await storageReference.getDownloadURL();
     return url;
   }
@@ -38,7 +38,7 @@ class UploaderProvider with ChangeNotifier {
         FirebaseFirestore.instance.collection('market').doc(marketItem);
     DocumentSnapshot snapshot = await marketDoc.get();
     marketDoc.update(
-        {'photos': (snapshot.get('photos') as List<String>)..add(imageUrl)});
+        {'photos': (snapshot.get('photos') as List<dynamic>)..add(imageUrl)});
   }
 
   uploadFile(PickedFile file) async {
