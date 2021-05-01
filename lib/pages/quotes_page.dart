@@ -18,7 +18,8 @@ class QuotesPagePage extends StatelessWidget {
         centerTitle: true,
       ),
       body: QuotesListBuilder(
-          userID: Provider.of<AuthProvider>(context, listen: false).uid!),
+        userID: Provider.of<AuthProvider>(context, listen: false).uid!,
+      ),
     );
   }
 }
