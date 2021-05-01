@@ -14,6 +14,7 @@ import 'package:shelf/pages/my_market_page.dart';
 import 'package:shelf/pages/on_boarding.dart';
 import 'package:shelf/pages/online_content_page.dart';
 import 'package:shelf/pages/profile_page.dart';
+import 'package:shelf/pages/quotes_page.dart';
 import 'package:shelf/pages/rating_page.dart';
 import 'package:shelf/pages/settings_page.dart';
 import 'package:shelf/pages/shelf_page.dart';
@@ -74,6 +75,7 @@ class MyApp extends StatelessWidget {
           MarketPage.routeName: (BuildContext context) => MarketPage(),
           MyMarkeyPage.routeName: (BuildContext context) => MyMarkeyPage(),
           ChatPage.routeName: (BuildContext context) => ChatPage(),
+          QuotesPagePage.routeName: (BuildContext context) => QuotesPagePage(),
           ImageUploaderPage.routeName: (BuildContext context) =>
               ImageUploaderPage(),
           OnlineContentPage.routeName: (BuildContext context) =>
