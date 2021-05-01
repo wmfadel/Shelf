@@ -3,8 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:shelf/providers/auth_provider.dart';
 import 'package:shelf/widgets/quotes/quotes_list_builder.dart';
 
-class QuotesPagePage extends StatelessWidget {
-  static final String routeName = 'QuotesPage_page';
+class QuotesPage extends StatelessWidget {
+  static final String routeName = 'Quotes_page';
   @override
   Widget build(BuildContext context) {
     return Scaffold(

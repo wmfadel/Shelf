@@ -49,7 +49,7 @@ class DrawerList extends StatelessWidget {
                 ),
                 onTap: () {
                   Navigator.of(context).pop();
-                  Navigator.of(context).pushNamed(QuotesPagePage.routeName);
+                  Navigator.of(context).pushNamed(QuotesPage.routeName);
                 }),
             ListTile(
                 title: Text('Chat'),

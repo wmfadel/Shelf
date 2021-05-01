@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:shelf/models/quote.dart';
+import 'package:shelf/pages/add_quote_page.dart';
 import 'package:shelf/widgets/quotes/quotes_list_item.dart';
 
 class QuotesListBuilder extends StatelessWidget {
@@ -34,7 +35,7 @@ class QuotesListBuilder extends StatelessWidget {
               padding: const EdgeInsets.all(10),
               child: GestureDetector(
                 onTap: () {
-                  // TODO: Navigate to add quote page
+                  Navigator.of(context).pushNamed(AddQuotePage.routeName);
                 },
                 child: Material(
                   color: Theme.of(context).primaryColor,
