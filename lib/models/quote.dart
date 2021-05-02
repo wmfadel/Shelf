@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Quote {
+  String? id;
   late String text;
   late String author;
   late String book;
@@ -8,6 +9,7 @@ class Quote {
   late String page;
 
   Quote({
+    this.id,
     required this.text,
     required this.author,
     required this.book,
@@ -15,7 +17,8 @@ class Quote {
     required this.page,
   });
 
-  Quote.fromFire(Map<String, dynamic> json) {
+  Quote.fromFire(Map<String, dynamic> json, String docID) {
+    id = docID;
     text = json['text'] ?? '';
     author = json['author'] ?? 'Unknown Author';
     book = json['book'] ?? 'Unknown Book Title';

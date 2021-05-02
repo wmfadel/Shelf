@@ -13,12 +13,12 @@ class QuotesListBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<QuerySnapshot>(
-      future: FirebaseFirestore.instance
+    return StreamBuilder<QuerySnapshot>(
+      stream: FirebaseFirestore.instance
           .collection('users')
           .doc(userID)
           .collection('quotes')
-          .get(),
+          .snapshots(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting)
           return Center(child: CircularProgressIndicator());
@@ -59,7 +59,7 @@ class QuotesListBuilder extends StatelessWidget {
               child: ListView.builder(
                 itemCount: quotes.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return QuotesListItem(quote: quotes[index]);
+                  return QuotesListItem(quote: quotes[index], userID: userID);
                 },
               ),
             ),
@@ -72,7 +72,9 @@ class QuotesListBuilder extends StatelessWidget {
   List<Quote> quotesFromList(List<QueryDocumentSnapshot> data) {
     List<Quote> quotes = [];
     data.forEach((element) {
-      quotes.add(Quote.fromFire(element.data()!));
+      Quote temp = Quote.fromFire(element.data()!, element.id);
+      quotes.add(temp);
+      print('quote id on creation ${element.id}, got ${temp.id}');
     });
     return quotes;
   }
