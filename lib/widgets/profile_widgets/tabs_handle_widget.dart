@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shelf/widgets/market/on_market.dart';
 import 'package:shelf/widgets/profile_widgets/people_handle.dart';
+import 'package:shelf/widgets/quotes/quotes_list_builder.dart';
 import 'package:shelf/widgets/shelf_grid/profile_shelf_grid_builder.dart';
 
 class TabsHandleWidget extends StatelessWidget {
@@ -22,7 +23,7 @@ class TabsHandleWidget extends StatelessWidget {
               child: TabBar(
                 tabs: [
                   Tab(text: "Shelfs"),
-                  Tab(text: "People"),
+                  Tab(text: "Quotes"),
                   Tab(text: "Activity"),
                   Tab(text: "Market"),
                 ],
@@ -38,7 +39,8 @@ class TabsHandleWidget extends StatelessWidget {
                     padding: const EdgeInsets.only(top: 8.0),
                     child: ProfileShelfGridBuilder(uid: uid),
                   ),
-                  PeopleHandle(uid: uid),
+                  //PeopleHandle(uid: uid),
+                  QuotesListBuilder(userID: uid),
                   Container(
                     width: double.infinity,
                     height: double.infinity,
