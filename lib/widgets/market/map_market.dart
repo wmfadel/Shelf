@@ -39,7 +39,7 @@ class MapMarket extends StatelessWidget {
                 clipBehavior: Clip.hardEdge,
                 borderRadius: BorderRadius.circular(10),
                 child: Container(
-                  width: 300,
+                  width: 330,
                   //  height: 100,
                   //   margin: EdgeInsets.all(10),
                   padding: EdgeInsets.only(right: 5),

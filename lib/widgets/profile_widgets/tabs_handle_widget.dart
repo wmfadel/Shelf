@@ -12,7 +12,7 @@ class TabsHandleWidget extends StatelessWidget {
 
     return Container(
       width: size.width,
-      height: size.height - 263,
+      height: size.height - 300,
       child: DefaultTabController(
         length: 4,
         child: Column(
