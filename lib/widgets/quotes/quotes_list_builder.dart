@@ -39,8 +39,7 @@ class QuotesListBuilder extends StatelessWidget {
               onPressed: () {},
             ));
           } else {
-            return Center(
-                child: Text('No Quotes added for now, Add One now!!'));
+            return Center(child: Text('No Quotes added yet!!'));
           }
         }
 

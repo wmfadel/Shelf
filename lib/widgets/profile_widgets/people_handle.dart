@@ -1,10 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:shelf/widgets/profile_widgets/followers_list.dart';
 import 'package:shelf/widgets/profile_widgets/following_list.dart';
 
 class PeopleHandle extends StatelessWidget {
-  final String uid;
-  PeopleHandle({required this.uid});
+  final List<QuerySnapshot> data;
+  PeopleHandle({required this.data});
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -30,8 +31,8 @@ class PeopleHandle extends StatelessWidget {
             Expanded(
               child: Container(
                 child: TabBarView(children: [
-                  FollowingList(uid: uid),
-                  FollowersList(uid: uid),
+                  FollowingList(data: data[1]),
+                  FollowersList(data: data[0]),
                 ]),
               ),
             )

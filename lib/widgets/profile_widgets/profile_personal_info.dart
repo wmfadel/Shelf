@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shelf/providers/auth_provider.dart';
 import 'package:shelf/widgets/profile_widgets/follow_button.dart';
+import 'package:shelf/widgets/profile_widgets/profile_people_view.dart';
 import 'package:shelf/widgets/shimmer_items/shmr_profile_personal_info.dart';
 
 class ProfilePersonalInfo extends StatelessWidget {
@@ -21,7 +22,6 @@ class ProfilePersonalInfo extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   SizedBox(
-                    height: 10,
                     width: MediaQuery.of(context).size.width,
                   ),
                   CircleAvatar(
@@ -42,6 +42,7 @@ class ProfilePersonalInfo extends StatelessWidget {
                   Text(
                     snapshot.data?.get('email'),
                   ),
+                  ProfilePeopleView(uid),
                 ],
               ),
               if (uid != Provider.of<AuthProvider>(context, listen: false).uid)
@@ -49,7 +50,7 @@ class ProfilePersonalInfo extends StatelessWidget {
                   top: 75,
                   right: MediaQuery.of(context).size.width * 0.25,
                   child: FollowButton(uid),
-                )
+                ),
             ],
           );
         });

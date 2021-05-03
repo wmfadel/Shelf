@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:shelf/widgets/market/on_market.dart';
-import 'package:shelf/widgets/profile_widgets/people_handle.dart';
 import 'package:shelf/widgets/quotes/quotes_list_builder.dart';
 import 'package:shelf/widgets/shelf_grid/profile_shelf_grid_builder.dart';
 
