@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:url_preview_card/url_preview_card.dart';
 
 // preparations For adding online content page
 // the plugin i need flutter_link_preview depends on an older version
@@ -17,7 +19,7 @@ class OnlineContentPage extends StatelessWidget {
         backgroundColor: Colors.white70,
         centerTitle: true,
       ),
-      /* body: FutureBuilder<DocumentSnapshot>(
+      /*  body: FutureBuilder<DocumentSnapshot>(
           future: FirebaseFirestore.instance
               .collection('content')
               .doc('urls')
