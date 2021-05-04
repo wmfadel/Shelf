@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shelf/pages/chat_page.dart';
+import 'package:shelf/pages/create_post_page.dart';
 import 'package:shelf/pages/login_page.dart';
 import 'package:shelf/pages/market_page.dart';
 import 'package:shelf/pages/my_market_page.dart';
@@ -8,9 +9,11 @@ import 'package:shelf/pages/online_content_page.dart';
 import 'package:shelf/pages/quotes_page.dart';
 import 'package:shelf/pages/rating_page.dart';
 import 'package:shelf/pages/settings_page.dart';
+import 'package:shelf/pages/social_page.dart';
 import 'package:shelf/providers/auth_provider.dart';
 import 'package:shelf/providers/map_provider.dart';
 import 'package:shelf/widgets/drawer_heading.dart';
+import 'package:shelf/widgets/drawer_item.dart';
 
 class DrawerList extends StatelessWidget {
   @override
@@ -18,111 +21,155 @@ class DrawerList extends StatelessWidget {
     return Drawer(
       child: SingleChildScrollView(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             DrawerHeading(),
-            ListTile(
-                title: Text('Market'),
-                leading: Icon(
-                  Icons.store_mall_directory,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+              child: Text(
+                'Interact',
+                style: TextStyle(
+                  color: Colors.deepPurple,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            DrawerItem(
+              text: 'Social',
+              color: Colors.deepPurple,
+              icon: Icons.deck,
+              destination: SocialPage.routeName,
+            ),
+            DrawerItem(
+              text: 'Create',
+              color: Colors.deepPurple,
+              icon: Icons.create_new_folder,
+              destination: CreatePostPage.routeName,
+            ),
+            DrawerItem(
+              text: 'Chat',
+              color: Colors.deepPurple,
+              icon: Icons.chat_rounded,
+              destination: ChatPage.routeName,
+            ),
+            DrawerItem(
+              text: 'Online Content',
+              color: Colors.deepPurple,
+              icon: Icons.local_fire_department_sharp,
+              destination: OnlineContentPage.routeName,
+            ),
+            Divider(color: Colors.deepPurple),
+            SizedBox(height: 5),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+              child: Text(
+                'Trade',
+                style: TextStyle(
                   color: Colors.green,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
                 ),
-                onTap: () {
-                  Navigator.of(context).pop();
-                  Navigator.of(context).pushNamed(MarketPage.routeName);
-                }),
-            ListTile(
-                title: Text('My Market'),
-                leading: Icon(
-                  Icons.storefront,
-                  color: Colors.cyan,
-                ),
-                onTap: () {
-                  Navigator.of(context).pop();
-                  Navigator.of(context).pushNamed(MyMarkeyPage.routeName);
-                }),
-            ListTile(
-                title: Text('Quotes'),
-                leading: Icon(
-                  Icons.format_quote,
-                  color: Colors.green,
-                ),
-                onTap: () {
-                  Navigator.of(context).pop();
-                  Navigator.of(context).pushNamed(QuotesPage.routeName);
-                }),
-            ListTile(
-                title: Text('Chat'),
-                leading: Icon(
-                  Icons.chat_rounded,
+              ),
+            ),
+            DrawerItem(
+              text: 'Market',
+              color: Colors.green,
+              icon: Icons.store_mall_directory,
+              destination: MarketPage.routeName,
+            ),
+            DrawerItem(
+              text: 'My Market',
+              color: Colors.green,
+              icon: Icons.storefront,
+              destination: MyMarkeyPage.routeName,
+            ),
+            DrawerItem(
+              text: 'Quotes',
+              color: Colors.green,
+              icon: Icons.format_quote,
+              destination: QuotesPage.routeName,
+            ),
+            Divider(color: Colors.green),
+            SizedBox(height: 5),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+              child: Text(
+                'Improve',
+                style: TextStyle(
                   color: Colors.deepOrange,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
                 ),
-                onTap: () {
-                  Navigator.of(context).pop();
-                  Navigator.of(context).pushNamed(ChatPage.routeName);
-                }),
-            ListTile(
-              title: Text('Online Content'),
-              leading: Icon(
-                Icons.local_fire_department_sharp,
-                color: Colors.redAccent,
               ),
-              onTap: () {
-                Navigator.of(context).pop();
-                Navigator.of(context).pushNamed(OnlineContentPage.routeName);
-              },
             ),
-            ListTile(
-              title: Text('Rating'),
-              leading: Icon(
-                Icons.star_rate_rounded,
-                color: Colors.orange,
+            DrawerItem(
+              text: 'Rating',
+              color: Colors.deepOrange,
+              icon: Icons.star_rate_rounded,
+              destination: RatingPage.routeName,
+            ),
+            Divider(color: Theme.of(context).iconTheme.color!),
+            SizedBox(height: 5),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+              child: Text(
+                'Control',
+                style: TextStyle(
+                  color: Theme.of(context).iconTheme.color!,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-              onTap: () {
-                Navigator.of(context).pop();
-                Navigator.of(context).pushNamed(
-                  RatingPage.routeName,
-                );
-              },
             ),
-            ListTile(
-                title: Text('Settings'),
-                leading: Icon(
-                  Icons.settings,
-                  color: Theme.of(context).iconTheme.color,
-                ),
-                onTap: () {
-                  Navigator.of(context).pop();
-                  Navigator.of(context).pushNamed(SettingsPage.routeName);
-                }),
-            ListTile(
-                title: Text('Help'),
-                leading: Icon(
-                  Icons.help_center,
-                  color: Theme.of(context).iconTheme.color,
-                ),
-                onTap: () {}),
-            ListTile(
-                title: Text('About'),
-                leading: Icon(
-                  Icons.info,
-                  color: Theme.of(context).iconTheme.color,
-                ),
-                onTap: () {}),
-            ListTile(
-                title: Text('Logout'),
-                leading: Icon(
-                  Icons.exit_to_app,
+            DrawerItem(
+              text: 'Settings',
+              color: Theme.of(context).iconTheme.color!,
+              icon: Icons.settings,
+              destination: SettingsPage.routeName,
+            ),
+            DrawerItem(
+              text: 'Help',
+              color: Theme.of(context).iconTheme.color!,
+              icon: Icons.help_center,
+              destination: SettingsPage.routeName,
+            ),
+            DrawerItem(
+              text: 'About',
+              color: Theme.of(context).iconTheme.color!,
+              icon: Icons.info,
+              destination: SettingsPage.routeName,
+            ),
+            Divider(
+              color: Colors.red,
+            ),
+            SizedBox(height: 5),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+              child: Text(
+                'Leave',
+                style: TextStyle(
                   color: Colors.red,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
                 ),
-                onTap: () {
-                  Provider.of<MapProvider>(context, listen: false)
-                      .controller!
-                      .dispose();
-                  Provider.of<AuthProvider>(context, listen: false).logout();
-                  Navigator.of(context).pushNamedAndRemoveUntil(
-                      LoginPage.routeName, (r) => false);
-                }),
+              ),
+            ),
+            DrawerItem(
+              text: 'Logout',
+              color: Colors.red,
+              icon: Icons.exit_to_app,
+              destination: '',
+              action: () {
+                Provider.of<MapProvider>(context, listen: false)
+                    .controller!
+                    .dispose();
+                Provider.of<AuthProvider>(context, listen: false).logout();
+                Navigator.of(context)
+                    .pushNamedAndRemoveUntil(LoginPage.routeName, (r) => false);
+              },
+            ),
+            SizedBox(height: 10),
           ],
         ),
       ),

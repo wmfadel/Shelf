@@ -6,6 +6,7 @@ import 'package:shelf/pages/add_book_page.dart';
 import 'package:shelf/pages/add_quote_page.dart';
 import 'package:shelf/pages/book_page.dart';
 import 'package:shelf/pages/chat_page.dart';
+import 'package:shelf/pages/create_post_page.dart';
 import 'package:shelf/pages/create_shelf_screen.dart';
 import 'package:shelf/pages/home_page.dart';
 import 'package:shelf/pages/image_uploader_page.dart';
@@ -19,6 +20,7 @@ import 'package:shelf/pages/quotes_page.dart';
 import 'package:shelf/pages/rating_page.dart';
 import 'package:shelf/pages/settings_page.dart';
 import 'package:shelf/pages/shelf_page.dart';
+import 'package:shelf/pages/social_page.dart';
 import 'package:shelf/pages/wrapper.dart';
 import 'package:shelf/providers/api_search_provider.dart';
 import 'package:shelf/providers/auth_provider.dart';
@@ -78,6 +80,8 @@ class MyApp extends StatelessWidget {
           ChatPage.routeName: (BuildContext context) => ChatPage(),
           QuotesPage.routeName: (BuildContext context) => QuotesPage(),
           AddQuotePage.routeName: (BuildContext context) => AddQuotePage(),
+          SocialPage.routeName: (BuildContext context) => SocialPage(),
+          CreatePostPage.routeName: (BuildContext context) => CreatePostPage(),
           ImageUploaderPage.routeName: (BuildContext context) =>
               ImageUploaderPage(),
           OnlineContentPage.routeName: (BuildContext context) =>
