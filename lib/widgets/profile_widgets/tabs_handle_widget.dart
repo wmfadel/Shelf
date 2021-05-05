@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shelf/widgets/market/on_market.dart';
 import 'package:shelf/widgets/quotes/quotes_list_builder.dart';
 import 'package:shelf/widgets/shelf_grid/profile_shelf_grid_builder.dart';
+import 'package:shelf/widgets/social_content/posts_handler.dart';
 
 class TabsHandleWidget extends StatelessWidget {
   final String uid;
@@ -40,11 +41,7 @@ class TabsHandleWidget extends StatelessWidget {
                   ),
                   //PeopleHandle(uid: uid),
                   QuotesListBuilder(userID: uid),
-                  Container(
-                    width: double.infinity,
-                    height: double.infinity,
-                    color: Colors.green,
-                  ),
+                  PostsHandler(userId: uid),
                   OnMarket(userID: uid),
                 ]),
               ),

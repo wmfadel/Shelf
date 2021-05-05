@@ -4,13 +4,23 @@ import 'package:shelf/models/post.dart';
 import 'package:shelf/widgets/social_content/posts_list.dart';
 
 class PostsHandler extends StatelessWidget {
+  final String? userId;
+  PostsHandler({this.userId});
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<QuerySnapshot>(
-      stream: FirebaseFirestore.instance
+    var query;
+    if (userId == null) {
+      query = FirebaseFirestore.instance
+          .collection('social')
+          .where('reply-to', isNull: true);
+    } else {
+      query = FirebaseFirestore.instance
           .collection('social')
           .where('reply-to', isNull: true)
-          .snapshots(),
+          .where('user', isEqualTo: userId);
+    }
+    return StreamBuilder<QuerySnapshot>(
+      stream: query.snapshots(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting)
           return Center(child: CircularProgressIndicator());

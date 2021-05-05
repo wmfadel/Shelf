@@ -29,18 +29,20 @@ class PostProvider with ChangeNotifier {
 
   Future<List<String>> uploadImages() async {
     List<String> urls = [];
-    for (var i in images) {
+    /*for (var i in images) {
       String url = await frankUploadFile(i.path);
       urls.add(url);
-    }
+    }*/
+    await Future.forEach(images, (File image) async {
+      await frankUploadFile(image.path);
+    });
     return urls;
   }
 
   Future<String> frankUploadFile(String _image) async {
     Reference storageReference =
         FirebaseStorage.instance.ref().child('photos/${DateTime.now()}');
-    UploadTask uploadTask = storageReference.putFile(File(_image));
-    await uploadTask.whenComplete(() {});
+    await storageReference.putFile(File(_image));
     String url = await storageReference.getDownloadURL();
     return url;
   }
