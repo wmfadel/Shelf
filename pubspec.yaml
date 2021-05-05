@@ -85,6 +85,8 @@ flutter:
     - assets/pics/share.png
     - assets/pics/shop.png
     - assets/pics/social.png
+    - assets/pics/empty.png
+    - assets/pics/error.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
