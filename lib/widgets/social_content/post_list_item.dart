@@ -1,13 +1,21 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shelf/models/post.dart';
+import 'package:shelf/providers/auth_provider.dart';
 import 'package:shelf/widgets/social_content/post_images_view.dart';
 import 'package:shelf/widgets/social_content/user_info.dart';
 
 class PostListItem extends StatelessWidget {
   final Post post;
-  PostListItem({required this.post});
+  const PostListItem({required this.post});
   @override
   Widget build(BuildContext context) {
+    String currentUserId =
+        Provider.of<AuthProvider>(context, listen: false).uid!;
+    bool isLikedByThisUser = post.likes!.contains(
+      currentUserId,
+    );
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
       child: Material(
@@ -25,12 +33,57 @@ class PostListItem extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Expanded(child: UserInfo(userID: post.user)),
-                    IconButton(
-                        onPressed: () {},
-                        icon: Icon(
-                          Icons.delete,
-                          color: Colors.red,
-                        ))
+                    if (currentUserId == post.user)
+                      IconButton(
+                          onPressed: () {
+                            // show confirmation dialog => delete / cancel
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    content: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          'Confirm',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 18),
+                                        ),
+                                        SizedBox(height: 15),
+                                        Text(
+                                          'Are you sure you want to delete this post',
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ],
+                                    ),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () =>
+                                            Navigator.of(context).pop(),
+                                        child: Text('cancel'),
+                                      ),
+                                      ElevatedButton(
+                                        onPressed: () {
+                                          FirebaseFirestore.instance
+                                              .collection('social')
+                                              .doc(post.id)
+                                              .delete();
+                                          Navigator.of(context).pop();
+                                        },
+                                        child: Text('delete'),
+                                      ),
+                                    ],
+                                  );
+                                });
+                          },
+                          icon: Icon(
+                            Icons.delete,
+                            color: Colors.red,
+                          ))
                   ],
                 ),
                 SizedBox(height: 8),
@@ -53,9 +106,24 @@ class PostListItem extends StatelessWidget {
                 Row(
                   children: [
                     IconButton(
-                      onPressed: () {},
+                      onPressed: currentUserId == post.user
+                          ? null
+                          : () {
+                              // allow liking only by other users
+                              // handle like by user
+                              // check if user alreay liked the photo
+                              if (isLikedByThisUser) {
+                                // unLike this photo
+                                unlikePost(currentUserId);
+                              } else {
+                                // like this photo
+                                likePost(currentUserId);
+                              }
+                            },
                       icon: Icon(
-                        Icons.thumb_up,
+                        (currentUserId != post.user && isLikedByThisUser)
+                            ? Icons.thumb_up
+                            : Icons.thumb_up_alt_outlined,
                       ),
                     ),
                     Text(
@@ -85,5 +153,21 @@ class PostListItem extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  unlikePost(String userID) {
+    post.likes!.remove(userID);
+    FirebaseFirestore.instance
+        .collection('social')
+        .doc(post.id)
+        .update({'likes': post.likes});
+  }
+
+  likePost(String userID) {
+    post.likes!.add(userID);
+    FirebaseFirestore.instance
+        .collection('social')
+        .doc(post.id)
+        .update({'likes': post.likes});
   }
 }

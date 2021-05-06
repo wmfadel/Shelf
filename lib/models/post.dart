@@ -20,8 +20,8 @@ class Post {
       this.comments,
       this.likes});
 
-  Post.fromJson(Map<String, dynamic> json, String id) {
-    id = id;
+  Post.fromJson(Map<String, dynamic> json, String postID) {
+    id = postID;
     text = json['text'];
     user = json['user'];
     replyTo = json['reply-to'];
