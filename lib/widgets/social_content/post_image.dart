@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class PostImage extends StatelessWidget {
   final String image;
@@ -14,7 +15,17 @@ class PostImage extends StatelessWidget {
           child: Container(
             width: 120,
             height: 120,
-            child: Image.network(
+            child: CachedNetworkImage(
+              imageUrl: image,
+              fit: BoxFit.cover,
+              progressIndicatorBuilder: (context, url, downloadProgress) =>
+                  Center(
+                child:
+                    CircularProgressIndicator(value: downloadProgress.progress),
+              ),
+              errorWidget: (context, url, error) => Icon(Icons.error),
+            ),
+            /* child: Image.network(
               image,
               fit: BoxFit.cover,
               loadingBuilder: (BuildContext context, Widget child,
@@ -29,7 +40,7 @@ class PostImage extends StatelessWidget {
                   ),
                 );
               },
-            ),
+            ),*/
           ),
         ),
       ],
