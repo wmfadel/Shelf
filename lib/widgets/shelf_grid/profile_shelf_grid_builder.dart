@@ -8,8 +8,9 @@ import 'package:shelf/widgets/shelf_grid/shelf_grid_item.dart';
 import 'package:shelf/widgets/shimmer_items/shmr_shelf_overview.dart';
 
 class ProfileShelfGridBuilder extends StatefulWidget {
+  final Key key;
   const ProfileShelfGridBuilder({
-    Key? key,
+    required this.key,
     required this.uid,
   }) : super(key: key);
 
@@ -20,9 +21,14 @@ class ProfileShelfGridBuilder extends StatefulWidget {
       _ProfileShelfGridBuilderState();
 }
 
-class _ProfileShelfGridBuilderState extends State<ProfileShelfGridBuilder> {
+class _ProfileShelfGridBuilderState extends State<ProfileShelfGridBuilder>
+    with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
+
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return FutureBuilder<QuerySnapshot>(
       future: FirebaseFirestore.instance
           .collection('shelfs')

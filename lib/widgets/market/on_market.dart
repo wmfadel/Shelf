@@ -5,16 +5,29 @@ import 'package:shelf/models/market_book.dart';
 import 'package:shelf/providers/auth_provider.dart';
 import 'package:shelf/widgets/market/user_market_grid_item.dart';
 
-class OnMarket extends StatelessWidget {
+class OnMarket extends StatefulWidget {
   final userID;
+  final Key key;
+  const OnMarket({
+    required this.key,
+    this.userID,
+  }) : super(key: key);
 
-  OnMarket({required this.userID});
+  @override
+  _OnMarketState createState() => _OnMarketState();
+}
+
+class _OnMarketState extends State<OnMarket>
+    with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return FutureBuilder<QuerySnapshot>(
       future: FirebaseFirestore.instance
           .collection('market')
-          .where('user-id', isEqualTo: userID)
+          .where('user-id', isEqualTo: widget.userID)
           .get(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting)
@@ -34,12 +47,12 @@ class OnMarket extends StatelessWidget {
             itemCount: snapshot.data?.docs.length,
             itemBuilder: (BuildContext context, int index) {
               String? itemID = snapshot.data?.docs[index].id;
-              return userID ==
+              return widget.userID ==
                       Provider.of<AuthProvider>(context, listen: false).uid
                   ? Dismissible(
                       key: Key(itemID!),
                       confirmDismiss: (DismissDirection direction) async {
-                        if (userID !=
+                        if (widget.userID !=
                             Provider.of<AuthProvider>(context, listen: false)
                                 .uid) return false;
                         bool confirm = await showDialog(
@@ -81,14 +94,14 @@ class OnMarket extends StatelessWidget {
                       ),
                       child: UserMarketGridItem(
                         marketBook: books[index],
-                        isOwner: userID ==
+                        isOwner: widget.userID ==
                             Provider.of<AuthProvider>(context, listen: false)
                                 .uid,
                       ),
                     )
                   : UserMarketGridItem(
                       marketBook: books[index],
-                      isOwner: userID ==
+                      isOwner: widget.userID ==
                           Provider.of<AuthProvider>(context, listen: false).uid,
                     );
             });

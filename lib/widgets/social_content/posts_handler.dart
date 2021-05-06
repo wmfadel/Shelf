@@ -3,13 +3,27 @@ import 'package:flutter/material.dart';
 import 'package:shelf/models/post.dart';
 import 'package:shelf/widgets/social_content/posts_list.dart';
 
-class PostsHandler extends StatelessWidget {
+class PostsHandler extends StatefulWidget {
   final String? userId;
-  PostsHandler({this.userId});
+  final Key key;
+  const PostsHandler({
+    required this.key,
+    this.userId,
+  }) : super(key: key);
+
+  @override
+  _PostsHandlerState createState() => _PostsHandlerState();
+}
+
+class _PostsHandlerState extends State<PostsHandler>
+    with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     var query;
-    if (userId == null) {
+    if (widget.userId == null) {
       query = FirebaseFirestore.instance
           .collection('social')
           .where('reply-to', isNull: true);
@@ -17,7 +31,7 @@ class PostsHandler extends StatelessWidget {
       query = FirebaseFirestore.instance
           .collection('social')
           .where('reply-to', isNull: true)
-          .where('user', isEqualTo: userId);
+          .where('user', isEqualTo: widget.userId);
     }
     return StreamBuilder<QuerySnapshot>(
       stream: query.snapshots(),

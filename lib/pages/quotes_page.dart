@@ -18,6 +18,7 @@ class QuotesPage extends StatelessWidget {
         centerTitle: true,
       ),
       body: QuotesListBuilder(
+        key: PageStorageKey('quotes'),
         userID: Provider.of<AuthProvider>(context, listen: false).uid!,
       ),
     );

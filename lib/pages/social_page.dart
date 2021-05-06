@@ -25,7 +25,9 @@ class SocialPage extends StatelessWidget {
         iconTheme: IconThemeData(color: Theme.of(context).iconTheme.color),
         centerTitle: true,
       ),
-      body: PostsHandler(),
+      body: PostsHandler(
+        key: PageStorageKey('activity'),
+      ),
     );
   }
 }

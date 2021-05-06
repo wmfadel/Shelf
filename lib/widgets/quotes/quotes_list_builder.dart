@@ -6,19 +6,29 @@ import 'package:shelf/pages/add_quote_page.dart';
 import 'package:shelf/providers/auth_provider.dart';
 import 'package:shelf/widgets/quotes/quotes_list_item.dart';
 
-class QuotesListBuilder extends StatelessWidget {
+class QuotesListBuilder extends StatefulWidget {
   final String userID;
+  final Key key;
   const QuotesListBuilder({
-    Key? key,
+    required this.key,
     required this.userID,
   }) : super(key: key);
 
   @override
+  _QuotesListBuilderState createState() => _QuotesListBuilderState();
+}
+
+class _QuotesListBuilderState extends State<QuotesListBuilder>
+    with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     return StreamBuilder<QuerySnapshot>(
       stream: FirebaseFirestore.instance
           .collection('users')
-          .doc(userID)
+          .doc(widget.userID)
           .collection('quotes')
           .snapshots(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -32,7 +42,8 @@ class QuotesListBuilder extends StatelessWidget {
           ));
         bool? isEmpty = snapshot.data?.docs.isEmpty ?? false;
         if (isEmpty) {
-          if (userID == Provider.of<AuthProvider>(context, listen: false).uid) {
+          if (widget.userID ==
+              Provider.of<AuthProvider>(context, listen: false).uid) {
             return Center(
                 child: TextButton(
               child: Text('No Quotes added for now, Add One now!!'),
@@ -46,7 +57,8 @@ class QuotesListBuilder extends StatelessWidget {
         List<Quote> quotes = quotesFromList(snapshot.data?.docs ?? []);
         return Column(
           children: [
-            if (userID == Provider.of<AuthProvider>(context, listen: false).uid)
+            if (widget.userID ==
+                Provider.of<AuthProvider>(context, listen: false).uid)
               Padding(
                 padding: const EdgeInsets.all(10),
                 child: GestureDetector(
@@ -75,7 +87,8 @@ class QuotesListBuilder extends StatelessWidget {
               child: ListView.builder(
                 itemCount: quotes.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return QuotesListItem(quote: quotes[index], userID: userID);
+                  return QuotesListItem(
+                      quote: quotes[index], userID: widget.userID);
                 },
               ),
             ),

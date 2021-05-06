@@ -12,6 +12,7 @@ class MyMarkeyPage extends StatelessWidget {
         title: Text('My market'),
       ),
       body: OnMarket(
+        key: PageStorageKey('market'),
         userID: Provider.of<AuthProvider>(context, listen: false).uid,
       ),
     );
