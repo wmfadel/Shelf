@@ -34,7 +34,13 @@ class PostListItem extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Expanded(child: UserInfo(userID: post.user)),
+                    Expanded(
+                        child: UserInfo(
+                      userID: post.user,
+                      name: post.name,
+                      email: post.email,
+                      photo: post.photo,
+                    )),
                     if (currentUserId == post.user)
                       IconButton(
                           onPressed: () {
@@ -144,11 +150,14 @@ class PostListItem extends StatelessWidget {
                         Icons.comment,
                       ),
                     ),
-                    Text(
-                      '${post.comments?.length ?? 0}',
-                      style: TextStyle(
-                          color: Theme.of(context).primaryColor,
-                          fontWeight: FontWeight.bold),
+                    TextButton(
+                      onPressed: () {},
+                      child: Text(
+                        '${post.comments?.length ?? 0} comments',
+                        style: TextStyle(
+                            color: Theme.of(context).primaryColor,
+                            fontWeight: FontWeight.bold),
+                      ),
                     ),
                   ],
                 )
