@@ -10,9 +10,12 @@ class PostProvider with ChangeNotifier {
   final List<File> images = [];
   bool isUploading = false;
 
-  createPost(
-    String text,
-    String userID, {
+  createPost({
+    required String text,
+    required String userID,
+    required String name,
+    required String email,
+    required String photo,
     String? replyTo,
   }) async {
     isUploading = true;
@@ -23,6 +26,9 @@ class PostProvider with ChangeNotifier {
         await FirebaseFirestore.instance.collection('social').add({
       'text': text,
       'user': userID,
+      'photo': photo,
+      'email': email,
+      'name': name,
       'date': Timestamp.now(),
       'images': urls,
       'reply-to': replyTo,

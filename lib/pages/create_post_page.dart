@@ -69,9 +69,17 @@ class _CreatePostPageState extends State<CreatePostPage> {
             if (postProvider.isUploading) CircularProgressIndicator(),
             SizedBox(height: 50),
             ElevatedButton(
-              onPressed: () {
-                postProvider.createPost(textController.text.trim(),
-                    Provider.of<AuthProvider>(context, listen: false).uid!,
+              onPressed: () async {
+                await postProvider.createPost(
+                    text: textController.text.trim(),
+                    userID:
+                        Provider.of<AuthProvider>(context, listen: false).uid!,
+                    name:
+                        Provider.of<AuthProvider>(context, listen: false).name!,
+                    email: Provider.of<AuthProvider>(context, listen: false)
+                        .email!,
+                    photo: Provider.of<AuthProvider>(context, listen: false)
+                        .photo!,
                     replyTo: replyTo);
                 textController.clear();
                 Navigator.of(context).pop();
