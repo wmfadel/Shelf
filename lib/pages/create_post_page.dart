@@ -35,7 +35,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
     return Scaffold(
         appBar: AppBar(
           title: Text(
-            'Create',
+            replyTo == null ? 'Create' : 'Comment',
             style: TextStyle(color: Theme.of(context).primaryColor),
           ),
           backgroundColor: Colors.white70,

@@ -5,6 +5,7 @@ import 'package:shelf/models/post.dart';
 import 'package:shelf/pages/create_post_page.dart';
 import 'package:shelf/providers/auth_provider.dart';
 import 'package:shelf/providers/post_provider.dart';
+import 'package:shelf/widgets/social_content/comments_page.dart';
 import 'package:shelf/widgets/social_content/post_images_view.dart';
 import 'package:shelf/widgets/social_content/user_info.dart';
 
@@ -133,13 +134,16 @@ class PostListItem extends StatelessWidget {
                             : Icons.thumb_up_alt_outlined,
                       ),
                     ),
-                    Text(
-                      '${post.likes?.length ?? 0}',
-                      style: TextStyle(
-                          color: Theme.of(context).primaryColor,
-                          fontWeight: FontWeight.bold),
+                    TextButton(
+                      onPressed: () {},
+                      child: Text(
+                        '${post.likes?.length ?? 0} likes',
+                        style: TextStyle(
+                            color: Theme.of(context).primaryColor,
+                            fontWeight: FontWeight.bold),
+                      ),
                     ),
-                    SizedBox(width: 15),
+                    SizedBox(width: 25),
                     IconButton(
                       onPressed: () {
                         Navigator.of(context).pushNamed(
@@ -151,7 +155,11 @@ class PostListItem extends StatelessWidget {
                       ),
                     ),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (BuildContext context) =>
+                                CommentsPage(parentPost: post)));
+                      },
                       child: Text(
                         '${post.comments?.length ?? 0} comments',
                         style: TextStyle(

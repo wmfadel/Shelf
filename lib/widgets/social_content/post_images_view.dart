@@ -3,7 +3,8 @@ import 'package:shelf/widgets/social_content/post_image.dart';
 
 class PostImagesView extends StatelessWidget {
   final List<String> images;
-  PostImagesView({required this.images});
+  final double size;
+  PostImagesView({required this.images, this.size = 120});
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -13,7 +14,7 @@ class PostImagesView extends StatelessWidget {
             .map(
               (e) => Padding(
                 padding: const EdgeInsets.all(4),
-                child: PostImage(e),
+                child: PostImage(e, size),
               ),
             )
             .toList(),

@@ -3,8 +3,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 
 class PostImage extends StatelessWidget {
   final String image;
+  final double size;
 
-  PostImage(this.image);
+  PostImage(this.image, this.size);
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -13,8 +14,8 @@ class PostImage extends StatelessWidget {
         ClipRRect(
           borderRadius: BorderRadius.circular(10),
           child: Container(
-            width: 120,
-            height: 120,
+            width: size,
+            height: size,
             child: CachedNetworkImage(
               imageUrl: image,
               fit: BoxFit.cover,
