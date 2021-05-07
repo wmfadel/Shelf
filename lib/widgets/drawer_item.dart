@@ -50,7 +50,7 @@ class DrawerItem extends StatelessWidget {
         margin: EdgeInsets.symmetric(horizontal: 6, vertical: 2),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
-          color: color.withOpacity(0.35),
+          color: color.withOpacity(0.2),
         ),
       ),
     );

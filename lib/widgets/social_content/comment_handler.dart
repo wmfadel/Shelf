@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:shelf/models/post.dart';
-import 'package:shelf/widgets/social_content/comments_page.dart';
 import 'package:shelf/widgets/social_content/post_list_item.dart';
 
 class CommentHandler extends StatelessWidget {

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shelf/pages/chat_page.dart';
+import 'package:shelf/pages/contact_me_page.dart';
 import 'package:shelf/pages/create_post_page.dart';
+import 'package:shelf/pages/help_page.dart';
 import 'package:shelf/pages/login_page.dart';
 import 'package:shelf/pages/market_page.dart';
 import 'package:shelf/pages/my_market_page.dart';
@@ -132,13 +134,19 @@ class DrawerList extends StatelessWidget {
               text: 'Help',
               color: Theme.of(context).iconTheme.color!,
               icon: Icons.help_center,
-              destination: SettingsPage.routeName,
+              destination: HelpPage.routeName,
             ),
             DrawerItem(
               text: 'About',
               color: Theme.of(context).iconTheme.color!,
               icon: Icons.info,
               destination: SettingsPage.routeName,
+            ),
+            DrawerItem(
+              text: 'Contact Me',
+              color: Theme.of(context).iconTheme.color!,
+              icon: Icons.alternate_email,
+              destination: ContactMePage.routeName,
             ),
             Divider(
               color: Colors.red,
