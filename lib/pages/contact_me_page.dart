@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_email_sender/flutter_email_sender.dart';
+import 'package:provider/provider.dart';
+import 'package:shelf/providers/auth_provider.dart';
 
 class ContactMePage extends StatefulWidget {
   static final String routeName = 'ContactMe_page';
@@ -55,7 +57,6 @@ class _ContactMePageState extends State<ContactMePage> {
               Center(
                 child: Wrap(
                   spacing: 10,
-                  runSpacing: 10,
                   alignment: WrapAlignment.center,
                   children: List<Widget>.generate(
                     topics.length,
@@ -95,22 +96,28 @@ class _ContactMePageState extends State<ContactMePage> {
                       ? null
                       : canSend()
                           ? () async {
-                              String subject = '';
+                              List<String> subject = [];
                               for (int i = 0; i < selectedTopics.length; i++) {
-                                if (selectedTopics[i])
-                                  subject += '${topics[i]}, ';
+                                if (selectedTopics[i]) subject.add(topics[i]);
                               }
-
-                              final Email email = Email(
-                                body: textController.text.trim(),
-                                subject: subject,
-                                recipients: ['mailto:fadel24997@gmail.com'],
-                                isHTML: false,
-                              );
+                              AuthProvider authProvider =
+                                  Provider.of<AuthProvider>(context,
+                                      listen: false);
                               setState(() {
                                 isSending = true;
                               });
-                              await FlutterEmailSender.send(email);
+                              await FirebaseFirestore.instance
+                                  .collection('feedback')
+                                  .add({
+                                'time': Timestamp.now(),
+                                'user': authProvider.uid,
+                                'name': authProvider.name,
+                                'email': authProvider.email,
+                                'photo': authProvider.photo,
+                                'text': textController.text.trim(),
+                                'topics': subject,
+                              });
+
                               selectedTopics = List<bool>.generate(
                                   topics.length, (_) => false);
                               textController.clear();

@@ -143,7 +143,7 @@ class DrawerList extends StatelessWidget {
               destination: SettingsPage.routeName,
             ),
             DrawerItem(
-              text: 'Contact Me',
+              text: 'Contact / Feedback',
               color: Theme.of(context).iconTheme.color!,
               icon: Icons.alternate_email,
               destination: ContactMePage.routeName,
