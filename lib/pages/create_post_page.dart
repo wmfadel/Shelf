@@ -14,11 +14,13 @@ class CreatePostPage extends StatefulWidget {
 class _CreatePostPageState extends State<CreatePostPage> {
   final TextEditingController textController = TextEditingController();
   late PostProvider postProvider;
+  late String? replyTo;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     postProvider = Provider.of<PostProvider>(context);
+    replyTo = ModalRoute.of(context)?.settings.arguments as String?;
   }
 
   @override
@@ -68,10 +70,9 @@ class _CreatePostPageState extends State<CreatePostPage> {
             SizedBox(height: 50),
             ElevatedButton(
               onPressed: () {
-                postProvider.createPost(
-                  textController.text.trim(),
-                  Provider.of<AuthProvider>(context, listen: false).uid!,
-                );
+                postProvider.createPost(textController.text.trim(),
+                    Provider.of<AuthProvider>(context, listen: false).uid!,
+                    replyTo: replyTo);
                 textController.clear();
                 Navigator.of(context).pop();
               },

@@ -2,7 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shelf/models/post.dart';
+import 'package:shelf/pages/create_post_page.dart';
 import 'package:shelf/providers/auth_provider.dart';
+import 'package:shelf/providers/post_provider.dart';
 import 'package:shelf/widgets/social_content/post_images_view.dart';
 import 'package:shelf/widgets/social_content/user_info.dart';
 
@@ -68,10 +70,9 @@ class PostListItem extends StatelessWidget {
                                       ),
                                       ElevatedButton(
                                         onPressed: () {
-                                          FirebaseFirestore.instance
-                                              .collection('social')
-                                              .doc(post.id)
-                                              .delete();
+                                          Provider.of<PostProvider>(context,
+                                                  listen: false)
+                                              .deletePost(post);
                                           Navigator.of(context).pop();
                                         },
                                         child: Text('delete'),
@@ -134,7 +135,11 @@ class PostListItem extends StatelessWidget {
                     ),
                     SizedBox(width: 15),
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).pushNamed(
+                            CreatePostPage.routeName,
+                            arguments: post.id);
+                      },
                       icon: Icon(
                         Icons.comment,
                       ),
