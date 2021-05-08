@@ -6,6 +6,7 @@ import 'package:shelf/pages/create_post_page.dart';
 import 'package:shelf/providers/auth_provider.dart';
 import 'package:shelf/providers/post_provider.dart';
 import 'package:shelf/widgets/social_content/comments_page.dart';
+import 'package:shelf/widgets/social_content/likes_list.dart';
 import 'package:shelf/widgets/social_content/post_images_view.dart';
 import 'package:shelf/widgets/social_content/user_info.dart';
 
@@ -135,7 +136,20 @@ class PostListItem extends StatelessWidget {
                       ),
                     ),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) => AlertDialog(
+                            actions: [
+                              TextButton(
+                                onPressed: () => Navigator.of(context).pop(),
+                                child: Text('OK'),
+                              ),
+                            ],
+                            content: LikesList(post.likes ?? []),
+                          ),
+                        );
+                      },
                       child: Text(
                         '${post.likes?.length ?? 0} likes',
                         style: TextStyle(
