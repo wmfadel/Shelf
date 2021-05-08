@@ -20,6 +20,7 @@ import 'package:shelf/pages/online_content_page.dart';
 import 'package:shelf/pages/profile_page.dart';
 import 'package:shelf/pages/quotes_page.dart';
 import 'package:shelf/pages/rating_page.dart';
+import 'package:shelf/pages/search_page.dart';
 import 'package:shelf/pages/settings_page.dart';
 import 'package:shelf/pages/shelf_page.dart';
 import 'package:shelf/pages/social_page.dart';
@@ -74,6 +75,7 @@ class MyApp extends StatelessWidget {
           OnBoardingPage.routeName: (BuildContext context) => OnBoardingPage(),
           LoginPage.routeName: (BuildContext context) => LoginPage(),
           HomePage.routeName: (BuildContext context) => HomePage(),
+          SearchPage.routeName: (BuildContext context) => SearchPage(),
           AddBookPage.routeName: (BuildContext context) => AddBookPage(),
           BookPage.routeName: (BuildContext context) => BookPage(),
           ProfilePage.routeName: (BuildContext context) => ProfilePage(),

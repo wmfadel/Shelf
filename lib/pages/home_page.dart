@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shelf/pages/add_book_page.dart';
 import 'package:shelf/pages/profile_page.dart';
+import 'package:shelf/pages/search_page.dart';
 import 'package:shelf/providers/auth_provider.dart';
 import 'package:shelf/widgets/custom_avatar.dart';
 import 'package:shelf/widgets/custom_button.dart';
@@ -55,7 +56,8 @@ class HomePage extends StatelessWidget {
             right: 135,
             child: CustomButton(
               iconData: Icons.search,
-              onPressed: () {},
+              onPressed: () =>
+                  Navigator.of(context).pushNamed(SearchPage.routeName),
             ),
           ),
           Positioned(bottom: 1, child: MapMarket(context)),
