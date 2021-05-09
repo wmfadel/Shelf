@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shelf/enums/book_search_enum.dart';
 import 'package:shelf/providers/auth_provider.dart';
 import 'package:shelf/providers/market_provider.dart';
 
@@ -14,6 +15,7 @@ class _SearchPageState extends State<SearchPage> {
   final TextEditingController searchController = TextEditingController();
   late MarketProvider marketProvider;
   late AuthProvider authProvider;
+  BookSearchEnum? bookSearchEnum = BookSearchEnum.title;
 
   @override
   void didChangeDependencies() {
@@ -37,6 +39,7 @@ class _SearchPageState extends State<SearchPage> {
           style: TextStyle(color: Theme.of(context).primaryColor),
         ),
         backgroundColor: Colors.white70,
+        iconTheme: IconThemeData(color: Theme.of(context).primaryColor),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -54,13 +57,52 @@ class _SearchPageState extends State<SearchPage> {
                   hintText: 'search for a book',
                 ),
               ),
+              RadioListTile<BookSearchEnum>(
+                value: BookSearchEnum.title,
+                groupValue: bookSearchEnum,
+                onChanged: (BookSearchEnum? newValue) {
+                  setState(() {
+                    bookSearchEnum = newValue;
+                  });
+                },
+                title: Text('Title'),
+              ),
+              RadioListTile<BookSearchEnum>(
+                value: BookSearchEnum.ISBN,
+                groupValue: bookSearchEnum,
+                onChanged: (BookSearchEnum? newValue) {
+                  setState(() {
+                    bookSearchEnum = newValue;
+                  });
+                },
+                title: Text('ISBN'),
+              ),
+              RadioListTile<BookSearchEnum>(
+                value: BookSearchEnum.author,
+                groupValue: bookSearchEnum,
+                onChanged: (BookSearchEnum? newValue) {
+                  setState(() {
+                    bookSearchEnum = newValue;
+                  });
+                },
+                title: Text('Author'),
+              ),
+              RadioListTile<BookSearchEnum>(
+                value: BookSearchEnum.year,
+                groupValue: bookSearchEnum,
+                onChanged: (BookSearchEnum? newValue) {
+                  setState(() {
+                    bookSearchEnum = newValue;
+                  });
+                },
+                title: Text('Publish Year'),
+              ),
               SizedBox(height: 30),
               MaterialButton(
                 onPressed: () {
-                  marketProvider.searchForBookByTitle(
-                      searchController.text.trim().toLowerCase());
-                  print(
-                      'search term ${searchController.text.trim().toLowerCase()}');
+                  marketProvider.searchForBook(
+                      searchController.text.trim().toLowerCase(),
+                      bookSearchEnum!);
                   if (marketProvider.searchBooks.isNotEmpty) {
                     searchController.clear();
                     Navigator.of(context).pop();

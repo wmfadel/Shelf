@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
+import 'package:shelf/enums/book_search_enum.dart';
 import 'package:shelf/models/market_book.dart';
 
 class MarketProvider with ChangeNotifier {
@@ -27,17 +28,41 @@ class MarketProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  searchForBookByTitle(String searchTerm) {
+  searchForBook(String searchTerm, BookSearchEnum bookSearchEnum) {
     searchBooks.clear();
-    marketBooks.forEach((MarketBook book) {
-      if (book.title!.toLowerCase().contains(searchTerm)) {
-        print(
-            'search book title ${book.title}, contains $searchTerm? ${book.title!.contains(searchTerm)}');
-        searchBooks.add(book);
-      }
-    });
+    switch (bookSearchEnum) {
+      case BookSearchEnum.ISBN:
+        marketBooks.forEach((MarketBook book) {
+          if (book.iSBN!.toLowerCase().contains(searchTerm)) {
+            searchBooks.add(book);
+          }
+        });
+        break;
+      case BookSearchEnum.author:
+        marketBooks.forEach((MarketBook book) {
+          book.authors!.forEach((String author) {
+            if (author.toLowerCase().contains(searchTerm)) {
+              searchBooks.add(book);
+            }
+          });
+        });
+        break;
+      case BookSearchEnum.year:
+        marketBooks.forEach((MarketBook book) {
+          if (book.publishDate!.toLowerCase().contains(searchTerm)) {
+            searchBooks.add(book);
+          }
+        });
+        break;
+      case BookSearchEnum.title:
+      default:
+        marketBooks.forEach((MarketBook book) {
+          if (book.title!.toLowerCase().contains(searchTerm)) {
+            searchBooks.add(book);
+          }
+        });
+    }
 
-    print('search books is search ${searchBooks.length}');
     if (searchBooks.isNotEmpty) {
       _activeBook = searchBooks.first;
       notifyListeners();
