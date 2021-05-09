@@ -21,6 +21,12 @@ class MarketProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  removeSearchResults() {
+    searchBooks.clear();
+    _activeBook = null;
+    notifyListeners();
+  }
+
   searchForBookByTitle(String searchTerm) {
     searchBooks.clear();
     marketBooks.forEach((MarketBook book) {

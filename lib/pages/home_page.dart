@@ -4,6 +4,7 @@ import 'package:shelf/pages/add_book_page.dart';
 import 'package:shelf/pages/profile_page.dart';
 import 'package:shelf/pages/search_page.dart';
 import 'package:shelf/providers/auth_provider.dart';
+import 'package:shelf/providers/market_provider.dart';
 import 'package:shelf/widgets/custom_avatar.dart';
 import 'package:shelf/widgets/custom_button.dart';
 import 'package:shelf/widgets/drawer_list.dart';
@@ -18,6 +19,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    MarketProvider marketProvider = Provider.of<MarketProvider>(context);
     return Scaffold(
       key: scaffoldKey,
       drawer: DrawerList(),
@@ -53,13 +55,21 @@ class HomePage extends StatelessWidget {
           ),
           Positioned(
             top: 45,
-            right: 135,
+            right: 140,
             child: CustomButton(
               iconData: Icons.search,
               onPressed: () =>
                   Navigator.of(context).pushNamed(SearchPage.routeName),
             ),
           ),
+          if (marketProvider.searchBooks.isNotEmpty)
+            Positioned(
+              top: 45,
+              right: 190,
+              child: CustomButton(
+                  iconData: Icons.search_off,
+                  onPressed: () => marketProvider.removeSearchResults()),
+            ),
           Positioned(bottom: 1, child: MapMarket(context)),
           Positioned(bottom: 205, child: BookOverview()),
         ],
