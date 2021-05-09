@@ -3,4 +3,6 @@ enum BookSearchEnum {
   ISBN,
   author,
   year,
+  user,
+  email,
 }

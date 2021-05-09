@@ -65,7 +65,27 @@ class _SearchPageState extends State<SearchPage> {
                     bookSearchEnum = newValue;
                   });
                 },
-                title: Text('Title'),
+                title: Text('Book Title'),
+              ),
+              RadioListTile<BookSearchEnum>(
+                value: BookSearchEnum.user,
+                groupValue: bookSearchEnum,
+                onChanged: (BookSearchEnum? newValue) {
+                  setState(() {
+                    bookSearchEnum = newValue;
+                  });
+                },
+                title: Text('User Name'),
+              ),
+              RadioListTile<BookSearchEnum>(
+                value: BookSearchEnum.email,
+                groupValue: bookSearchEnum,
+                onChanged: (BookSearchEnum? newValue) {
+                  setState(() {
+                    bookSearchEnum = newValue;
+                  });
+                },
+                title: Text('User Email'),
               ),
               RadioListTile<BookSearchEnum>(
                 value: BookSearchEnum.ISBN,
@@ -75,7 +95,7 @@ class _SearchPageState extends State<SearchPage> {
                     bookSearchEnum = newValue;
                   });
                 },
-                title: Text('ISBN'),
+                title: Text('Book ISBN'),
               ),
               RadioListTile<BookSearchEnum>(
                 value: BookSearchEnum.author,
@@ -85,7 +105,7 @@ class _SearchPageState extends State<SearchPage> {
                     bookSearchEnum = newValue;
                   });
                 },
-                title: Text('Author'),
+                title: Text('Book Author'),
               ),
               RadioListTile<BookSearchEnum>(
                 value: BookSearchEnum.year,

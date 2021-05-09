@@ -38,6 +38,20 @@ class MarketProvider with ChangeNotifier {
           }
         });
         break;
+      case BookSearchEnum.user:
+        marketBooks.forEach((MarketBook book) {
+          if (book.userName!.toLowerCase().contains(searchTerm)) {
+            searchBooks.add(book);
+          }
+        });
+        break;
+      case BookSearchEnum.email:
+        marketBooks.forEach((MarketBook book) {
+          if (book.email!.toLowerCase().contains(searchTerm)) {
+            searchBooks.add(book);
+          }
+        });
+        break;
       case BookSearchEnum.author:
         marketBooks.forEach((MarketBook book) {
           book.authors!.forEach((String author) {
