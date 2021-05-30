@@ -12,7 +12,8 @@ import 'package:shelf/widgets/social_content/user_info.dart';
 
 class PostListItem extends StatelessWidget {
   final Post post;
-  const PostListItem({required this.post});
+  final double elevation;
+  const PostListItem({required this.post, this.elevation = 8});
   @override
   Widget build(BuildContext context) {
     String currentUserId =
@@ -23,7 +24,7 @@ class PostListItem extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
       child: Material(
-        elevation: 8,
+        elevation: this.elevation,
         borderRadius: BorderRadius.circular(10),
         color: Colors.white,
         clipBehavior: Clip.hardEdge,

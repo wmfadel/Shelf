@@ -16,13 +16,17 @@ class CommentHandler extends StatelessWidget {
       builder:
           (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting)
-          return Center(child: CircularProgressIndicator());
+          return SizedBox(
+              height: 200, child: Center(child: CircularProgressIndicator()));
         if (snapshot.hasError)
           return Center(child: Image.asset('assets/pics/error.png'));
         if (!snapshot.hasData)
           return Center(child: Image.asset('assets/pics/empty.png'));
         Post post = Post.fromJson(snapshot.data!.data()!, snapshot.data!.id);
-        return PostListItem(post: post);
+        return PostListItem(
+          post: post,
+          elevation: 1,
+        );
       },
     );
   }
