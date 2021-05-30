@@ -23,7 +23,7 @@ class APIBookListItem extends StatelessWidget {
               padding: const EdgeInsets.all(20),
               child: Material(
                 elevation: 10,
-                shadowColor: Theme.of(context).accentColor,
+                shadowColor: Theme.of(context).colorScheme.secondary,
                 borderRadius: BorderRadius.circular(10),
                 child: Container(
                   width: MediaQuery.of(context).size.width,

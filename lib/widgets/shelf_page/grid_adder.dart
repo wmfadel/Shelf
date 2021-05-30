@@ -8,11 +8,11 @@ class GridAdder extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: Material(
         clipBehavior: Clip.hardEdge,
-        shadowColor: Theme.of(context).accentColor.withOpacity(0.5),
+        shadowColor: Theme.of(context).colorScheme.secondary.withOpacity(0.5),
         elevation: 4,
         borderRadius: BorderRadius.circular(12),
         child: InkWell(
-          splashColor: Theme.of(context).accentColor,
+          splashColor: Theme.of(context).colorScheme.secondary,
           onTap: () => Navigator.of(context).pushNamed(AddBookPage.routeName),
           child: Container(
             width: double.infinity,

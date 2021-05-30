@@ -23,7 +23,7 @@ class PeopleHandle extends StatelessWidget {
                   Tab(text: "Following"),
                   Tab(text: "Followers"),
                 ],
-                indicatorColor: Theme.of(context).accentColor,
+                indicatorColor: Theme.of(context).colorScheme.secondary,
                 labelColor: Theme.of(context).primaryColor,
                 unselectedLabelColor: Colors.black,
               ),

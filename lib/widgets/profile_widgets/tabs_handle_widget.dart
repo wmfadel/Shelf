@@ -34,7 +34,7 @@ class TabsHandleWidget extends StatelessWidget {
                     Tab(text: "Activity"),
                     Tab(text: "Market"),
                   ],
-                  indicatorColor: Theme.of(context).accentColor,
+                  indicatorColor: Theme.of(context).colorScheme.secondary,
                   labelColor: Theme.of(context).primaryColor,
                   unselectedLabelColor: Colors.black,
                 ),
