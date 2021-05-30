@@ -10,6 +10,7 @@ class AuthService {
 
   logout() {
     _auth.signOut();
+    _googleSignIn.signOut();
     clearCash();
   }
 
