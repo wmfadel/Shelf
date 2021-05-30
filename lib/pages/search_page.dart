@@ -68,6 +68,16 @@ class _SearchPageState extends State<SearchPage> {
                 title: Text('Book Title'),
               ),
               RadioListTile<BookSearchEnum>(
+                value: BookSearchEnum.free,
+                groupValue: bookSearchEnum,
+                onChanged: (BookSearchEnum? newValue) {
+                  setState(() {
+                    bookSearchEnum = newValue;
+                  });
+                },
+                title: Text('Free Books'),
+              ),
+              RadioListTile<BookSearchEnum>(
                 value: BookSearchEnum.user,
                 groupValue: bookSearchEnum,
                 onChanged: (BookSearchEnum? newValue) {

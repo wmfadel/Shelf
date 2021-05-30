@@ -45,6 +45,13 @@ class MarketProvider with ChangeNotifier {
           }
         });
         break;
+      case BookSearchEnum.free:
+        marketBooks.forEach((MarketBook book) {
+          if (book.price == 0) {
+            searchBooks.add(book);
+          }
+        });
+        break;
       case BookSearchEnum.email:
         marketBooks.forEach((MarketBook book) {
           if (book.email!.toLowerCase().contains(searchTerm)) {

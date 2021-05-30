@@ -5,4 +5,5 @@ enum BookSearchEnum {
   year,
   user,
   email,
+  free,
 }
