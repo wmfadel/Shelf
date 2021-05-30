@@ -50,9 +50,22 @@ class AuthService {
           'downVote': 0,
         },
       );
+      // create shelfs
+      addShelf('Want To Read', 'Books i want to read someday', currentUser.uid);
+      addShelf('Read', 'Books i finished reading', currentUser.uid);
     }
 
     return currentUser;
+  }
+
+  addShelf(String name, description, userID) {
+    FirebaseFirestore.instance.collection('shelfs').add({
+      'description': description,
+      'isPublic': true,
+      'name': name,
+      'time': Timestamp.now(),
+      'user': userID,
+    });
   }
 
   cashUserID(String id) async {
