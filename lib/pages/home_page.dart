@@ -68,6 +68,7 @@ class HomePage extends StatelessWidget {
               right: 190,
               child: CustomButton(
                   iconData: Icons.search_off,
+                  color: Colors.red,
                   onPressed: () => marketProvider.removeSearchResults()),
             ),
           Positioned(bottom: 1, child: MapMarket(context)),

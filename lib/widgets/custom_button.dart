@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 class CustomButton extends StatelessWidget {
   final IconData iconData;
   final Function onPressed;
+  final Color? color;
   CustomButton({
     required this.iconData,
     required this.onPressed,
+    this.color,
   });
   @override
   Widget build(BuildContext context) {
@@ -18,7 +20,8 @@ class CustomButton extends StatelessWidget {
         height: 45,
         child: Center(
           child: IconButton(
-            icon: Icon(iconData, color: Theme.of(context).iconTheme.color),
+            icon: Icon(iconData,
+                color: color ?? Theme.of(context).iconTheme.color),
             onPressed: onPressed as void Function()?,
           ),
         ),
