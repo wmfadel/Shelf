@@ -6,11 +6,14 @@ class UserInfo extends StatelessWidget {
   final String name;
   final String email;
   final String photo;
-  const UserInfo(
-      {required this.userID,
-      required this.name,
-      required this.email,
-      required this.photo});
+  final String? date;
+  const UserInfo({
+    required this.userID,
+    required this.name,
+    required this.email,
+    required this.photo,
+    this.date,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +44,11 @@ class UserInfo extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(fontSize: 12),
               ),
+              if (date != null)
+                Text(
+                  date!,
+                  style: TextStyle(fontSize: 10),
+                ),
             ],
           ))
         ],

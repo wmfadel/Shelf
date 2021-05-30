@@ -26,12 +26,14 @@ class _PostsHandlerState extends State<PostsHandler>
     if (widget.userId == null) {
       query = FirebaseFirestore.instance
           .collection('social')
-          .where('reply-to', isNull: true);
+          .where('reply-to', isNull: true)
+          .orderBy('date', descending: true);
     } else {
       query = FirebaseFirestore.instance
           .collection('social')
           .where('reply-to', isNull: true)
-          .where('user', isEqualTo: widget.userId);
+          .where('user', isEqualTo: widget.userId)
+          .orderBy('date', descending: true);
     }
     return StreamBuilder<QuerySnapshot>(
       stream: query.snapshots(),
