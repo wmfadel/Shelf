@@ -12,7 +12,7 @@ class MarketBook {
   String? userName;
   String? userPhoto;
   String? iSBN;
-  String? price;
+  double? price;
   String? location;
   String? id;
   String? email;
@@ -48,7 +48,7 @@ class MarketBook {
     userName = json['user-name'];
     userPhoto = json['user-photo'];
     iSBN = json['ISBN'];
-    price = json['price'];
+    price = double.parse(json['price']);
     location = json['location'];
     id = json['id'];
     email = json['email'];
@@ -68,7 +68,7 @@ class MarketBook {
     data['user-name'] = this.userName;
     data['user-photo'] = this.userPhoto;
     data['ISBN'] = this.iSBN;
-    data['price'] = this.price;
+    data['price'] = this.price.toString();
     data['location'] = this.location;
     data['id'] = this.id;
     data['email'] = this.email;
