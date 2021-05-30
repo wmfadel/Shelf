@@ -65,10 +65,29 @@ class MarketMapListItem extends StatelessWidget {
                                 .take(2)
                                 .map((String s) => Text('$s ')),
                             SizedBox(height: 5),
-                            Text(
-                              'Price: ${book.price} EGP',
-                              style: TextStyle(fontSize: 16),
-                            ),
+                            if (book.price == 0)
+                              Container(
+                                width: 80,
+                                height: 30,
+                                child: Center(
+                                  child: Text('Free',
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold)),
+                                ),
+                                decoration: BoxDecoration(
+                                  color: Colors.green,
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(8),
+                                    bottomRight: Radius.circular(8),
+                                  ),
+                                ),
+                              ),
+                            if (book.price != 0)
+                              Text(
+                                'Price: ${book.price} EGP',
+                                style: TextStyle(fontSize: 16),
+                              ),
                           ],
                         ),
                         Row(

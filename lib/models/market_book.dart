@@ -48,7 +48,12 @@ class MarketBook {
     userName = json['user-name'];
     userPhoto = json['user-photo'];
     iSBN = json['ISBN'];
-    price = double.parse(json['price']);
+    if (json['price'].toString().isEmpty) {
+      price = 0;
+    } else {
+      price = double.parse(json['price']);
+    }
+
     location = json['location'];
     id = json['id'];
     email = json['email'];
