@@ -31,100 +31,111 @@ class AboutPage extends StatelessWidget {
             ),
           ),
           Positioned(
-              bottom: 15,
-              left: 15,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text.rich(
-                    TextSpan(
-                      children: [
-                        TextSpan(
-                            text: 'Mohamed ',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                                fontSize: 40)),
-                        TextSpan(
-                          text: 'Fadel',
+            bottom: 15,
+            left: 15,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text.rich(
+                  TextSpan(
+                    children: [
+                      TextSpan(
+                          text: 'Mohamed ',
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              color: Colors.lightBlueAccent,
-                              fontFamily: 'Pacifico',
-                              fontSize: 40),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: 10),
-                  Text.rich(
-                    TextSpan(
-                      children: [
-                        TextSpan(
-                            text: 'If it\s a ',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                                fontSize: 24)),
-                        TextSpan(
-                          text: 'Mobile Application\n',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.lightBlueAccent,
-                              fontFamily: 'Pacifico',
-                              fontSize: 24),
-                        ),
-                        TextSpan(
-                            text: 'I can build it.',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                                fontSize: 24)),
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: 30),
-                  Center(
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            launch('https://github.com/wmfadel');
-                          },
-                          child: Image.asset('assets/pics/github.png',
-                              width: 70, height: 70),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            launch('https://www.linkedin.com/in/wmfadel/');
-                          },
-                          child: Image.asset('assets/pics/linkedin.png',
-                              width: 70, height: 70),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            launch('https://twitter.com/wmfadel');
-                          },
-                          child: Image.asset('assets/pics/twitter.png',
-                              width: 70, height: 70),
-                        ),
-                        SizedBox(width: 10),
-                        Text(
-                          'wmfadel',
-                          style: TextStyle(
                               color: Colors.white,
-                              fontSize: 28,
-                              fontFamily: 'Pacifico'),
-                        ),
-                      ],
-                    ),
-                  )
-                ],
-              ))
+                              fontSize: 40)),
+                      TextSpan(
+                        text: 'Fadel',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.lightBlueAccent,
+                            fontFamily: 'Pacifico',
+                            fontSize: 40),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(height: 10),
+                Text.rich(
+                  TextSpan(
+                    children: [
+                      TextSpan(
+                          text: 'If it\s a ',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                              fontSize: 24)),
+                      TextSpan(
+                        text: 'Mobile Application\n',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.lightBlueAccent,
+                            fontFamily: 'Pacifico',
+                            fontSize: 24),
+                      ),
+                      TextSpan(
+                          text: 'I can build it.',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                              fontSize: 24)),
+                    ],
+                  ),
+                ),
+                SizedBox(height: 30),
+                Center(
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          launch('https://github.com/wmfadel');
+                        },
+                        child: Image.asset('assets/pics/github.png',
+                            width: 70, height: 70),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          launch('https://www.linkedin.com/in/wmfadel/');
+                        },
+                        child: Image.asset('assets/pics/linkedin.png',
+                            width: 70, height: 70),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          launch('https://twitter.com/wmfadel');
+                        },
+                        child: Image.asset('assets/pics/twitter.png',
+                            width: 70, height: 70),
+                      ),
+                      SizedBox(width: 10),
+                      Text(
+                        'wmfadel',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 28,
+                            fontFamily: 'Pacifico'),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Positioned(
+              top: 40,
+              left: 15,
+              child: IconButton(
+                  onPressed: () => Navigator.of(context).pop(),
+                  icon: Icon(
+                    Icons.arrow_back_ios,
+                    size: 35,
+                    color: Colors.white,
+                  )))
         ],
       ),
     );
