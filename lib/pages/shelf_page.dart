@@ -16,11 +16,11 @@ class ShelfPage extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      body: FutureBuilder<DocumentSnapshot>(
-          future: FirebaseFirestore.instance
+      body: StreamBuilder<DocumentSnapshot>(
+          stream: FirebaseFirestore.instance
               .collection('shelfs')
               .doc(shelfID)
-              .get(),
+              .snapshots(),
           builder:
               (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting)

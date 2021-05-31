@@ -15,12 +15,12 @@ class ShelfOverview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<QuerySnapshot>(
-        future: FirebaseFirestore.instance
+    return StreamBuilder<QuerySnapshot>(
+        stream: FirebaseFirestore.instance
             .collection('shelfs')
             .doc(shelfID)
             .collection('books')
-            .get(),
+            .snapshots(),
         builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting)
             return ShmrShelfOverview();

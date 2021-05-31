@@ -29,11 +29,11 @@ class _ProfileShelfGridBuilderState extends State<ProfileShelfGridBuilder>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return FutureBuilder<QuerySnapshot>(
-      future: FirebaseFirestore.instance
+    return StreamBuilder<QuerySnapshot>(
+      stream: FirebaseFirestore.instance
           .collection('shelfs')
           .where('user', isEqualTo: widget.uid)
-          .get(),
+          .snapshots(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting)
           return GridView.count(

@@ -21,12 +21,12 @@ class BooksGrid extends StatefulWidget {
 class _BooksGridState extends State<BooksGrid> {
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<QuerySnapshot>(
-      future: FirebaseFirestore.instance
+    return StreamBuilder<QuerySnapshot>(
+      stream: FirebaseFirestore.instance
           .collection('shelfs')
           .doc(widget.shelfID)
           .collection('books')
-          .get(),
+          .snapshots(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting)
           return Center(
@@ -66,6 +66,14 @@ class _BooksGridState extends State<BooksGrid> {
                         children: <Widget>[
                           SizedBox(height: 10),
                           Text(
+                            'Confirm Delete!!',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 24, fontWeight: FontWeight.bold),
+                            maxLines: 1,
+                          ),
+                          SizedBox(height: 10),
+                          Text(
                             'Are you sure you want to remove \"${books[index].title}\" from this shelf',
                             textAlign: TextAlign.center,
                             style: TextStyle(fontSize: 18),
@@ -76,7 +84,8 @@ class _BooksGridState extends State<BooksGrid> {
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               TextButton(
-                                  onPressed: () => Navigator.of(context).pop(),
+                                  onPressed: () =>
+                                      Navigator.of(context).pop(false),
                                   child: Text('Cancel')),
                               ElevatedButton(
                                 onPressed: () {
@@ -93,7 +102,7 @@ class _BooksGridState extends State<BooksGrid> {
                                   backgroundColor:
                                       MaterialStateProperty.resolveWith<Color>(
                                     (Set<MaterialState> states) {
-                                      return Colors.red;
+                                      return Colors.red[700]!;
                                     },
                                   ),
                                 ),

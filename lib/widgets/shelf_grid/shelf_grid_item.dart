@@ -18,7 +18,7 @@ class ShelfGridItem extends StatelessWidget {
       child: InkWell(
         onTap: () => Navigator.of(context)
             .pushNamed(ShelfPage.routeName, arguments: shelf.id),
-        splashColor: Theme.of(context).primaryColor,
+        splashColor: Theme.of(context).primaryColor.withOpacity(0.3),
         borderRadius: BorderRadius.circular(8),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -38,6 +38,7 @@ class ShelfGridItem extends StatelessWidget {
             SizedBox(height: 28),
             Text(
               shelf.name,
+              textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 20,
                 color: Colors.black,
