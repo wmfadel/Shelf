@@ -1,6 +1,7 @@
 class APIBook {
   String? id;
   String? etag;
+  double? progress;
   String? title;
   String? subtitle;
   List<String>? authors;
@@ -23,6 +24,7 @@ class APIBook {
       this.etag,
       this.title,
       this.subtitle,
+      this.progress,
       this.authors,
       this.publishedDate,
       this.description,
@@ -41,6 +43,7 @@ class APIBook {
   APIBook.fromJson(Map<String, dynamic> json) {
     id = json['id'] ?? '';
     etag = json['etag'] ?? '';
+    progress = 0;
     title = json['volumeInfo']['title'] ?? 'No title available';
     subtitle = json['volumeInfo']['subtitle'] ?? 'No Subtitle available';
     authors = (json['volumeInfo']['authors'] ?? <String>[]).cast<String>();
@@ -75,6 +78,7 @@ class APIBook {
   APIBook.fromFire(Map<String, dynamic> json) {
     id = json['id'] ?? '';
     etag = json['etag'] ?? '';
+    progress = double.tryParse('${json['progress']}');
     title = json['title'] ?? 'No title available';
     subtitle = json['subtitle'] ?? 'No Subtitle available';
     authors = (json['authors'] ?? <String>[]).cast<String>();
@@ -102,6 +106,7 @@ class APIBook {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
     data['etag'] = this.etag;
+    data['progress'] = progress;
     data['title'] = this.title;
     data['subtitle'] = this.subtitle;
     data['authors'] = this.authors;

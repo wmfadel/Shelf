@@ -4,6 +4,7 @@ import 'package:shelf/models/api_book.dart';
 import 'package:shelf/pages/image_uploader_page.dart';
 import 'package:shelf/providers/api_search_provider.dart';
 import 'package:shelf/widgets/add_to_shelf_builder.dart';
+import 'package:shelf/widgets/book_progress.dart';
 import 'package:shelf/widgets/info_chip.dart';
 import 'package:shelf/widgets/info_chip_text.dart';
 import 'package:shelf/widgets/sell_button.dart';
@@ -16,6 +17,7 @@ class BookPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     APIBook book;
+
     String shelfID = '';
     bool isEdible = true;
     bool isView = false;
@@ -130,6 +132,16 @@ class BookPage extends StatelessWidget {
                 )
               ],
             ),
+
+            // TODO here
+            if (isView && isEdible) ...[
+              SizedBox(height: 20),
+              BookProgress(
+                  bookId: book.id!,
+                  shelfID: shelfID,
+                  value: book.progress ?? 0,
+                  maxValue: book.pageCount ?? 0),
+            ],
             Padding(
               padding: const EdgeInsets.all(5),
               child: Divider(),
