@@ -5,7 +5,7 @@ class ShmrShelfItemUser extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      crossAxisAlignment: CrossAxisAlignment.end,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Shimmer.fromColors(
           baseColor: Colors.grey[300]!,
