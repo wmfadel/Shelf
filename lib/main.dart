@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:shelf/pages/about_page.dart';
 import 'package:shelf/pages/add_book_page.dart';
 import 'package:shelf/pages/add_quote_page.dart';
 import 'package:shelf/pages/book_page.dart';
@@ -74,6 +75,7 @@ class MyApp extends StatelessWidget {
           OnBoardingPage.routeName: (BuildContext context) => OnBoardingPage(),
           LoginPage.routeName: (BuildContext context) => LoginPage(),
           HomePage.routeName: (BuildContext context) => HomePage(),
+          AboutPage.routeName: (BuildContext context) => AboutPage(),
           SearchPage.routeName: (BuildContext context) => SearchPage(),
           AddBookPage.routeName: (BuildContext context) => AddBookPage(),
           BookPage.routeName: (BuildContext context) => BookPage(),

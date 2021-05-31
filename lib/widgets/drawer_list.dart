@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shelf/pages/about_page.dart';
 import 'package:shelf/pages/chat_page.dart';
 import 'package:shelf/pages/contact_me_page.dart';
 import 'package:shelf/pages/create_post_page.dart';
@@ -140,7 +141,7 @@ class DrawerList extends StatelessWidget {
               text: 'About',
               color: Theme.of(context).iconTheme.color!,
               icon: Icons.info,
-              destination: SettingsPage.routeName,
+              destination: AboutPage.routeName,
             ),
             DrawerItem(
               text: 'Contact / Feedback',

@@ -132,8 +132,6 @@ class BookPage extends StatelessWidget {
                 )
               ],
             ),
-
-            // TODO here
             if (isView && isEdible) ...[
               SizedBox(height: 20),
               BookProgress(

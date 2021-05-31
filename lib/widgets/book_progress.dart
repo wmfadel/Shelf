@@ -66,7 +66,12 @@ class _BookProgressState extends State<BookProgress> {
             } else {
               setState(() {
                 widget.value = double.parse('${widget.maxValue}');
-                // TODO set value on db
+                FirebaseFirestore.instance
+                    .collection('shelfs')
+                    .doc(widget.shelfID)
+                    .collection('books')
+                    .doc(widget.bookId)
+                    .update({'progress': widget.maxValue});
               });
             }
           },

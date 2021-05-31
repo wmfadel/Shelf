@@ -88,6 +88,10 @@ flutter:
     - assets/pics/social.png
     - assets/pics/empty.png
     - assets/pics/error.png
+    - assets/pics/me.jpg
+    - assets/pics/twitter.png
+    - assets/pics/linkedin.png
+    - assets/pics/github.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
