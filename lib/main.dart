@@ -7,6 +7,7 @@ import 'package:shelf/pages/add_book_page.dart';
 import 'package:shelf/pages/add_quote_page.dart';
 import 'package:shelf/pages/book_page.dart';
 import 'package:shelf/pages/chat_page.dart';
+import 'package:shelf/pages/chat_room_page.dart';
 import 'package:shelf/pages/contact_me_page.dart';
 import 'package:shelf/pages/create_post_page.dart';
 import 'package:shelf/pages/create_shelf_screen.dart';
@@ -88,6 +89,7 @@ class MyApp extends StatelessWidget {
           MarketPage.routeName: (BuildContext context) => MarketPage(),
           MyMarkeyPage.routeName: (BuildContext context) => MyMarkeyPage(),
           ChatPage.routeName: (BuildContext context) => ChatPage(),
+          ChatRoomPage.routeName: (BuildContext context) => ChatRoomPage(),
           QuotesPage.routeName: (BuildContext context) => QuotesPage(),
           AddQuotePage.routeName: (BuildContext context) => AddQuotePage(),
           SocialPage.routeName: (BuildContext context) => SocialPage(),

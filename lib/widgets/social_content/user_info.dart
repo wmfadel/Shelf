@@ -7,12 +7,14 @@ class UserInfo extends StatelessWidget {
   final String email;
   final String photo;
   final String? date;
+  final bool large;
   const UserInfo({
     required this.userID,
     required this.name,
     required this.email,
     required this.photo,
     this.date,
+    this.large = false,
   });
 
   @override
@@ -23,6 +25,7 @@ class UserInfo extends StatelessWidget {
       child: Row(
         children: [
           CircleAvatar(
+            radius: large ? 24 : 20,
             backgroundImage: NetworkImage(photo),
           ),
           SizedBox(width: 4),
@@ -36,13 +39,13 @@ class UserInfo extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
                     color: Colors.black,
-                    fontSize: 14,
+                    fontSize: large ? 16 : 14,
                     fontWeight: FontWeight.bold),
               ),
               Text(
                 email,
                 overflow: TextOverflow.ellipsis,
-                style: TextStyle(fontSize: 12),
+                style: TextStyle(fontSize: large ? 14 : 12),
               ),
               if (date != null)
                 Text(
