@@ -1,5 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shelf/models/chat.dart';
+import 'package:shelf/pages/chat_room_page.dart';
 import 'package:shelf/pages/profile_page.dart';
+import 'package:shelf/providers/auth_provider.dart';
 
 class MarketUser extends StatelessWidget {
   final String id, name, photo, email;
@@ -13,6 +18,8 @@ class MarketUser extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AuthProvider authProvider =
+        Provider.of<AuthProvider>(context, listen: false);
     return GestureDetector(
       onTap: () =>
           Navigator.of(context).pushNamed(ProfilePage.routeName, arguments: id),
@@ -46,10 +53,59 @@ class MarketUser extends StatelessWidget {
                 ],
               ),
             ),
-            ElevatedButton(
-              onPressed: () {},
-              child: Text('Buy'),
-            )
+            FutureBuilder<QuerySnapshot>(
+                future: FirebaseFirestore.instance
+                    .collection('chats')
+                    .where('users', arrayContains: authProvider.uid)
+                    .get(),
+                builder: (BuildContext context,
+                    AsyncSnapshot<QuerySnapshot> snapshot) {
+                  return ElevatedButton(
+                    onPressed:
+                        snapshot.connectionState == ConnectionState.waiting
+                            ? null
+                            : () async {
+                                // find chat with the other user
+
+                                Chat? chat;
+                                for (QueryDocumentSnapshot chatDoc
+                                    in snapshot.data!.docs) {
+                                  // get the chat from list
+                                  Chat temp = Chat.fromJson(chatDoc.data()!);
+                                  if (temp.users.contains(id)) {
+                                    chat = temp;
+                                    break;
+                                  }
+                                }
+                                if (chat == null) {
+                                  // create it
+                                  FirebaseFirestore.instance
+                                      .collection('chats')
+                                      .add({
+                                    'date': Timestamp.now(),
+                                    'users': [id, authProvider.uid],
+                                  });
+                                }
+
+                                print('HERE : ${snapshot.data!.docs.first.id}');
+                                if (snapshot.data!.docs.isNotEmpty) {
+                                  Navigator.of(context).pushNamed(
+                                      ChatRoomPage.routeName,
+                                      arguments: {
+                                        'oUser': id,
+                                        'oName': name,
+                                        'oEmail': email,
+                                        'oPhoto': photo,
+                                        'user': authProvider.uid,
+                                        'name': authProvider.name,
+                                        'email': authProvider.email,
+                                        'photo': authProvider.photo,
+                                      });
+                                }
+                              },
+                    child: Text('Buy'),
+                  );
+                })
           ],
         ),
       ),

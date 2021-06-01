@@ -25,11 +25,12 @@ class MessageItem extends StatelessWidget {
             child: Container(
               child: Text(
                 message.text!,
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(
+                    color: isFromThisUser() ? Colors.white : Colors.black),
               ),
               margin: EdgeInsets.only(
-                left: isFromThisUser() ? 50 : 5,
-                right: isFromThisUser() ? 5 : 50,
+                left: isFromThisUser() ? 80 : 5,
+                right: isFromThisUser() ? 5 : 80,
               ),
               padding: EdgeInsets.all(10),
               decoration: BoxDecoration(

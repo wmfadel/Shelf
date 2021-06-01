@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:shelf/models/chat.dart';
 import 'package:shelf/models/chat_user.dart';
 import 'package:shelf/models/message.dart';
 import 'package:shelf/widgets/chat/chat_room_list_builder.dart';
@@ -54,27 +55,28 @@ class ChatRoomPage extends StatelessWidget {
                 children: [
                   Expanded(
                     child: TextField(
-                      controller: messageController,
-                      maxLines: 2,
-                      minLines: 1,
-                      autocorrect: true,
-                      scrollPadding: EdgeInsets.all(5),
-                      decoration: InputDecoration(
-                        hintText: 'type your message',
-                        enabledBorder: OutlineInputBorder(
-                          gapPadding: 0,
-                          borderSide: BorderSide(
-                              width: 1, color: Theme.of(context).primaryColor),
-                          borderRadius: BorderRadius.circular(25),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          gapPadding: 0,
-                          borderSide: BorderSide(
-                              width: 1, color: Theme.of(context).primaryColor),
-                          borderRadius: BorderRadius.circular(25),
-                        ),
-                      ),
-                    ),
+                        controller: messageController,
+                        maxLines: 2,
+                        minLines: 1,
+                        autocorrect: true,
+                        scrollPadding: EdgeInsets.all(5),
+                        decoration: InputDecoration(
+                          hintText: 'type your message',
+                          enabledBorder: OutlineInputBorder(
+                            gapPadding: 0,
+                            borderSide: BorderSide(
+                                width: 1,
+                                color: Theme.of(context).primaryColor),
+                            borderRadius: BorderRadius.circular(25),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            gapPadding: 0,
+                            borderSide: BorderSide(
+                                width: 1,
+                                color: Theme.of(context).primaryColor),
+                            borderRadius: BorderRadius.circular(25),
+                          ),
+                        )),
                   ),
                   IconButton(
                     onPressed: () async {
@@ -84,13 +86,33 @@ class ChatRoomPage extends StatelessWidget {
                         text: messageController.text.trim(),
                       );
                       if (chatID == null) {
-                        QuerySnapshot chat = await FirebaseFirestore.instance
+                        QuerySnapshot userChats = await FirebaseFirestore
+                            .instance
                             .collection('chats')
-                            .where('users', arrayContainsAny: [
-                          otherUser.id,
-                          currentUser.id
-                        ]).get();
-                        chatID = chat.docs.first.id;
+                            .where('users',
+                                arrayContains: [currentUser.id]).get();
+
+                        Chat? chat;
+                        for (QueryDocumentSnapshot chatDoc in userChats.docs) {
+                          // get the chat from list
+                          Chat temp = Chat.fromJson(chatDoc.data()!);
+                          if (temp.users.contains(otherUser.id)) {
+                            chat = temp;
+                            chatID = chatDoc.id;
+                            break;
+                          }
+                        }
+                        if (chat == null) {
+                          // create it
+                          DocumentReference docID = await FirebaseFirestore
+                              .instance
+                              .collection('chats')
+                              .add({
+                            'date': Timestamp.now(),
+                            'users': [otherUser.id, currentUser.id],
+                          });
+                          chatID = docID.id;
+                        }
                       }
                       FirebaseFirestore.instance
                           .collection('chats')
@@ -101,7 +123,7 @@ class ChatRoomPage extends StatelessWidget {
                     },
                     icon: Icon(
                       Icons.send,
-                      size: 35,
+                      size: 30,
                     ),
                   ),
                 ],
