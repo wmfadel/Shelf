@@ -87,7 +87,8 @@ class MarketUser extends StatelessWidget {
                                   });
                                 }
 
-                                print('HERE : ${snapshot.data!.docs.first.id}');
+                                print(
+                                    'HERE market: ${snapshot.data!.docs.first.id}');
                                 if (snapshot.data!.docs.isNotEmpty) {
                                   Navigator.of(context).pushNamed(
                                       ChatRoomPage.routeName,

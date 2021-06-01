@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:shelf/models/chat.dart';
 import 'package:shelf/models/chat_user.dart';
 import 'package:shelf/models/message.dart';
 import 'package:shelf/widgets/chat/messages_list.dart';
@@ -15,13 +16,31 @@ class ChatRoomListBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<QuerySnapshot>(
-      future: FirebaseFirestore.instance.collection('chats').where('users',
-          arrayContainsAny: [otherUser.id, currentUser.id]).get(),
+      future: FirebaseFirestore.instance
+          .collection('chats')
+          .where('users', arrayContains: currentUser.id)
+          .get(),
       builder:
           (BuildContext context, AsyncSnapshot<QuerySnapshot> futureSnapshot) {
         if (futureSnapshot.connectionState == ConnectionState.waiting)
           return Center(child: CircularProgressIndicator());
-        String chatID = futureSnapshot.data!.docs.first.id;
+        String? chatID;
+
+        if (chatID == null) {
+          print('111111111111');
+
+          for (QueryDocumentSnapshot chatDoc in futureSnapshot.data!.docs) {
+            // get the chat from list
+            Chat temp = Chat.fromJson(chatDoc.data()!);
+            if (temp.users.contains(otherUser.id)) {
+              print(temp.users.toString());
+              chatID = chatDoc.id;
+              print('got chat id $chatID');
+              break;
+            }
+          }
+        }
+
         return StreamBuilder<QuerySnapshot>(
           stream: FirebaseFirestore.instance
               .collection('chats')

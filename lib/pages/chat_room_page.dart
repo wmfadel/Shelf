@@ -86,39 +86,31 @@ class ChatRoomPage extends StatelessWidget {
                         text: messageController.text.trim(),
                       );
                       if (chatID == null) {
+                        print('111111111111');
                         QuerySnapshot userChats = await FirebaseFirestore
                             .instance
                             .collection('chats')
-                            .where('users',
-                                arrayContains: [currentUser.id]).get();
+                            .where('users', arrayContains: currentUser.id)
+                            .get();
 
-                        Chat? chat;
                         for (QueryDocumentSnapshot chatDoc in userChats.docs) {
                           // get the chat from list
                           Chat temp = Chat.fromJson(chatDoc.data()!);
                           if (temp.users.contains(otherUser.id)) {
-                            chat = temp;
                             chatID = chatDoc.id;
+                            print('got chat id $chatID');
                             break;
                           }
                         }
-                        if (chat == null) {
-                          // create it
-                          DocumentReference docID = await FirebaseFirestore
-                              .instance
-                              .collection('chats')
-                              .add({
-                            'date': Timestamp.now(),
-                            'users': [otherUser.id, currentUser.id],
-                          });
-                          chatID = docID.id;
-                        }
                       }
+                      print('222222222222222');
+                      print('chat id $chatID');
                       FirebaseFirestore.instance
                           .collection('chats')
                           .doc(chatID)
                           .collection('messages')
                           .add(message.toJson());
+                      print('sent message to $chatID');
                       messageController.clear();
                     },
                     icon: Icon(
