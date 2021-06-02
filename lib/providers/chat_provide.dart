@@ -6,7 +6,7 @@ import 'package:shelf/models/chat.dart';
 class ChatProvider with ChangeNotifier {
   BehaviorSubject<List<Chat>> _chatSubject = BehaviorSubject<List<Chat>>();
   late final String userID;
-  Stream get chatStream => _chatSubject.stream;
+  Stream<List<Chat>> get chatStream => _chatSubject.stream;
 
   getUserChats(String userID) async {
     print('CHATPROVIDER: getting user chats');
