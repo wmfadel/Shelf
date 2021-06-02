@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Message {
-  String? location;
+  GeoPoint? location;
   String? marketBook;
   List<String?>? photos;
   String? text;

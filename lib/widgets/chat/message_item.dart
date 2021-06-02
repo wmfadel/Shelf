@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:shelf/models/chat_user.dart';
 import 'package:shelf/models/message.dart';
 import 'package:shelf/providers/auth_provider.dart';
+import 'package:shelf/widgets/chat/bubble_item.dart';
 
 class MessageItem extends StatelessWidget {
   late final Message message;
@@ -21,32 +22,22 @@ class MessageItem extends StatelessWidget {
         mainAxisAlignment:
             isFromThisUser() ? MainAxisAlignment.end : MainAxisAlignment.start,
         children: [
-          Flexible(
-            child: Container(
-              child: Text(
-                message.text!,
-                style: TextStyle(
-                    color: isFromThisUser() ? Colors.white : Colors.black),
-              ),
-              margin: EdgeInsets.only(
-                left: isFromThisUser() ? 80 : 5,
-                right: isFromThisUser() ? 5 : 80,
-              ),
-              padding: EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                color: isFromThisUser()
-                    ? Theme.of(context).primaryColor.withOpacity(0.75)
-                    : Colors.grey[300],
-                borderRadius: BorderRadius.only(
-                  topLeft: isFromThisUser() ? Radius.circular(8) : Radius.zero,
-                  topRight: isFromThisUser() ? Radius.zero : Radius.circular(8),
-                  bottomLeft:
-                      isFromThisUser() ? Radius.circular(8) : Radius.zero,
-                  bottomRight:
-                      isFromThisUser() ? Radius.zero : Radius.circular(8),
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (message.text != null)
+                Flexible(
+                  child: BubbleItem(
+                      text: message.text!, isFromThisUser: isFromThisUser()),
                 ),
-              ),
-            ),
+              if (message.location != null)
+                BubbleItem(
+                  text:
+                      '${message.location!.latitude},${message.location!.longitude}',
+                  isFromThisUser: isFromThisUser(),
+                  isLocation: true,
+                ),
+            ],
           ),
         ],
       ),

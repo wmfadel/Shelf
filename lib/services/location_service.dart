@@ -1,6 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:location/location.dart';
 
 class LocationService {
+  static GeoPoint parseLatLang(String coordenates) {
+    List<String> parts = coordenates.split(',');
+    return GeoPoint(double.parse(parts[0]), double.parse(parts[1]));
+  }
+
   Future<String?> getUserLocation() async {
     Location location = new Location();
     bool _serviceEnabled;
