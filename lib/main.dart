@@ -29,6 +29,7 @@ import 'package:shelf/pages/social_page.dart';
 import 'package:shelf/pages/wrapper.dart';
 import 'package:shelf/providers/api_search_provider.dart';
 import 'package:shelf/providers/auth_provider.dart';
+import 'package:shelf/providers/chat_provide.dart';
 import 'package:shelf/providers/map_provider.dart';
 import 'package:shelf/providers/market_provider.dart';
 import 'package:shelf/providers/post_provider.dart';
@@ -47,6 +48,7 @@ class MyApp extends StatelessWidget {
   final MarketProvider _marketProvider = MarketProvider();
   final UploaderProvider _uploaderProvider = UploaderProvider();
   final PostProvider _postProvider = PostProvider();
+  final ChatProvider _chatProvider = ChatProvider();
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([
@@ -62,6 +64,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => _marketProvider),
         ChangeNotifierProvider(create: (_) => _uploaderProvider),
         ChangeNotifierProvider(create: (_) => _postProvider),
+        ChangeNotifierProvider(create: (_) => _chatProvider),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',

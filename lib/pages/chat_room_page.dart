@@ -95,7 +95,8 @@ class ChatRoomPage extends StatelessWidget {
 
                         for (QueryDocumentSnapshot chatDoc in userChats.docs) {
                           // get the chat from list
-                          Chat temp = Chat.fromJson(chatDoc.data()!);
+                          Chat temp =
+                              Chat.fromJson(chatDoc.data()!, chatDoc.id);
                           if (temp.users.contains(otherUser.id)) {
                             chatID = chatDoc.id;
                             print('got chat id $chatID');

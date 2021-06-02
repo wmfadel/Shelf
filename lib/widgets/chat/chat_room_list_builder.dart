@@ -31,7 +31,7 @@ class ChatRoomListBuilder extends StatelessWidget {
 
           for (QueryDocumentSnapshot chatDoc in futureSnapshot.data!.docs) {
             // get the chat from list
-            Chat temp = Chat.fromJson(chatDoc.data()!);
+            Chat temp = Chat.fromJson(chatDoc.data()!, chatDoc.id);
             if (temp.users.contains(otherUser.id)) {
               print(temp.users.toString());
               chatID = chatDoc.id;

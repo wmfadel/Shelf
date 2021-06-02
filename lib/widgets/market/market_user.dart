@@ -61,49 +61,50 @@ class MarketUser extends StatelessWidget {
                 builder: (BuildContext context,
                     AsyncSnapshot<QuerySnapshot> snapshot) {
                   return ElevatedButton(
-                    onPressed:
-                        snapshot.connectionState == ConnectionState.waiting
-                            ? null
-                            : () async {
-                                // find chat with the other user
+                    onPressed: snapshot.connectionState ==
+                            ConnectionState.waiting
+                        ? null
+                        : () async {
+                            // find chat with the other user
 
-                                Chat? chat;
-                                for (QueryDocumentSnapshot chatDoc
-                                    in snapshot.data!.docs) {
-                                  // get the chat from list
-                                  Chat temp = Chat.fromJson(chatDoc.data()!);
-                                  if (temp.users.contains(id)) {
-                                    chat = temp;
-                                    break;
-                                  }
-                                }
-                                if (chat == null) {
-                                  // create it
-                                  FirebaseFirestore.instance
-                                      .collection('chats')
-                                      .add({
-                                    'date': Timestamp.now(),
-                                    'users': [id, authProvider.uid],
+                            Chat? chat;
+                            for (QueryDocumentSnapshot chatDoc
+                                in snapshot.data!.docs) {
+                              // get the chat from list
+                              Chat temp =
+                                  Chat.fromJson(chatDoc.data()!, chatDoc.id);
+                              if (temp.users.contains(id)) {
+                                chat = temp;
+                                break;
+                              }
+                            }
+                            if (chat == null) {
+                              // create it
+                              FirebaseFirestore.instance
+                                  .collection('chats')
+                                  .add({
+                                'date': Timestamp.now(),
+                                'users': [id, authProvider.uid],
+                              });
+                            }
+
+                            print(
+                                'HERE market: ${snapshot.data!.docs.first.id}');
+                            if (snapshot.data!.docs.isNotEmpty) {
+                              Navigator.of(context).pushNamed(
+                                  ChatRoomPage.routeName,
+                                  arguments: {
+                                    'oUser': id,
+                                    'oName': name,
+                                    'oEmail': email,
+                                    'oPhoto': photo,
+                                    'user': authProvider.uid,
+                                    'name': authProvider.name,
+                                    'email': authProvider.email,
+                                    'photo': authProvider.photo,
                                   });
-                                }
-
-                                print(
-                                    'HERE market: ${snapshot.data!.docs.first.id}');
-                                if (snapshot.data!.docs.isNotEmpty) {
-                                  Navigator.of(context).pushNamed(
-                                      ChatRoomPage.routeName,
-                                      arguments: {
-                                        'oUser': id,
-                                        'oName': name,
-                                        'oEmail': email,
-                                        'oPhoto': photo,
-                                        'user': authProvider.uid,
-                                        'name': authProvider.name,
-                                        'email': authProvider.email,
-                                        'photo': authProvider.photo,
-                                      });
-                                }
-                              },
+                            }
+                          },
                     child: Text('Buy'),
                   );
                 })

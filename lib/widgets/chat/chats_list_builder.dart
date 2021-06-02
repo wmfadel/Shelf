@@ -21,7 +21,7 @@ class ChatsListBuilder extends StatelessWidget {
           List<Chat> chats = [];
           if (snapshot.data!.docs.isNotEmpty)
             for (QueryDocumentSnapshot chat in snapshot.data!.docs) {
-              chats.add(Chat.fromJson(chat.data()!));
+              chats.add(Chat.fromJson(chat.data()!, chat.id));
             }
           if (chats.isEmpty)
             return Center(child: Text('You have no chats with other users'));
