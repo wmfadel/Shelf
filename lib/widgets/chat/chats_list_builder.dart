@@ -15,8 +15,16 @@ class ChatsListBuilder extends StatelessWidget {
 
           if (snapshot.data!.isEmpty)
             return Center(child: Text('You have no chats with other users'));
-          return ListView.builder(
+          return ListView.separated(
             itemCount: snapshot.data!.length,
+            separatorBuilder: (BuildContext context, int index) {
+              return index != snapshot.data!.length
+                  ? Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: Divider(),
+                    )
+                  : Container();
+            },
             itemBuilder: (BuildContext context, int index) {
               return ChatRoomListItem(snapshot.data![index]);
             },

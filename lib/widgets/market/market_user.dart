@@ -5,6 +5,7 @@ import 'package:shelf/models/chat.dart';
 import 'package:shelf/pages/chat_room_page.dart';
 import 'package:shelf/pages/profile_page.dart';
 import 'package:shelf/providers/auth_provider.dart';
+import 'package:shelf/providers/chat_provide.dart';
 
 class MarketUser extends StatelessWidget {
   final String id, name, photo, email;
@@ -53,57 +54,26 @@ class MarketUser extends StatelessWidget {
                 ],
               ),
             ),
-            FutureBuilder<QuerySnapshot>(
-                future: FirebaseFirestore.instance
-                    .collection('chats')
-                    .where('users', arrayContains: authProvider.uid)
-                    .get(),
-                builder: (BuildContext context,
-                    AsyncSnapshot<QuerySnapshot> snapshot) {
+            FutureBuilder<Chat>(
+                future: Provider.of<ChatProvider>(context).getChatWithUser(id),
+                builder: (BuildContext context, AsyncSnapshot<Chat> snapshot) {
                   return ElevatedButton(
                     onPressed: snapshot.connectionState ==
                             ConnectionState.waiting
                         ? null
                         : () async {
                             // find chat with the other user
-
-                            Chat? chat;
-                            for (QueryDocumentSnapshot chatDoc
-                                in snapshot.data!.docs) {
-                              // get the chat from list
-                              Chat temp =
-                                  Chat.fromJson(chatDoc.data()!, chatDoc.id);
-                              if (temp.users.contains(id)) {
-                                chat = temp;
-                                break;
-                              }
-                            }
-                            if (chat == null) {
-                              // create it
-                              FirebaseFirestore.instance
-                                  .collection('chats')
-                                  .add({
-                                'date': Timestamp.now(),
-                                'users': [id, authProvider.uid],
-                              });
-                            }
-
-                            print(
-                                'HERE market: ${snapshot.data!.docs.first.id}');
-                            if (snapshot.data!.docs.isNotEmpty) {
-                              Navigator.of(context).pushNamed(
-                                  ChatRoomPage.routeName,
-                                  arguments: {
-                                    'oUser': id,
-                                    'oName': name,
-                                    'oEmail': email,
-                                    'oPhoto': photo,
-                                    'user': authProvider.uid,
-                                    'name': authProvider.name,
-                                    'email': authProvider.email,
-                                    'photo': authProvider.photo,
-                                  });
-                            }
+                            Navigator.of(context)
+                                .pushNamed(ChatRoomPage.routeName, arguments: {
+                              'oUser': id,
+                              'oName': name,
+                              'oEmail': email,
+                              'oPhoto': photo,
+                              'user': authProvider.uid,
+                              'name': authProvider.name,
+                              'email': authProvider.email,
+                              'photo': authProvider.photo,
+                            });
                           },
                     child: Text('Buy'),
                   );

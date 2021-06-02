@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shelf/models/chat.dart';
 import 'package:shelf/models/chat_user.dart';
 import 'package:shelf/models/message.dart';
+import 'package:shelf/providers/chat_provide.dart';
 import 'package:shelf/widgets/chat/chat_room_list_builder.dart';
 import 'package:shelf/widgets/social_content/user_info.dart';
 
@@ -86,26 +88,11 @@ class ChatRoomPage extends StatelessWidget {
                         text: messageController.text.trim(),
                       );
                       if (chatID == null) {
-                        print('111111111111');
-                        QuerySnapshot userChats = await FirebaseFirestore
-                            .instance
-                            .collection('chats')
-                            .where('users', arrayContains: currentUser.id)
-                            .get();
-
-                        for (QueryDocumentSnapshot chatDoc in userChats.docs) {
-                          // get the chat from list
-                          Chat temp =
-                              Chat.fromJson(chatDoc.data()!, chatDoc.id);
-                          if (temp.users.contains(otherUser.id)) {
-                            chatID = chatDoc.id;
-                            print('got chat id $chatID');
-                            break;
-                          }
-                        }
+                        Chat temp = await Provider.of<ChatProvider>(context,
+                                listen: false)
+                            .getChatWithUser(otherUser.id);
+                        chatID = temp.id;
                       }
-                      print('222222222222222');
-                      print('chat id $chatID');
                       FirebaseFirestore.instance
                           .collection('chats')
                           .doc(chatID)

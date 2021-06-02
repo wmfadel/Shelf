@@ -9,7 +9,6 @@ class ChatProvider with ChangeNotifier {
   Stream<List<Chat>> get chatStream => _chatSubject.stream;
 
   getUserChats(String userID) async {
-    print('CHATPROVIDER: getting user chats');
     this.userID = userID;
     Stream<QuerySnapshot> userChatsStream = FirebaseFirestore.instance
         .collection('chats')
@@ -21,8 +20,6 @@ class ChatProvider with ChangeNotifier {
         chats.add(Chat.fromJson(chatDoc.data()!, chatDoc.id));
       }
       _chatSubject.sink.add(chats);
-      print(
-          'CHATPROVIDER: chats we have in the provider ${_chatSubject.value.length}');
     });
   } // end getUserChats
 
