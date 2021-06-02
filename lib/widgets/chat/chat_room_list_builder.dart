@@ -23,29 +23,21 @@ class ChatRoomListBuilder extends StatelessWidget {
         if (chatSnapshot.connectionState == ConnectionState.waiting)
           return Center(child: CircularProgressIndicator());
 
-        return StreamBuilder<QuerySnapshot>(
-          stream: FirebaseFirestore.instance
-              .collection('chats')
-              .doc(chatSnapshot.data!.id)
-              .collection('messages')
-              .orderBy('time', descending: true)
-              .snapshots(),
+        return StreamBuilder<List<Message>>(
+          stream: chatSnapshot.data!.messeges,
           builder:
-              (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+              (BuildContext context, AsyncSnapshot<List<Message>> snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting)
               return Center(child: CircularProgressIndicator());
             if (snapshot.hasError)
               return Center(child: Text('Error getting this chat messeges'));
-            if (!snapshot.hasData || snapshot.data!.docs.isEmpty)
+            if (!snapshot.hasData || snapshot.data!.isEmpty)
               return Center(
                   child:
                       Text('You have no messeges with ${otherUser.name} yet'));
 
-            List<Message> messages = [];
-            for (QueryDocumentSnapshot message in snapshot.data!.docs) {
-              messages.add(Message.fromJson(message.data()!));
-            }
-            return MesssagesList(messages: messages, otherUser: otherUser);
+            return MesssagesList(
+                messages: snapshot.data!, otherUser: otherUser);
           },
         );
       },

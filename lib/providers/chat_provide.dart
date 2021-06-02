@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:shelf/models/chat.dart';
+import 'package:shelf/models/message.dart';
 
 class ChatProvider with ChangeNotifier {
   BehaviorSubject<List<Chat>> _chatSubject = BehaviorSubject<List<Chat>>();
@@ -15,13 +16,28 @@ class ChatProvider with ChangeNotifier {
         .where('users', arrayContains: userID)
         .snapshots();
     List<Chat> chats = [];
-    userChatsStream.listen((QuerySnapshot event) {
+    userChatsStream.listen((QuerySnapshot event) async {
       for (QueryDocumentSnapshot chatDoc in event.docs) {
-        chats.add(Chat.fromJson(chatDoc.data()!, chatDoc.id));
+        Chat temp = Chat.fromJson(chatDoc.data()!, chatDoc.id);
+        temp.messeges = await getChatMesseges(temp.id);
+
+        chats.add(temp);
       }
       _chatSubject.sink.add(chats);
     });
   } // end getUserChats
+
+  Future<Stream<List<Message>>> getChatMesseges(String chatID) async {
+    Stream<QuerySnapshot> stream = FirebaseFirestore.instance
+        .collection('chats')
+        .doc(chatID)
+        .collection('messages')
+        .orderBy('time', descending: true)
+        .snapshots();
+
+    return stream.map((qShot) =>
+        qShot.docs.map((doc) => Message.fromJson(doc.data()!)).toList());
+  }
 
   Future<Chat> getChatWithUser(String otherUserID) async {
     for (Chat c in _chatSubject.value) {

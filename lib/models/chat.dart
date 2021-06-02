@@ -1,9 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:shelf/models/message.dart';
 
 class Chat {
   late String id;
   late Timestamp date;
   late List<String> users;
+  late Stream<List<Message>> messeges;
 
   Chat({
     required this.id,
