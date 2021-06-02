@@ -30,6 +30,19 @@ class MessageItem extends StatelessWidget {
                   child: BubbleItem(
                       text: message.text!, isFromThisUser: isFromThisUser()),
                 ),
+              if (message.photo != null)
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Image.network(
+                      message.photo!,
+                      width: 200,
+                      height: 200,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
               if (message.location != null)
                 BubbleItem(
                   text:

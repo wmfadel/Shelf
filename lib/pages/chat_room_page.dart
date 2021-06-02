@@ -1,5 +1,9 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:shelf/models/chat.dart';
 import 'package:shelf/models/chat_user.dart';
@@ -91,6 +95,13 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
                         )),
                   ),
                   IconButton(
+                    onPressed: () => imageButtonAction(context),
+                    icon: Icon(
+                      Icons.image,
+                      size: 30,
+                    ),
+                  ),
+                  IconButton(
                     onPressed: () async {
                       String? locationString =
                           await LocationService().getUserLocation();
@@ -128,6 +139,72 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
         ],
       ),
     );
+  }
+
+  imageButtonAction(BuildContext context) {
+    showModalBottomSheet(
+        context: context,
+        elevation: 10,
+        isDismissible: true,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(25),
+        ),
+        builder: (BuildContext ctx) {
+          return Padding(
+            padding: const EdgeInsets.all(10),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Select Image Source',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Divider(),
+                ListTile(
+                  leading: Icon(
+                    Icons.photo_camera,
+                    color: Theme.of(context).primaryColor,
+                  ),
+                  title: Text('Camera'),
+                  onTap: () => getImage(ImageSource.gallery, context),
+                ),
+                ListTile(
+                  leading: Icon(
+                    Icons.photo_library,
+                    color: Theme.of(context).primaryColor,
+                  ),
+                  onTap: () => getImage(ImageSource.gallery, context),
+                  title: Text('Gallery'),
+                ),
+                SizedBox(height: 10)
+              ],
+            ),
+          );
+        });
+  }
+
+  getImage(ImageSource imageSource, BuildContext context) async {
+    final _picker = ImagePicker();
+    PickedFile? pickedFile = await _picker.getImage(source: imageSource);
+    if (pickedFile == null) return;
+
+    String url = await frankUploadFile(pickedFile.path);
+    sendMessage(
+        Message(time: Timestamp.now(), user: currentUser.id, photo: url));
+    Navigator.of(context).pop();
+  }
+
+  Future<String> frankUploadFile(String image) async {
+    Reference storageReference =
+        FirebaseStorage.instance.ref().child('photos/${DateTime.now()}');
+    UploadTask uploadTask = storageReference.putFile(File(image));
+    await uploadTask.whenComplete(() {});
+    String url = await storageReference.getDownloadURL();
+    return url;
   }
 
   sendMessage(Message message) async {

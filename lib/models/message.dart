@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class Message {
   GeoPoint? location;
   String? marketBook;
-  List<String?>? photos;
+  String? photo;
   String? text;
   late Timestamp time;
   late String user;
@@ -11,7 +11,7 @@ class Message {
   Message(
       {this.location,
       this.marketBook,
-      this.photos,
+      this.photo,
       this.text,
       required this.time,
       required this.user});
@@ -19,7 +19,7 @@ class Message {
   Message.fromJson(Map<String, dynamic> json) {
     location = json['location'];
     marketBook = json['market_book'];
-    photos = json['photos'] ?? [].cast<String>();
+    photo = json['photos'];
     text = json['text'];
     time = json['time'];
     user = json['user'];
@@ -29,7 +29,7 @@ class Message {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['location'] = this.location;
     data['market_book'] = this.marketBook;
-    data['photos'] = this.photos;
+    data['photos'] = this.photo;
     data['text'] = this.text;
     data['time'] = this.time;
     data['user'] = this.user;
