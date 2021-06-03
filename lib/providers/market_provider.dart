@@ -17,9 +17,14 @@ class MarketProvider with ChangeNotifier {
 
     marketBooks.clear();
     snapshot.docs.forEach((QueryDocumentSnapshot book) {
-      marketBooks.add(MarketBook.fromJson(book.data()!));
+      marketBooks.add(MarketBook.fromJson(book.data()!, marketID: book.id));
     });
     notifyListeners();
+  }
+
+  MarketBook getBookByID(String id) {
+    return marketBooks
+        .firstWhere((MarketBook element) => element.marketID == id);
   }
 
   removeSearchResults() {
