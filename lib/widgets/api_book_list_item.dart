@@ -36,6 +36,7 @@ class APIBookListItem extends StatelessWidget {
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
                         book!.title!,
@@ -56,7 +57,7 @@ class APIBookListItem extends StatelessWidget {
                           fontSize: 12,
                         ),
                       ),
-                      SizedBox(height: 5),
+                      // SizedBox(height: 5),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
