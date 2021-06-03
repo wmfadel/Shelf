@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shelf/models/market_book.dart';
 import 'package:shelf/models/message.dart';
 import 'package:shelf/providers/auth_provider.dart';
 import 'package:shelf/providers/market_provider.dart';

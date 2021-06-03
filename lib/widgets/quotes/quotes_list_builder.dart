@@ -38,7 +38,9 @@ class _QuotesListBuilderState extends State<QuotesListBuilder>
           return Center(
               child: TextButton(
             child: Text('No Quotes added for now, Add One now!!'),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pushNamed(AddQuotePage.routeName);
+            },
           ));
         bool? isEmpty = snapshot.data?.docs.isEmpty ?? false;
         if (isEmpty) {
