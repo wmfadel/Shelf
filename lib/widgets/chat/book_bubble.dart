@@ -32,16 +32,20 @@ class BookBubble extends StatelessWidget {
         if (snapshot.hasError || !snapshot.hasData) return Container();
         MarketBook book = MarketBook.fromJson(snapshot.data!.data()!);
 
-        return Row(
-          mainAxisAlignment: currentUSerID == message.user
-              ? MainAxisAlignment.end
-              : MainAxisAlignment.start,
-          children: [
-            ChatMarketListItem(
-              book: book,
-              isInChat: true,
-            ),
-          ],
+        return Container(
+          padding: EdgeInsets.symmetric(horizontal: 5),
+          width: MediaQuery.of(context).size.width,
+          child: Row(
+            mainAxisAlignment: currentUSerID == message.user
+                ? MainAxisAlignment.start
+                : MainAxisAlignment.end,
+            children: [
+              ChatMarketListItem(
+                book: book,
+                isInChat: true,
+              ),
+            ],
+          ),
         );
       },
     );
