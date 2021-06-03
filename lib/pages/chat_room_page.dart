@@ -10,6 +10,7 @@ import 'package:shelf/models/chat_user.dart';
 import 'package:shelf/models/message.dart';
 import 'package:shelf/providers/chat_provide.dart';
 import 'package:shelf/services/location_service.dart';
+import 'package:shelf/widgets/chat/chat_market.dart';
 import 'package:shelf/widgets/chat/chat_room_list_builder.dart';
 import 'package:shelf/widgets/social_content/user_info.dart';
 
@@ -38,7 +39,7 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
       body: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.only(top: 40, left: 8, bottom: 10),
+            padding: const EdgeInsets.only(top: 40, left: 8, bottom: 4),
             child: Row(
               children: [
                 IconButton(
@@ -57,6 +58,9 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
             ),
           ),
           Divider(),
+          ChatMarket(
+            otherUser: otherUser,
+          ),
           Expanded(
             child: ChatRoomListBuilder(
               otherUser: otherUser,
@@ -187,6 +191,21 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
         });
   }
 
+  sendMessage(Message message) async {
+    if (chatID == null) {
+      Chat temp = await Provider.of<ChatProvider>(context, listen: false)
+          .getChatWithUser(otherUser.id);
+      chatID = temp.id;
+    }
+    FirebaseFirestore.instance
+        .collection('chats')
+        .doc(chatID)
+        .collection('messages')
+        .add(message.toJson());
+    print('sent message to $chatID');
+    messageController.clear();
+  }
+
   getImage(ImageSource imageSource, BuildContext context) async {
     final _picker = ImagePicker();
     Navigator.of(context).pop();
@@ -206,20 +225,5 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
     await uploadTask.whenComplete(() {});
     String url = await storageReference.getDownloadURL();
     return url;
-  }
-
-  sendMessage(Message message) async {
-    if (chatID == null) {
-      Chat temp = await Provider.of<ChatProvider>(context, listen: false)
-          .getChatWithUser(otherUser.id);
-      chatID = temp.id;
-    }
-    FirebaseFirestore.instance
-        .collection('chats')
-        .doc(chatID)
-        .collection('messages')
-        .add(message.toJson());
-    print('sent message to $chatID');
-    messageController.clear();
   }
 }

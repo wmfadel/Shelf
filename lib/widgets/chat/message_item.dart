@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:shelf/models/chat_user.dart';
 import 'package:shelf/models/message.dart';
 import 'package:shelf/providers/auth_provider.dart';
+import 'package:shelf/widgets/chat/book_bubble.dart';
 import 'package:shelf/widgets/chat/bubble_item.dart';
 import 'package:shelf/widgets/chat/location_bubble.dart';
 
@@ -36,15 +37,18 @@ class MessageItem extends StatelessWidget {
                 ),
               ),
             )
+          else if (message.location != null)
+            LocationBubble(
+                location: message.location!, isFromThisUser: isFromThisUser())
+          else if (message.marketBook != null)
+            BookBubble(
+              message: message,
+            )
           else
-            message.location != null
-                ? LocationBubble(
-                    location: message.location!,
-                    isFromThisUser: isFromThisUser())
-                : BubbleItem(
-                    text: message.text!,
-                    isFromThisUser: isFromThisUser(),
-                  )
+            BubbleItem(
+              text: message.text!,
+              isFromThisUser: isFromThisUser(),
+            )
         ],
       ),
     );

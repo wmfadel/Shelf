@@ -17,6 +17,7 @@ class MarketBook {
   String? id;
   String? email;
   List<String>? authors;
+  String? marketID;
 
   MarketBook(
       {this.date,
@@ -36,7 +37,7 @@ class MarketBook {
       this.email,
       this.authors});
 
-  MarketBook.fromJson(Map<String, dynamic> json) {
+  MarketBook.fromJson(Map<String, dynamic> json, {String? marketID}) {
     date = json['date'];
     sold = json['sold'];
     thumbnail = json['thumbnail'];
@@ -58,6 +59,7 @@ class MarketBook {
     id = json['id'];
     email = json['email'];
     authors = json['authors'].cast<String>();
+    this.marketID = marketID;
   }
 
   Map<String, dynamic> toJson() {
