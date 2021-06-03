@@ -4,6 +4,7 @@ import 'package:shelf/models/chat_user.dart';
 import 'package:shelf/models/message.dart';
 import 'package:shelf/providers/auth_provider.dart';
 import 'package:shelf/widgets/chat/bubble_item.dart';
+import 'package:shelf/widgets/chat/location_bubble.dart';
 
 class MessageItem extends StatelessWidget {
   late final Message message;
@@ -22,36 +23,28 @@ class MessageItem extends StatelessWidget {
         mainAxisAlignment:
             isFromThisUser() ? MainAxisAlignment.end : MainAxisAlignment.start,
         children: [
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              if (message.text != null)
-                Flexible(
-                  child: BubbleItem(
-                      text: message.text!, isFromThisUser: isFromThisUser()),
+          if (message.photo != null)
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 5),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Image.network(
+                  message.photo!,
+                  width: 200,
+                  height: 200,
+                  fit: BoxFit.cover,
                 ),
-              if (message.photo != null)
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: Image.network(
-                      message.photo!,
-                      width: 200,
-                      height: 200,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-              if (message.location != null)
-                BubbleItem(
-                  text:
-                      '${message.location!.latitude},${message.location!.longitude}',
-                  isFromThisUser: isFromThisUser(),
-                  isLocation: true,
-                ),
-            ],
-          ),
+              ),
+            )
+          else
+            message.location != null
+                ? LocationBubble(
+                    location: message.location!,
+                    isFromThisUser: isFromThisUser())
+                : BubbleItem(
+                    text: message.text!,
+                    isFromThisUser: isFromThisUser(),
+                  )
         ],
       ),
     );

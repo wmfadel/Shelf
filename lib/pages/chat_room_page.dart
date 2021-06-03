@@ -189,6 +189,7 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
 
   getImage(ImageSource imageSource, BuildContext context) async {
     final _picker = ImagePicker();
+    Navigator.of(context).pop();
     PickedFile? pickedFile = await _picker.getImage(source: imageSource);
     if (pickedFile == null) return;
 
