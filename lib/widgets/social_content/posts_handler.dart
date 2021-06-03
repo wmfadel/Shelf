@@ -42,6 +42,7 @@ class _PostsHandlerState extends State<PostsHandler>
           return Center(child: CircularProgressIndicator());
         if (snapshot.hasError)
           return Center(child: Image.asset('assets/pics/error.png'));
+        print('error ${snapshot.error}');
         if (!snapshot.hasData || snapshot.data!.docs.isEmpty)
           return Center(child: Image.asset('assets/pics/empty.png'));
         List<Post> posts = [];
