@@ -39,6 +39,7 @@ class _QuotesListBuilderState extends State<QuotesListBuilder>
               child: TextButton(
             child: Text('No Quotes added for now, Add One now!!'),
             onPressed: () {
+              print('going to quotes page');
               Navigator.of(context).pushNamed(AddQuotePage.routeName);
             },
           ));

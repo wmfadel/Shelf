@@ -11,7 +11,7 @@ class MarketProvider with ChangeNotifier {
   getMapMarket(String currentUserID) async {
     QuerySnapshot snapshot = await FirebaseFirestore.instance
         .collection('market')
-        .where('user-id', isNotEqualTo: currentUserID)
+        // .where('user-id', isNotEqualTo: currentUserID)
         .where('sold', isEqualTo: false)
         .get();
 
@@ -23,8 +23,13 @@ class MarketProvider with ChangeNotifier {
   }
 
   MarketBook getBookByID(String id) {
-    return marketBooks
-        .firstWhere((MarketBook element) => element.marketID == id);
+    print(id);
+    MarketBook b = marketBooks.firstWhere((MarketBook element) {
+      print('iterating over ${element.marketID}');
+      return element.marketID == id;
+    });
+    print('go book title ${b.title}');
+    return b;
   }
 
   removeSearchResults() {

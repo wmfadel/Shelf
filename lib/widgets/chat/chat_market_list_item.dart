@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:shelf/models/chat.dart';
 import 'package:shelf/models/market_book.dart';
 import 'package:shelf/models/message.dart';
+import 'package:shelf/providers/auth_provider.dart';
 import 'package:shelf/providers/chat_provide.dart';
 
 class ChatMarketListItem extends StatelessWidget {
@@ -109,7 +110,10 @@ class ChatMarketListItem extends StatelessWidget {
                                   .collection('messages')
                                   .add(Message(
                                           time: Timestamp.now(),
-                                          user: book.userId!,
+                                          user: Provider.of<AuthProvider>(
+                                                  context,
+                                                  listen: false)
+                                              .uid!,
                                           marketBook: book.marketID)
                                       .toJson());
                             },

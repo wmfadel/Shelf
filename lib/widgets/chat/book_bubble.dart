@@ -21,8 +21,8 @@ class BookBubble extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       child: Row(
         mainAxisAlignment: currentUSerID == message.user
-            ? MainAxisAlignment.start
-            : MainAxisAlignment.end,
+            ? MainAxisAlignment.end
+            : MainAxisAlignment.start,
         children: [
           ChatMarketListItem(
             book: Provider.of<MarketProvider>(context, listen: false)
