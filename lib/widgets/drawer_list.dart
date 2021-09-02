@@ -137,12 +137,12 @@ class DrawerList extends StatelessWidget {
               icon: Icons.help_center,
               destination: HelpPage.routeName,
             ),
-            DrawerItem(
+            /*    DrawerItem(
               text: 'About',
               color: Theme.of(context).iconTheme.color!,
               icon: Icons.info,
               destination: AboutPage.routeName,
-            ),
+            ),*/
             DrawerItem(
               text: 'Contact / Feedback',
               color: Theme.of(context).iconTheme.color!,

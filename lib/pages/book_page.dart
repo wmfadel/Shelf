@@ -42,12 +42,12 @@ class BookPage extends StatelessWidget {
           if (isView && isEdible)
             ...[
               SellButton(bookID: book.id!, shelfID: shelfID),
-              IconButton(
+              /*   IconButton(
                 onPressed: () => Navigator.of(context).pushNamed(
                     ImageUploaderPage.routeName,
                     arguments: book.id!),
                 icon: Icon(Icons.image),
-              )
+              )*/
               /*PopupMenuButton(
                 icon: Icon(Icons.camera_alt_sharp),
                 itemBuilder: (BuildContext context) {
