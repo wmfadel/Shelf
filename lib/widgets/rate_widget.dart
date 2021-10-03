@@ -27,6 +27,7 @@ class RateWidget extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class RateBuild extends StatefulWidget {
   int rate;
   final bool isUp;

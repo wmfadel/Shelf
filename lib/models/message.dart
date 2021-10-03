@@ -16,7 +16,8 @@ class Message {
       required this.time,
       required this.user});
 
-  Message.fromJson(Map<String, dynamic> json) {
+  Message.fromJson(dynamic rawJson) {
+    Map<String, dynamic> json = rawJson as Map<String, dynamic>;
     location = json['location'];
     marketBook = json['market_book'];
     photo = json['photos'];

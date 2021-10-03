@@ -115,7 +115,7 @@ class _ImageUploaderPageState extends State<ImageUploaderPage> {
 
   getImage(ImageSource source) async {
     final _picker = ImagePicker();
-    PickedFile? pickedFile = await _picker.getImage(source: source);
+    XFile? pickedFile = await _picker.pickImage(source: source);
     if (pickedFile == null) return;
     setState(() {
       file = File(pickedFile.path);

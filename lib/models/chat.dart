@@ -13,7 +13,8 @@ class Chat {
     required this.users,
   });
 
-  Chat.fromJson(Map<String, dynamic> json, String id) {
+  Chat.fromJson(dynamic rawJson, String id) {
+    Map<String, dynamic> json = rawJson as Map<String, dynamic>;
     this.id = id;
     date = json['date'];
     users = json['users'].cast<String>();

@@ -74,7 +74,7 @@ class PostProvider with ChangeNotifier {
 
   getImage(ImageSource source) async {
     final _picker = ImagePicker();
-    PickedFile? pickedFile = await _picker.getImage(source: source);
+    XFile? pickedFile = await _picker.pickImage(source: source);
     if (pickedFile == null) return;
     images.add(File(pickedFile.path));
     print(

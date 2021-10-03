@@ -47,7 +47,7 @@ class _PostsHandlerState extends State<PostsHandler>
           return Center(child: Image.asset('assets/pics/empty.png'));
         List<Post> posts = [];
         snapshot.data!.docs.forEach((QueryDocumentSnapshot element) {
-          Post temp = Post.fromJson(element.data()!, element.id);
+          Post temp = Post.fromJson(element.data(), element.id);
           posts.add(temp);
         });
         return PostsList(posts: posts);

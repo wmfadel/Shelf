@@ -5,6 +5,7 @@ import 'package:shelf/models/chat.dart';
 import 'package:shelf/models/message.dart';
 
 class ChatProvider with ChangeNotifier {
+  // ignore: close_sinks
   BehaviorSubject<List<Chat>> _chatSubject = BehaviorSubject<List<Chat>>();
   late final String userID;
   Stream<List<Chat>> get chatStream => _chatSubject.stream;
@@ -18,7 +19,8 @@ class ChatProvider with ChangeNotifier {
     List<Chat> chats = [];
     userChatsStream.listen((QuerySnapshot event) async {
       for (QueryDocumentSnapshot chatDoc in event.docs) {
-        Chat temp = Chat.fromJson(chatDoc.data()!, chatDoc.id);
+        Chat temp =
+            Chat.fromJson((chatDoc.data() as Map<String, dynamic>), chatDoc.id);
         temp.messeges = await getChatMesseges(temp.id);
 
         chats.add(temp);
@@ -36,7 +38,7 @@ class ChatProvider with ChangeNotifier {
         .snapshots();
 
     return stream.map((qShot) =>
-        qShot.docs.map((doc) => Message.fromJson(doc.data()!)).toList());
+        qShot.docs.map((doc) => Message.fromJson(doc.data())).toList());
   }
 
   Future<Chat> getChatWithUser(String otherUserID) async {

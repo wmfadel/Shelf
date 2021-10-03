@@ -17,7 +17,7 @@ class MarketProvider with ChangeNotifier {
 
     marketBooks.clear();
     snapshot.docs.forEach((QueryDocumentSnapshot book) {
-      marketBooks.add(MarketBook.fromJson(book.data()!, marketID: book.id));
+      marketBooks.add(MarketBook.fromJson(book.data(), marketID: book.id));
     });
     notifyListeners();
   }

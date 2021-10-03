@@ -75,7 +75,8 @@ class APIBook {
         json['accessInfo']['webReaderLink'] ?? 'https:www.google.com';
   }
 
-  APIBook.fromFire(Map<String, dynamic> json) {
+  APIBook.fromFire(dynamic rawJson) {
+    Map<String, dynamic> json = rawJson as Map<String, dynamic>;
     id = json['id'] ?? '';
     etag = json['etag'] ?? '';
     progress = double.tryParse('${json['progress']}');

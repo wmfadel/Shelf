@@ -28,7 +28,7 @@ class ShelfOverview extends StatelessWidget {
           List<APIBook> books = [];
 
           docs.forEach((element) {
-            books.add(APIBook.fromFire(element.data()!));
+            books.add(APIBook.fromFire(element.data()));
           });
 
           return books.length > 3

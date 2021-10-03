@@ -17,7 +17,8 @@ class Quote {
     required this.page,
   });
 
-  Quote.fromFire(Map<String, dynamic> json, String docID) {
+  Quote.fromFire(dynamic rawJson, String docID) {
+    Map<String, dynamic> json = rawJson as Map<String, dynamic>;
     id = docID;
     text = json['text'] ?? '';
     author = json['author'] ?? 'Unknown Author';

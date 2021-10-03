@@ -74,8 +74,8 @@ class AddToShelfBuilder extends StatelessWidget {
                             Icons.add_box_rounded,
                             color: Theme.of(context).iconTheme.color,
                           ),
-                          title: Text(snapshot.data!.docs[index]
-                              .data()!['name']
+                          title: Text((snapshot.data!.docs[index].data()!
+                                  as Map<String, dynamic>)['name']
                               .replaceAll('!@#', ' ')),
                         );
                       }),

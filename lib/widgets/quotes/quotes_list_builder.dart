@@ -104,7 +104,7 @@ class _QuotesListBuilderState extends State<QuotesListBuilder>
   List<Quote> quotesFromList(List<QueryDocumentSnapshot> data) {
     List<Quote> quotes = [];
     data.forEach((element) {
-      Quote temp = Quote.fromFire(element.data()!, element.id);
+      Quote temp = Quote.fromFire(element.data(), element.id);
       quotes.add(temp);
       print('quote id on creation ${element.id}, got ${temp.id}');
     });

@@ -29,7 +29,7 @@ class ChatMarketListBuiler extends StatelessWidget {
           return Center(child: Text('$userName is not selling book now'));
         List<MarketBook> books = [];
         snapshot.data!.docs.forEach((QueryDocumentSnapshot element) {
-          books.add(MarketBook.fromJson(element.data()!, marketID: element.id));
+          books.add(MarketBook.fromJson(element.data(), marketID: element.id));
         });
         return ListView.builder(
           itemCount: books.length,

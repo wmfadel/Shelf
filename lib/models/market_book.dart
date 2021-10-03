@@ -37,7 +37,8 @@ class MarketBook {
       this.email,
       this.authors});
 
-  MarketBook.fromJson(Map<String, dynamic> json, {String? marketID}) {
+  MarketBook.fromJson(dynamic rawJson, {String? marketID}) {
+    Map<String, dynamic> json = rawJson as Map<String, dynamic>;
     date = json['date'];
     sold = json['sold'];
     thumbnail = json['thumbnail'];

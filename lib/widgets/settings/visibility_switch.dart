@@ -17,7 +17,7 @@ class _VisibilitySwitchState extends State<VisibilitySwitch> {
     if (value) {
       DocumentSnapshot userDoc =
           await FirebaseFirestore.instance.collection('users').doc(uid).get();
-      if (userDoc.data()!['location'] == null) {
+      if ((userDoc.data()! as Map<String, dynamic>)['location'] == null) {
         String? newLocation = await LocationService().getUserLocation();
         if (newLocation == null) {
           return;
@@ -44,7 +44,8 @@ class _VisibilitySwitchState extends State<VisibilitySwitch> {
       builder: (ctx, AsyncSnapshot<DocumentSnapshot> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting)
           return dummyPlaceHolder();
-        dynamicSwitch = snapshot.data!.data()!['visibility'];
+        dynamicSwitch =
+            (snapshot.data!.data()! as Map<String, dynamic>)['visibility'];
         return SwitchListTile(
           value: dynamicSwitch != true ? isSwitch : dynamicSwitch!,
           title: Text(dynamicSwitch != true

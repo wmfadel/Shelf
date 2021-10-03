@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shelf/models/api_book.dart';
-import 'package:shelf/pages/image_uploader_page.dart';
 import 'package:shelf/providers/api_search_provider.dart';
 import 'package:shelf/widgets/add_to_shelf_builder.dart';
 import 'package:shelf/widgets/book_progress.dart';

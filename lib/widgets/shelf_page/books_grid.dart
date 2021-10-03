@@ -36,7 +36,7 @@ class _BooksGridState extends State<BooksGrid> {
           ));
         List<APIBook> books = [];
         snapshot.data?.docs.forEach((QueryDocumentSnapshot fireBook) {
-          books.add(APIBook.fromFire(fireBook.data()!));
+          books.add(APIBook.fromFire(fireBook.data()));
         });
 
         return Padding(

@@ -39,7 +39,7 @@ class _OnMarketState extends State<OnMarket>
 
         List<MarketBook> books = [];
         snapshot.data?.docs.forEach((QueryDocumentSnapshot book) {
-          books.add(MarketBook.fromJson(book.data()!));
+          books.add(MarketBook.fromJson(book.data()));
         });
         return ListView.builder(
             shrinkWrap: true,

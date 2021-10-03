@@ -7,6 +7,7 @@ import 'package:shelf/widgets/chat/book_bubble.dart';
 import 'package:shelf/widgets/chat/bubble_item.dart';
 import 'package:shelf/widgets/chat/location_bubble.dart';
 
+// ignore: must_be_immutable
 class MessageItem extends StatelessWidget {
   late final Message message;
   late final ChatUser otherUser;

@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:flutter/material.dart';
 import 'package:shelf/models/chat_user.dart';
 import 'package:shelf/widgets/chat/chat_market_list_builder.dart';
