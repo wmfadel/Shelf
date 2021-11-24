@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shelf/providers/analytics_provider.dart';
 import 'package:shelf/widgets/profile_widgets/profile_personal_info.dart';
 import 'package:shelf/widgets/profile_widgets/tabs_handle_widget.dart';
 
@@ -8,6 +10,8 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final String uid = ModalRoute.of(context)!.settings.arguments as String;
+    context.read<AnalyticsProvider>().setCurrentScreen(ProfilePage.routeName);
+    context.read<AnalyticsProvider>().setUserId();
 
     return Scaffold(
       backgroundColor: Colors.white,

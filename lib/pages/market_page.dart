@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shelf/providers/analytics_provider.dart';
 import 'package:shelf/providers/auth_provider.dart';
 import 'package:shelf/providers/market_provider.dart';
 import 'package:shelf/widgets/market/market_list_item.dart';
@@ -8,6 +9,8 @@ class MarketPage extends StatelessWidget {
   static final String routeName = 'Market_page';
   @override
   Widget build(BuildContext context) {
+    context.read<AnalyticsProvider>().setCurrentScreen(MarketPage.routeName);
+
     MarketProvider marketProvider =
         Provider.of<MarketProvider>(context, listen: false);
     marketProvider

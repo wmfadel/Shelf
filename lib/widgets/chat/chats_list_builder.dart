@@ -7,7 +7,7 @@ import 'package:shelf/widgets/chat/chat_room_list_item.dart';
 class ChatsListBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder(
+    return StreamBuilder<List<Chat>>(
         stream: Provider.of<ChatProvider>(context).chatStream,
         builder: (BuildContext context, AsyncSnapshot<List<Chat>> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting)
@@ -23,7 +23,7 @@ class ChatsListBuilder extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 10),
                       child: Divider(),
                     )
-                  : Container();
+                  : SizedBox();
             },
             itemBuilder: (BuildContext context, int index) {
               return ChatRoomListItem(snapshot.data![index]);

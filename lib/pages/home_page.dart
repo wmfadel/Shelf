@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:shelf/pages/add_book_page.dart';
 import 'package:shelf/pages/profile_page.dart';
 import 'package:shelf/pages/search_page.dart';
+import 'package:shelf/providers/analytics_provider.dart';
 import 'package:shelf/providers/auth_provider.dart';
 import 'package:shelf/providers/chat_provide.dart';
 import 'package:shelf/providers/market_provider.dart';
@@ -23,19 +24,26 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
   bool chatsFetched = false;
+  bool pageLogged = false;
+
   @override
   void didChangeDependencies() {
-    super.didChangeDependencies();
     if (!chatsFetched) {
       Provider.of<ChatProvider>(context, listen: false)
           .getUserChats(Provider.of<AuthProvider>(context, listen: false).uid!);
       chatsFetched = true;
     }
+    if (!pageLogged) {
+      context.read<AnalyticsProvider>().setCurrentScreen(HomePage.routeName);
+      pageLogged = true;
+    }
+    super.didChangeDependencies();
   }
 
   @override
   Widget build(BuildContext context) {
     MarketProvider marketProvider = Provider.of<MarketProvider>(context);
+
     return Scaffold(
       key: scaffoldKey,
       drawer: DrawerList(),

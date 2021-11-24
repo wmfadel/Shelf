@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shelf/providers/analytics_provider.dart';
 import 'package:shelf/widgets/settings/change_location.dart';
 import 'package:shelf/widgets/settings/visibility_switch.dart';
 
@@ -7,6 +9,8 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    context.read<AnalyticsProvider>().setCurrentScreen(SettingsPage.routeName);
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(

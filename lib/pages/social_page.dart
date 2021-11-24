@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shelf/pages/create_post_page.dart';
+import 'package:shelf/providers/analytics_provider.dart';
 import 'package:shelf/widgets/social_content/posts_handler.dart';
 
 class SocialPage extends StatelessWidget {
   static final String routeName = 'Social_page';
   @override
   Widget build(BuildContext context) {
+    context.read<AnalyticsProvider>().setCurrentScreen(SocialPage.routeName);
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(

@@ -22,7 +22,6 @@ class ChatProvider with ChangeNotifier {
         Chat temp =
             Chat.fromJson((chatDoc.data() as Map<String, dynamic>), chatDoc.id);
         temp.messeges = await getChatMesseges(temp.id);
-
         chats.add(temp);
       }
       _chatSubject.sink.add(chats);
