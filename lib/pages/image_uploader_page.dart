@@ -129,7 +129,7 @@ class _ImageUploaderPageState extends State<ImageUploaderPage> {
   }
 
   editImage() async {
-    File? croppedFile = await ImageCropper.cropImage(
+    CroppedFile? croppedFile = await ImageCropper().cropImage(
       sourcePath: file!.path,
       aspectRatioPresets: [
         CropAspectRatioPreset.square,
@@ -138,16 +138,18 @@ class _ImageUploaderPageState extends State<ImageUploaderPage> {
         CropAspectRatioPreset.ratio4x3,
         CropAspectRatioPreset.ratio16x9
       ],
-      androidUiSettings: AndroidUiSettings(
-          toolbarTitle: 'Cropper',
-          toolbarColor: Theme.of(context).primaryColor,
-          toolbarWidgetColor: Colors.white,
-          initAspectRatio: CropAspectRatioPreset.original,
-          lockAspectRatio: false),
+      uiSettings: [
+        AndroidUiSettings(
+            toolbarTitle: 'Cropper',
+            toolbarColor: Theme.of(context).primaryColor,
+            toolbarWidgetColor: Colors.white,
+            initAspectRatio: CropAspectRatioPreset.original,
+            lockAspectRatio: false)
+      ],
     );
     if (croppedFile == null) return;
     setState(() {
-      file = croppedFile;
+      file = File(croppedFile.path);
     });
   }
 }

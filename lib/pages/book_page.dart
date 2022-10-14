@@ -28,7 +28,7 @@ class BookPage extends StatelessWidget {
       isEdible = args[2];
       isView = true;
     } else {
-      book = Provider.of<APISearchPRovider>(context, listen: false)
+      book = Provider.of<APISearchProvider>(context, listen: false)
           .getSelectedBook()!;
     }
 

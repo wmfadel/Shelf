@@ -43,11 +43,11 @@ class AddBookPage extends StatelessWidget {
                     Icons.search,
                     color: Theme.of(context).iconTheme.color,
                   ),
-                  onPressed: context.watch<APISearchPRovider>().isLoading
+                  onPressed: context.watch<APISearchProvider>().isLoading
                       ? null
                       : () async {
                           print('text: ${_textEditingController.text}');
-                          Provider.of<APISearchPRovider>(context, listen: false)
+                          Provider.of<APISearchProvider>(context, listen: false)
                               .searchForABook(_textEditingController.text
                                   .replaceAll(' ', '+'));
                           FocusScope.of(context).unfocus();
@@ -56,30 +56,30 @@ class AddBookPage extends StatelessWidget {
               ],
             ),
           ),
-          if (context.watch<APISearchPRovider>().books.length == 0 ||
-              context.watch<APISearchPRovider>().isLoading)
+          if (context.watch<APISearchProvider>().books.length == 0 ||
+              context.watch<APISearchProvider>().isLoading)
             SizedBox(height: 100),
-          if (context.watch<APISearchPRovider>().books.length == 0 &&
-              !context.watch<APISearchPRovider>().isLoading)
+          if (context.watch<APISearchProvider>().books.length == 0 &&
+              !context.watch<APISearchProvider>().isLoading)
             Image.asset(
               'assets/pics/bibliophile.png',
               width: MediaQuery.of(context).size.width * 0.7,
             ),
-          if (context.watch<APISearchPRovider>().isLoading)
+          if (context.watch<APISearchProvider>().isLoading)
             Center(child: CircularProgressIndicator()),
-          if (context.watch<APISearchPRovider>().books.length > 0 &&
-              !context.watch<APISearchPRovider>().isLoading)
+          if (context.watch<APISearchProvider>().books.length > 0 &&
+              !context.watch<APISearchProvider>().isLoading)
             Expanded(
               child: ListView.builder(
                 itemCount:
-                    Provider.of<APISearchPRovider>(context, listen: false)
+                    Provider.of<APISearchProvider>(context, listen: false)
                         .books
                         .length,
                 primary: true,
                 physics: ClampingScrollPhysics(),
                 itemBuilder: (BuildContext context, int index) =>
                     APIBookListItem(
-                        book: Provider.of<APISearchPRovider>(context,
+                        book: Provider.of<APISearchProvider>(context,
                                 listen: false)
                             .books[index]),
               ),

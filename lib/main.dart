@@ -43,7 +43,7 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   final AuthProvider _authProvider = AuthProvider();
-  final APISearchPRovider _apiSearchPRovider = APISearchPRovider();
+  final APISearchProvider _apiSearchProvider = APISearchProvider();
   final MapProvider _mapProvider = MapProvider();
   final MarketProvider _marketProvider = MarketProvider();
   final UploaderProvider _uploaderProvider = UploaderProvider();
@@ -59,7 +59,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => _authProvider),
-        ChangeNotifierProvider(create: (_) => _apiSearchPRovider),
+        ChangeNotifierProvider(create: (_) => _apiSearchProvider),
         ChangeNotifierProvider(create: (_) => _mapProvider),
         ChangeNotifierProvider(create: (_) => _marketProvider),
         ChangeNotifierProvider(create: (_) => _uploaderProvider),

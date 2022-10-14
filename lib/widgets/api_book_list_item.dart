@@ -13,7 +13,7 @@ class APIBookListItem extends StatelessWidget {
       padding: const EdgeInsets.all(8),
       child: GestureDetector(
         onTap: () {
-          Provider.of<APISearchPRovider>(context, listen: false)
+          Provider.of<APISearchProvider>(context, listen: false)
               .selectedBookID = book!.id;
           Navigator.of(context).pushNamed(BookPage.routeName);
         },

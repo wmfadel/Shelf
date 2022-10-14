@@ -1,0 +1,79 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "market",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "sold",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "`user-id`",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "market",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "sold",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "title",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "social",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "`reply-to`",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "date",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "social",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "`reply-to`",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "date",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "social",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "`reply-to`",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "user",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "date",
+          "order": "DESCENDING"
+        }
+      ]
+    }
+  ],
+  "fieldOverrides": []
+}

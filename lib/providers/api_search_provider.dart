@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:shelf/models/api_book.dart';
 import 'package:shelf/services/book_api_search_service.dart';
 
-class APISearchPRovider with ChangeNotifier {
+class APISearchProvider with ChangeNotifier {
   bool _isLoading = false;
   List<APIBook?> _books = [];
   BooksAPISearchService _searchService = BooksAPISearchService();

@@ -1,4 +1,24 @@
 # Shelf
+## Ignore the rest of this README file. This project is being refactored into greatness.
+## Meanwhile, Read a book i recommend Malcome Gladwell or Jordan Peterson they are both great.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 A flutter application built for managing and keeping track of your books and reading lists, sharing ideas and recommendations, selling or buying books from people and bookstores nearby.
 https://youtu.be/G79ayFfY5SQ

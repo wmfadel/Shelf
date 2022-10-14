@@ -35,6 +35,7 @@ class _HomeMapState extends State<HomeMap> {
 
   @override
   Widget build(BuildContext context) {
+    print('building map');
     showingOverView = marketProvider.getActiveBook() != null;
     return GoogleMap(
       initialCameraPosition: CameraPosition(
