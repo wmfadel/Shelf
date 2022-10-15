@@ -28,7 +28,9 @@ class AppUser {
         email = map['email'],
         name = map['name'],
         photo = map['photo'],
-        location = AppLocation.fromJoinedString(map['location']),
+        location = map['location'] != null
+            ? AppLocation.fromJoinedString(map['location'])
+            : null,
         bio = map['bio'],
         upVote = map['upVote'],
         downVote = map['downVote'],
@@ -40,7 +42,7 @@ class AppUser {
       'email': email,
       'name': name,
       'photo': photo,
-      'location': location?.toJoinedString() ,
+      'location': location?.toJoinedString(),
       'bio': bio,
       'upVote': upVote,
       'downVote': downVote,

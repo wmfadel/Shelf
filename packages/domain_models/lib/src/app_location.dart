@@ -1,17 +1,17 @@
 class AppLocation {
-  late final double? lat;
-  late final double? long;
+  late final double? latitude;
+  late final double? longitude;
 
-  AppLocation({required this.lat, required this.long});
+  AppLocation({required this.latitude, required this.longitude});
 
   AppLocation.fromJson(Map<String, dynamic> map)
-      : lat = map['lat'],
-        long = map['long'];
+      : latitude = map['lat'],
+        longitude = map['long'];
 
   Map<String, dynamic> toJson() {
     return {
-      'lat': lat,
-      'long': long,
+      'lat': latitude,
+      'long': longitude,
     };
   }
 
@@ -21,13 +21,13 @@ class AppLocation {
     if(split.length != 2) {
       throw ArgumentError('location must be in the format of "lat,long"');
     }
-    lat = double.tryParse(split[0]);
-    long = double.tryParse(split[1]);
+    latitude = double.tryParse(split[0]);
+    longitude = double.tryParse(split[1]);
   }
 
   /// returns a string representation of the location in the format
   /// "latitude,longitude"
   String toJoinedString() {
-    return '$lat,$long';
+    return '$latitude,$longitude';
   }
 }

@@ -3,6 +3,6 @@ import 'package:location/location.dart';
 
 extension LocationDataExtension on LocationData {
   AppLocation toAppLocation() {
-    return AppLocation(lat: latitude, long: longitude);
+    return AppLocation(latitude: latitude, longitude: longitude);
   }
 }

@@ -13,7 +13,7 @@ void main() {
 
       expect(
         locationData.toAppLocation().toJoinedString(),
-        AppLocation(lat: 1.0, long: 1.0).toJoinedString(),
+        AppLocation(latitude: 1.0, longitude: 1.0).toJoinedString(),
       );
     });
   });
