@@ -1,6 +1,6 @@
 # Shelf
 ## Ignore the rest of this README file. This project is being refactored into greatness.
-## Meanwhile, Read a book i recommend Malcome Gladwell or Jordan Peterson they are both great.
+## Meanwhile, Read a book i recommend Malcome Gladwell.
 
 
 
