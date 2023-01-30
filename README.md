@@ -1,6 +1,5 @@
 # Shelf
-## Ignore the rest of this README file. This project is being refactored into greatness.
-## Meanwhile, Read a book i recommend Malcome Gladwell.
+## Ignore the rest of this README file. This project is being refactored into greatness, Meanwhile Read a book i recommend Malcome Gladwell.
 
 
 
